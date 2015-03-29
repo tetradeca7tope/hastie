@@ -1,12 +1,12 @@
 function [alphas,stats] = subgradient(y, K_all, lambda_1, lambda_2, lambda_3)
     [n, ~, m] = size(K_all);
-    maxiters = 1000;
+    maxiters = 250;
     f_tol = 1.0e-4;
     gamma_0 = 1; 
     
     alphas = zeros(n, m);
     K_alphas = zeros(n, m);
-    obj_history = fast_objective(alphas,y,K_all,lambda_1,lambda_2,lambda_3);
+    obj_history = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3);
     time_history = 0;
     tic;
     for iter=1:maxiters       
