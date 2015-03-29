@@ -52,3 +52,14 @@ optimisation problem.
 \subsection{Additive Kernel Ridge Regression}
 \label{sec:addKR}
 
+Therefore the optimisation objective can be written as,
+\begin{equation}
+F(\aalpha) = \frac{1}{2}\|Y - \sum_{j=1}^m \KKj \alphaj\|_2^2 + 
+  \frac{1}{2} \sum_{j=1}^M {\alphaj}^\top \KKj \alphaj +
+  \sum_{j=1}^M \| \alphaj \|_2
+\label{eqn:optObjective}
+\end{equation}
+where $\alphaj \in \RR^n \; \forall j$, $\aalpha = [{\alphaii{1}}^\top, \dots, 
+{\alphaii{M}}^\top]^\top  \in\RR^{nM}$ and $\KKj \in \RR^{n\times n}\; \forall
+j$.
+

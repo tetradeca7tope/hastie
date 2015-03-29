@@ -1,16 +1,21 @@
 \relax 
-\ifx\hyper@anchor\@undefined
-\global \let \oldcontentsline\contentsline
-\gdef \contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
-\global \let \oldnewlabel\newlabel
-\gdef \newlabel#1#2{\newlabelxx{#1}#2}
-\gdef \newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
-\AtEndDocument{\let \contentsline\oldcontentsline
-\let \newlabel\oldnewlabel}
-\else
-\global \let \hyper@last\relax 
-\fi
-
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{gyorfi02distributionfree}
 \citation{hastie90gam,ravikumar09spam,lafferty05rodeo}
 \citation{thin-plate-splines:2003}
@@ -21,11 +26,23 @@
 \citation{intelligible:2013}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Problem Set up \& Algorithm}{1}{section.2}}
-\newlabel{sec:additiveKR}{{2}{1}{Problem Set up \& Algorithm\relax }{section.2}{}}
+\newlabel{sec:additiveKR}{{2}{1}{Problem Set up \& Algorithm}{section.2}{}}
 \citation{hastie90gam}
 \citation{ravikumar09spam}
 \citation{hastie90gam}
 \citation{hastie90gam,ravikumar09spam,duvenaud11additivegps}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Problem Statement \& Notation}{2}{subsection.2.1}}
+\newlabel{sec:setup}{{2.1}{2}{Problem Statement \& Notation}{subsection.2.1}{}}
+\newlabel{eqn:addAssumption}{{{1}}{2}{Problem Statement \& Notation}{AMS.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Kernel Ridge Regression}{2}{subsection.2.2}}
+\newlabel{sec:krReview}{{2.2}{2}{Kernel Ridge Regression}{subsection.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Additive Kernel Ridge Regression}{2}{subsection.2.3}}
+\newlabel{sec:addKR}{{2.3}{2}{Additive Kernel Ridge Regression}{subsection.2.3}{}}
+\newlabel{eqn:optObjective}{{2}{2}{Additive Kernel Ridge Regression}{equation.2.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Optimisation Methods}{2}{section.3}}
+\newlabel{sec:optMethods}{{3}{2}{Optimisation Methods}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}SubGradient Method}{2}{subsection.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Proximal Gradient Method}{2}{subsection.3.2}}
 \bibstyle{plainnat}
 \bibdata{convexopt,kky}
 \bibcite{duvenaud11additivegps}{{1}{2011}{{Duvenaud et~al.}}{{Duvenaud, Nickisch, and Rasmussen}}}
@@ -33,25 +50,14 @@
 \bibcite{gyorfi02distributionfree}{{3}{2002}{{Gy\"orfi et~al.}}{{Gy\"orfi, Kohler, Krzyzak, and Walk}}}
 \bibcite{hastie90gam}{{4}{1990}{{Hastie and Tibshirani}}{{}}}
 \bibcite{lafferty05rodeo}{{5}{2005}{{Lafferty and Wasserman}}{{}}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Problem Statement \& Notation}{2}{subsection.2.1}}
-\newlabel{sec:setup}{{2.1}{2}{Problem Statement \& Notation\relax }{subsection.2.1}{}}
-\newlabel{eqn:addAssumption}{{{1}}{2}{Problem Statement \& Notation\relax }{AMS.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Kernel Ridge Regression}{2}{subsection.2.2}}
-\newlabel{sec:krReview}{{2.2}{2}{Kernel Ridge Regression\relax }{subsection.2.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Additive Kernel Ridge Regression}{2}{subsection.2.3}}
-\newlabel{sec:addKR}{{2.3}{2}{Additive Kernel Ridge Regression\relax }{subsection.2.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Optimisation Methods}{2}{section.3}}
-\newlabel{sec:optMethods}{{3}{2}{Optimisation Methods\relax }{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}SubGradient Method}{2}{subsection.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Proximal Gradient Method}{2}{subsection.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}BCD - use full name}{2}{subsection.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}BCGD}{2}{subsection.3.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{2}{section.4}}
-\newlabel{sec:experiments}{{4}{2}{Experiments\relax }{section.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{2}{section.5}}
-\newlabel{sec:conclusion}{{5}{2}{Conclusion\relax }{section.5}{}}
 \bibcite{intelligible:2013}{{6}{2013}{{Lou et~al.}}{{Lou, Caruana, Gehrke, and Hooker}}}
 \bibcite{ravikumar09spam}{{7}{2009}{{Ravikumar et~al.}}{{Ravikumar, Lafferty, Liu, and Wasserman}}}
 \bibcite{tensor-product-splines:1994}{{8}{1994}{{Stone}}{{}}}
 \bibcite{tsybakov08nonparametric}{{9}{2008}{{Tsybakov}}{{}}}
 \bibcite{thin-plate-splines:2003}{{10}{2003}{{Wood}}{{}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}BCD - use full name}{3}{subsection.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}BCGD}{3}{subsection.3.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{3}{section.4}}
+\newlabel{sec:experiments}{{4}{3}{Experiments}{section.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{3}{section.5}}
+\newlabel{sec:conclusion}{{5}{3}{Conclusion}{section.5}{}}

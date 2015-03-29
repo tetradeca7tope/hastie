@@ -7,6 +7,25 @@
 
 \subsection{Proximal Gradient Method}
 
+Note that we can write the objective \eqref{eqn:optObjective} as $F(\aalpha) =
+G(\aalpha) + \Psi(\aalpha)$ where $G$ is smooth and $\Psi$ is not. $\Psi$ is the
+popular group lasso penalty. Via the Moreau decomposition, and using the fact
+that the argument in the prox operator is separable, the prox operator can
+be shown to be,
+\[
+[\prox_{\Psi, t} (\aalpha)]^{(j)} =
+\prox_{\Psi, t} (\alphaj) = 
+  \begin{cases}
+    \alphaj - t \frac{\alpha}{\|\alphaj\|_2} & \text{if } 
+              \|\alphaj\| < t \\
+    \zero & \text{otherwise}
+  \end{cases}
+\]
+Obtaining the prox operator takes $O(nM)$ time and has cost comparable to
+computing the gradient of $G(\aalpha)$. We use the above to implement proximal
+gradient method as described in the class notes. We use backtracking to
+determien the step size and experiment both with and without acceleration.
+
 
 \subsection{BCD - use full name}
 
