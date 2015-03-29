@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: midterm.aux
+The style file: plainnat.bst
+Database file #1: convexopt.bib
+Database file #2: kky.bib
+You've used 10 entries,
+            2773 wiz_defined-function locations,
+            651 strings with 6405 characters,
+and the built_in function-call counts, 4457 in all, are:
+= -- 385
+> -- 240
+< -- 8
++ -- 82
+- -- 72
+* -- 322
+:= -- 679
+add.period$ -- 31
+call.type$ -- 10
+change.case$ -- 51
+chr.to.int$ -- 10
+cite$ -- 20
+duplicate$ -- 230
+empty$ -- 389
+format.name$ -- 88
+if$ -- 947
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 13
+newline$ -- 58
+num.names$ -- 40
+pop$ -- 127
+preamble$ -- 1
+purify$ -- 44
+quote$ -- 0
+skip$ -- 171
+stack$ -- 0
+substring$ -- 137
+swap$ -- 31
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 95
+warning$ -- 0
+while$ -- 40
+width$ -- 0
+write$ -- 132

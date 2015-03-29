@@ -12,7 +12,7 @@ function [obj, G] = computeSmoothObjGrad(Alpha, Ks, Y, lambda1)
   M = size(Alpha, 2);
 
   % Compute the following
-  KAlpha = sparse(n, M);
+  KAlpha = zeros(n, M);
   for j = 1:M
     KAlpha(:,j) = Ks(:,:,j) * Alpha(:, j);
   end

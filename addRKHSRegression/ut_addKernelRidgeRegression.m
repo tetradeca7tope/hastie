@@ -4,9 +4,11 @@ clear all;
 close all;
 clc;
 addpath ~/libs/kky-matlab/utils/
+addpath ../utils/
+rng('default');
 
 numDims = 10;
-n = 1000;
+n = 200;
 lambda1 = 1;
 lambda2 = 5;
 
@@ -18,14 +20,17 @@ Xte = randn(n, numDims);
 Yte = f(Xte);
 
 % Generate the decomposition
-% decomposition.setting = 'randomGroups';
-decomposition.setting = 'maxGroupSize';
-decomposition.numRandGroups = 13;
+decomposition.setting = 'randomGroups';
+% decomposition.setting = 'maxGroupSize';
+decomposition.numRandGroups = 20;
 decomposition.maxGroupSize = 3;
-decomposition.groupSize = 3;
-params.optMethod = 'proxGrad';
+decomposition.groupSize = 4;
+% params.optMethod = 'proxGradient';
+% params.optMethod = 'subGradient';
+% params.optMethod = 'bcdExact';
+params.optMethod = 'bcgdDiagHessian';
 params.maxNumIters = 1000;
-[predFunc, decomposition] = ...
+[predFunc, decomposition, stats] = ...
   addKernelRidgeRegression(Xtr, Ytr, decomposition, lambda1, lambda2, params);
 
 % Now do a prediction

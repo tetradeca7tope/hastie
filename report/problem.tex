@@ -1,0 +1,56 @@
+
+\section{Problem Statement}
+
+Let $\func : \Xcal \rightarrow \RR$ be the function of interest. 
+Here $x = [x_1, \dots, x_D] \in \RR^D$ and $\Xcal \subset \RR^D$.
+We have data $\XYn$ and wish to obtain an estimate
+$\funchat$ of $\func$.
+In this work, we will be assuming that $\func$ has the form
+\begin{align*}
+\func(x) = \funcii{1}(\xii{1}) + \funcii{2}(\xii{2}) + \dots +
+\funcii{M}(\xii{M}),
+\numberthis
+\label{eqn:addAssumption}
+\end{align*}
+where $\xii{j} \in \Xcalj \subset \RR^{d_j}$ and $\funcj:\Xcalj \rightarrow
+\RR$. We shall refer to the $\Xcalj$'s as groups. 
+In this work, we are particularly  interested in the case
+where $D$ is very large and the group dimensionality is bounded-- i.e. $d_j \leq
+d \ll D$. 
+
+The work in \citet{hastie90gam} treats $\func$ as a sum of one
+dimensional components. In Equation~\ref{eqn:addAssumption} this corresponds to
+$\xii{j} = x_j$, $d_j = d =1\; \forall j$ and $M = D$. 
+We would like to be more expressive than
+this. One option would be to allow for all interactions of up to order $d$. But
+this requires $M \approx \bigO(D^d)$ which poses computational challenges both
+for training and evaluation during run time. 
+
+In this work, we will, at least initially, be focusing on kernel regression. The Nadaraya
+Watson estimator \cite{tsybakov08nonparametric} is a popular kernel smoothing method which
+estimates the function via,
+\[
+\funchat(t) =  \frac{\sum_{i=1}^n\kernel(t,X_i) Y_i }{\sum_{i=1}^n \kernel(t,X_i)}
+\]
+A natural way to handle additive models is to use an additive kernel of the form
+\[
+\kernel(x,x') = 
+\alpha_1\kernelii{1}(\xii{1}, {\xii{1}}') +
+\alpha_2\kernelii{2}(\xii{2}, {\xii{2}}') + \dots
+\alpha_M\kernelii{M}(\xii{M}, {\xii{M}}')
+\]
+The optimization problem here then is to learn 
+$\alpha \in \RR^M$ and the hyperparameters of the kernels $\kernelj$ by minimizing the
+cross validation error. If we fix the hyperparameters of the kernel, the problem
+is convex in $\alpha$ but otherwise the problem is generally nonconvex.
+
+As a first step, we wish to study the problem when $M$ is manageable. For this,
+we could select the groups either randomly or via some greedy procedure.
+Alternatively, \citep{duvenaud11additivegps} use a trick based on elementary
+symmetric polynomials to efficiently compute additive kernels of up to all
+orders of interaction. This however, will require some parameter sharing between
+the kernels and not be as expressive. We shall first explore these paths before
+delving deep into more sophisticated additive models.
+Outside optimization, we also wish to study some of the statistical properties
+of the function such as rate of convergence and minimaxity.
+

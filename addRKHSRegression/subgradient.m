@@ -1,14 +1,20 @@
-function [alphas,stats] = subgradient(y, K_all, lambda_1, lambda_2, lambda_3)
+function [currBestAlpha,stats] = subgradient(y, K_all, lambda_1, lambda_2, ...
+  lambda_3, params)
     [n, ~, m] = size(K_all);
-    maxiters = 250;
-    f_tol = 1.0e-4;
-    gamma_0 = 1; 
+
+    params = processOptParamsCommon(params, n, m);
+
+    maxiters = params.maxNumIters;
+    f_tol = params.tolerance;
+    gamma_0 = 1; % @Calvin: What's gamma0 ? can you pls comment ?
     
-    alphas = zeros(n, m);
+    alphas = params.initAlpha; % zeros(n, m);
     K_alphas = zeros(n, m);
     obj_history = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3);
     time_history = 0;
-    tic;
+    startTime = cputime;
+    currBestObj = obj_history;
+
     for iter=1:maxiters       
         
         subgrads = zeros(n,m);
@@ -31,11 +37,26 @@ function [alphas,stats] = subgradient(y, K_all, lambda_1, lambda_2, lambda_3)
         for g=1:m
             K_alphas(:,g) = K_all(:,:,g)*alphas(:,g);
         end
-        
-        obj = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3)
-        obj_history = [obj_history obj];
-        time_history = [time_history toc];
+
+%         obj = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3);
+        obj = computeObj(alphas,K_all, y, lambda_1,lambda_3);
+        currTime = cputime - startTime;
+        if currBestObj > obj,
+          currBestObj = obj;
+          currBestAlpha = alphas;
+        end
+
+        obj_history = [obj_history; currBestObj];
+        time_history = [time_history; currTime];
+
+        if params.verbose & mod(iter, params.verbosePerIter) == 0
+          fprintf('#%d (%.4f): currObj: %0.5f, currBestObj: %0.4f, stepSize: %e\n', ...
+            iter, currTime, obj, currBestObj, t_iter);
+        end
+
         if abs((obj-obj_history(end-1))/obj_history(end-1)) <= f_tol
+            fprintf('Terminating sub gradient method after %d iters.\n', ...
+                    iter);
             break;
         end
     end

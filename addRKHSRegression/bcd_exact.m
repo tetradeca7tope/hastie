@@ -1,19 +1,24 @@
-function [alphas, stats] = bcd_exact(y, K_all, lambda_1, lambda_2, lambda_3)
+function [alphas, stats] = bcd_exact(y, K_all, lambda_1, lambda_2, lambda_3, ...
+  params)
 % Uses trust-region Newton to solve each group exactly
 % Efficient Block-coordinate Descent Algorithms for the Group Lasso
 % http://www.optimization-online.org/DB_FILE/2010/11/2806.pdf
     [n, ~, m] = size(K_all);
-    max_iters = 100;
-    f_tol = 1.0e-4;
+    params = processOptParamsCommon(params, n, m);
+    max_iters = params.maxNumIters;
+    f_tol = params.tolerance;
+%     max_iters = 100;
+%     f_tol = 1.0e-4;
 
-    alphas = zeros(n, m);
+    alphas = params.initAlpha; % zeros(n, m);
     K_alphas = zeros(n,m);
     for g=1:m
         K_alphas(:,g) = K_all(:,:,g)*alphas(:,g);
     end
 
-    obj_history = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3)
+    obj_history = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3);
     time_history = 0;
+    startTime = cputime;
     tic;
 
     % Compute eigenvalues and eigenvectors of Hessian
@@ -52,10 +57,19 @@ function [alphas, stats] = bcd_exact(y, K_all, lambda_1, lambda_2, lambda_3)
             end
         end
 
-        obj = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3)
-        obj_history = [obj_history obj];
-        time_history = [time_history toc];
+        obj = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3);
+        currTime = cputime - startTime;
+        obj_history = [obj_history; obj];
+        time_history = [time_history; currTime];
+
+        if params.verbose & mod(iter, params.verbosePerIter) == 0
+          fprintf('#%d (%.4f): currObj: %0.5f\n', ...
+            iter, currTime, obj);
+        end
+        
+
         if abs((obj-obj_history(end-1))/obj_history(end-1)) <= f_tol
+          fprintf('Terminating BCD at %d iterations.\n', iter);
             break;
         end
     end

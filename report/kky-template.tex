@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{calc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{color,hyperref}
+\usepackage{epsfig}
+\usepackage{subfigure} 
+\usepackage{verbatim}
+% For algorithms
+\usepackage{algorithm}
+\usepackage{algorithmic}
+% Add my definitions file
+\usepackage{../../../Latex-Resources/kky}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% New Commands
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\toworkon}[1]{\textcolor{magenta}{[#1]}}
+% \newcommand{\toworkon}[1]{}
+
+% Title
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter% since there's an at-sign (@) in the command name
+\renewcommand{\@maketitle}{
+  \parindent=0pt
+  {\Large \bfseries {\@title}}  \\[1mm]
+   \textbf{\@author} \hfill   \textit{\@date } \\[-1mm]
+  \Hrule
+	\vspace{0.4in}
+}
+\makeatother % resets the meaning of the at-sign (@)
+\title{\textbf{Additive Gaussian Processes}}
+\author{samy}
+\date{\today}
+
+% Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+
+
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{alpha}
+\bibliography{../../../Latex-Resources/kky}
+
+
+% Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \appendix
+
+
+\end{document}
+

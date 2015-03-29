@@ -1,0 +1,43 @@
+
+
+\section{Introduction}
+
+Regression in high dimensions is an inherently difficult problem with known
+lower bounds depending exponentially in dimension
+\citep{gyorfi02distributionfree}. In this
+project we intend to make progress in this problem by treating the function as
+an additive model of lower dimensional components.
+Using additive models is fairly standard in high dimensional regression
+literature \cite{hastie90gam,ravikumar09spam,lafferty05rodeo}. However, in this
+work we wish to consider additive models which are more general/ expressive than
+previous work.
+
+There are a number of potential nonparametric methods for modeling the low-order interaction terms.
+One option is to use multidimensional splines. 
+Thin plate splines \citep{thin-plate-splines:2003} extend 
+spline-based nonparametric regression to multiple covariates,
+although computational complexity increases dramatically with the order of interaction.
+Natural thin plate splines extend one-dimensional smoothing splines.
+These can be fit via penalized regression, and
+complexity can be reduced by choosing knots on a grid rather than at each data point.
+Thin plate (penalized) regression splines can alternatively be used;
+this approach requires truncated SVD, but avoids choice of knots.
+Tensor product splines \citep{tensor-product-splines:1994} can be used to construct 
+multivariate splines as tensor products of single-dimensional splines.
+The number of basis functions grows exponential with the interaction order, 
+but they can be fit via penalized regression.
+
+
+Another option is to model the low-order interaction basis functions implicitly using kernels.
+There is existing research on using linear combinations of kernels for kernel learning,
+called multiple kernel learning \citep{mkl-review:2011}.
+Computationally efficient use of additive kernels has also been explored 
+in Bayesian settings \citep{duvenaud11additivegps}.
+
+Our work extends Sparse Additive Models (SpAM) \citep{ravikumar09spam} 
+to multi-dimensional nonparametric basis functions.
+For Sparse Additive Models, parameters are typically optimized using the backfitting algorithm.
+Our work also extends recent work on 
+Generalized Additive Models plus Interactions \citep{intelligible:2013}.
+However, in this work the interaction model was assumed to follow a specific functional form,
+leading to an optimization method tailored to their interaction model.

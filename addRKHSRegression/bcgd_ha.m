@@ -1,13 +1,16 @@
-function [alphas, stats] = bcgd_ha(y, K_all, lambda_1, lambda_2, lambda_3)
+function [alphas, stats] = bcgd_ha(y, K_all, lambda_1, lambda_2, lambda_3, ...
+    params)
     [n, ~, m] = size(K_all);
-    max_iters = 100;
+    params = processOptParamsCommon(params, n, m);
+    max_iters = params.maxNumIters;
     max_ls_iters = 100;
-    f_tol = 1.0e-4;
+    f_tol = params.tolerance;
  
-    alphas = zeros(n, m);
+    alphas = params.initAlpha;
     K_alphas = zeros(n,m);
-    obj_history = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3)
+    obj_history = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3);
     time_history = 0;
+    startTime = cputime;
     tic;
     
     % Precompute constant Hessian
@@ -40,7 +43,7 @@ function [alphas, stats] = bcgd_ha(y, K_all, lambda_1, lambda_2, lambda_3)
                 alpha_g'*(lambda_1/2*K_alpha_g + lambda_2/2*alpha_g) + ...
                 lambda_3*norm(alpha_g,2);
             delta = 1*grad_g'*d_g + norm(alpha_g + d_g,2) - norm(alpha_g, 2);
-            assert(delta < 0);
+%             assert(delta < 0);
             step = 1;
             success = 0;
             for lsiter=1:max_ls_iters
@@ -60,10 +63,19 @@ function [alphas, stats] = bcgd_ha(y, K_all, lambda_1, lambda_2, lambda_3)
             K_alphas(:,g) = K_g*alphas(:,g);
         end
 
-        obj = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3)
-        obj_history = [obj_history obj];
-        time_history = [time_history toc];
+        obj = fast_objective(alphas,y,K_alphas,lambda_1,lambda_2,lambda_3);
+        currTime = cputime - startTime;
+        obj_history = [obj_history; obj];
+        time_history = [time_history; currTime];
+
+        if params.verbose & mod(iter, params.verbosePerIter) == 0
+          fprintf('#%d (%.4f): currObj: %0.5f\n', ...
+            iter, currTime, obj);
+        end
+
+
         if abs((obj-obj_history(end-1))/obj_history(end-1)) <= f_tol
+          fprintf('Terminating BCGD-HA after %d iterations.\n', iter);
             break;
         end
     end

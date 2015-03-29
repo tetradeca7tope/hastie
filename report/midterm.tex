@@ -1,0 +1,54 @@
+\documentclass{article} % For LaTeX2e
+\usepackage[numbers,square,comma,sort&compress]{natbib}
+\usepackage{url}
+
+\usepackage{nips14submit_e,times}
+\usepackage{calc}
+\usepackage{amsmath, amssymb, amsthm} 
+\usepackage{parskip}
+\usepackage{color,hyperref}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{rotating}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{natbib}
+% Add my definitions file
+\usepackage{kky}
+\usepackage{hastieDefns}
+
+
+% \title{Sparse Additive Nonparametric Low-Order Interaction Models}
+\title{High Dimensional Nonparametric Regresssion via Additive Kernel Ridge
+Models}
+
+
+\author{
+Kirthevasan Kandasamy \\
+\texttt{kkandasa@andrew.cmu.edu} \\
+\And
+Calvin McCarter \\
+\texttt{cmccarte@andrew.cmu.edu} \\
+}
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+% \nipsfinalcopy % Uncomment for camera-ready version
+
+\begin{document}
+
+
+\maketitle
+
+\input{abstract}
+\input{introduction}
+% \input{problem}
+
+
+% \newpage
+\bibliographystyle{plainnat}
+\bibliography{convexopt,kky}
+
+\end{document}
