@@ -1,2 +1,12 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}
-\BOOKMARK [1][-]{section.2}{Problem Statement}{}
+\BOOKMARK [1][-]{section.2}{Problem Set up \046 Algorithm}{}
+\BOOKMARK [2][-]{subsection.2.1}{Problem Statement \046 Notation}{section.2}
+\BOOKMARK [2][-]{subsection.2.2}{Kernel Ridge Regression}{section.2}
+\BOOKMARK [2][-]{subsection.2.3}{Additive Kernel Ridge Regression}{section.2}
+\BOOKMARK [1][-]{section.3}{Optimisation Methods}{}
+\BOOKMARK [2][-]{subsection.3.1}{SubGradient Method}{section.3}
+\BOOKMARK [2][-]{subsection.3.2}{Proximal Gradient Method}{section.3}
+\BOOKMARK [2][-]{subsection.3.3}{BCD - use full name}{section.3}
+\BOOKMARK [2][-]{subsection.3.4}{BCGD}{section.3}
+\BOOKMARK [1][-]{section.4}{Experiments}{}
+\BOOKMARK [1][-]{section.5}{Conclusion}{}

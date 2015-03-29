@@ -1,6 +1,54 @@
 
-\section{Additive Kernel Ridge Regression}
+\section{Problem Set up \& Algorithm}
 \label{sec:additiveKR}
 
-In this section we describe the proposed algorithm, the objective and our
-methods for optimising the objective.
+In this section we describe the problem, the proposed algorithm and its objective and our
+methods for optimising the objective. 
+% We begin with a brief review of Kernel Ridge Regression.
+
+\subsection{Problem Statement \& Notation}
+\label{sec:setup}
+
+Let $\func : \Xcal \rightarrow \RR$ be the function of interest. 
+Here $x = [x_1, \dots, x_D] \in \RR^D$ and $\Xcal \subset \RR^D$.
+We have data $\XYn$ and wish to obtain an estimate
+$\funchat$ of $\func$.
+In this work, we seek additive approximations to the
+function. That is, $\funchat$ can be expressed as,
+\begin{align*}
+\funchat(x) = \funchatii{1}(\xii{1}) + \funchatii{2}(\xii{2}) + \dots +
+\funchatii{M}(\xii{M}),
+\numberthis
+\label{eqn:addAssumption}
+\end{align*}
+where $\xii{j} \in \Xcalj \subset \RR^{d_j}$ and $\funchatj:\Xcalj \rightarrow
+\RR$. We shall refer to the $\Xcalj$'s as groups and the collection of all
+groups $\bigcup_j \Xcalj$ as the decomposition.
+We are particularly  interested in the case
+where $D$ is very large and the group dimensionality is bounded-- i.e. $d_j \leq
+d \ll D$. 
+
+The work in \citet{hastie90gam} treats $\funchat$ as a sum of one
+dimensional components. The decomposition here corresponds to
+$\xii{j} = x_j$, $d_j = d =1\; \forall j$ and $M = D$. 
+In this project, we would like to be more expressive than this model. We will
+consider decompositions for which $d > 1$ and more importantly allows for
+overlap between the groups.
+\citet{ravikumar09spam} treat $\funchat$ as a sparse combination of one
+dimensional functions. While this is seemingly restrictive than
+\citep{hastie90gam}, the sparse approximation may provide favourable
+bias-variance tradeoffs in high dimensions. Drawing inspiration from this, we
+will consider models where $M$ is very large and seek a sparse collection of
+groups to approximate the function - i.e. $\funchatj = \zero$ for several $j$.
+
+
+\subsection{Kernel Ridge Regression}
+\label{sec:krReview}
+
+One method to formulate a regression problem is to consider the following
+optimisation problem.
+
+
+\subsection{Additive Kernel Ridge Regression}
+\label{sec:addKR}
+

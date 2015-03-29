@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  29 MAR 2015 16:14
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  29 MAR 2015 17:34
 entering extended mode
  %&-line parsing enabled.
 **midterm.tex
@@ -387,7 +387,11 @@ LaTeX Info: Redefining \bm on input line 204.
 Package hyperref Info: Option `colorlinks' set `true' on input line 332.
 Package hyperref Info: Option `breaklinks' set `true' on input line 332.
 ) (./hastieDefns.sty)
-(./midterm.aux)
+(./midterm.aux
+
+LaTeX Warning: Label `eqn:addAssumption' multiply defined.
+
+)
 \openout1 = `midterm.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
@@ -460,37 +464,39 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
 )
-(./introduction.tex) (./problem.tex [1{/var/lib/texmf/fonts/map/pdftex/updmap/p
-dftex.map}
+(./introduction.tex) (./additiveKR.tex [1{/var/lib/texmf/fonts/map/pdftex/updma
+p/pdftex.map}
 
-]) (./midterm.bbl) [2] (./midterm.aux) ) 
+]) (./optMethods.tex) (./experiments.tex) (./conclusion.tex)
+(./midterm.bbl [2]) [3] (./midterm.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 6981 strings out of 493848
- 95572 string characters out of 1152822
- 178792 words of memory out of 3000000
- 10072 multiletter control sequences out of 15000+50000
+ 7011 strings out of 493848
+ 95976 string characters out of 1152822
+ 178013 words of memory out of 3000000
+ 10083 multiletter control sequences out of 15000+50000
  19420 words of font info for 47 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,9n,36p,271b,291s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{section.3} 
-has been referenced but does not exist, replaced by a fixed one
-
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texlive
-/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmmi5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
-mi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf
--texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fo
-nts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/pu
-blic/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/cour
-ier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></
-usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texl
-ive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/
-times/utmri8a.pfb>
-Output written on midterm.pdf (2 pages, 149861 bytes).
+ 38i,9n,36p,271b,410s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmmi5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1
+/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/c
+ourier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb
+></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-t
+exlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/u
+rw/times/utmri8a.pfb>
+Output written on midterm.pdf (3 pages, 154388 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
- 18 named destinations out of 1000 (max. 500000)
- 25 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 137 PDF objects out of 1000 (max. 8388607)
+ 28 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
