@@ -49,7 +49,7 @@ problem
 \text{ such that } \|\alphaj\|_2 \le t_j.
 \]
 If $t_j$ is known we have $\alphaj = t_j * \left(-(t_j A_j + \lambda_2 I_n)^{-1} b_j\right)$
-Because in this case $\|\alphaj\|_2 = t_j$, we have $(t_j A_j + \lambda_2 I_n)^{-1} b_j = 1$.
+Because in this case $\|\alphaj\|_2 = t_j$, we have $\|(t_j A_j + \lambda_2 I_n)^{-1} b_j\|_2 = 1$.
 As described in \citet{bcd-group-lasso:2013}, 
 we can use Newton's method to solve this equation efficiently 
 using the eigendecomposition of $A_j$, which is constant and needs to be computed only once.
