@@ -78,12 +78,13 @@ $\funcii{1}, \dots, \funcii{M}$,
 \begin{align*}
 &\left( \funcii{1}, \funcii{2}, \dots, \funcii{M} \right) \;=\; 
 \argmin_{\funcj \in \Hcalkj, j = 1,\dots, M} \;\;
-  F\left( \{\funcj\}_{j=1}^M \right) \hspace{0.2in} \textrm{where, } \\
+  F\left( \{\funcj\}_{j=1}^M \right) \hspace{0.2in} \textrm{where, } 
+  \numberthis \label{eqn:rkhsObjective}
+\\
 & F\left( \{\funcj\}_{j=1}^M \right)  \;= \;
   \frac{1}{2}\sum_{i=1}^n \Big(Y_i - \sum_{j=1}^M \funcj (\xj) \Big)^2 
   + \frac{\lambda_1}{2} \sum_{j=1}^M \|\funcj\|^2_\Hcalkj 
   + \lambda_2 \sum_{j=1}^M \indfone(\funcj \neq \zero)
-  \numberthis \label{eqn:rkhsObjective}
 \end{align*}
 Our estimate for $\func$ is then $\funchat(\cdot) = \sum_j \funchatj(\cdot)$.
 
@@ -111,12 +112,14 @@ estimate is obtained via $\funchat(\cdot) = \sum_{j=1}^M \sum_{i=1}^n \alphaj_i
 \kernelj(\cdot, \Xj_i)$.
 Equation~\eqref{eqn:optObjective} will the (convex) optimisation problem in our
 algorithm.
+We call this algorithm Additive Kernel Ridge Regression and abbreviate it
+\addkrr.
 
 \subsection{Practical Considerations}
 
 All that is left to do to complete the specification of our algorithm is to
 describe the allocation of coordinates into different groups and the kernel used
-for each such group. For this we tried 3 different strategies, all of which
+for each such group. For the former, we tried 3 different strategies, all of which
 require the specification of a group size parameter $d$. The first sets $M = {D
 \choose d}$ and uses all combinations of size $d$ groups. The second sets $M =
 \sum_{k=1}^d {D \choose k}$ and uses all combinations of up to size $d$. In the
@@ -124,10 +127,10 @@ third we also specify $M$ and then randomly generate $M$ groups of size $d$.
 All three performed equally well so we only consider the third option as $M$
 does not grow combinatorially with $D$ and $d$.
 
-As is the case in several kernel methods, the choice
+As is the case in most kernel methods, the choice
 of the kernel is important for good empirical performance.
-For each $\kernelj$ we use an RBF kernel, with scale parameter $\sigma_j$
-and bandwidth parameter $h_j$.
+For each $\kernelj$ we use an RBF kernel, with scale $\sigma_j$
+and bandwidth $h_j$.
 \[
 \kernelj(\xj_s, \xj_t) = \sigma_j \exp \left( \frac{\|\xj_s -\xj_t\|_2^2 } 
   {2h_j^2} \right)

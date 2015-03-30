@@ -2,21 +2,40 @@
 
 \section{Introduction}
 
-Regression in high dimensions is an inherently difficult problem with known
+Nonparametric regression in high dimensions is an inherently difficult problem with known
 lower bounds depending exponentially in dimension
-\citep{gyorfi02distributionfree}. In this
-project we intend to make progress in this problem by treating the function as
-an additive model of lower dimensional components.
+\citep{gyorfi02distributionfree}. 
+Nonparametric methods typically work well only under at most $4-6$ dimensions.
+In this project we intend to make progress in this problem by treating the
+\emph{estimate} of the function as
+an additive function of lower dimensional components.
+
 Using additive models is fairly standard in high dimensional regression
 literature \cite{hastie90gam,ravikumar09spam,lafferty05rodeo}. 
 However, we wish to consider additive models which are more expressive than
 previous work.
+When the true underlying function $\func$ exhibits additive structure, using an additive
+model for estimation is understandably reasonable. However, even when $\func$ is
+not additive, using an additive model has its advantages. 
+It is a well understoon notion in Statistics that when we only have a few samples, using a
+simpler model to fit our data may give us a better tradeoff for variance 
+against bias. This is because additive functions are \emph{statistically simpler}
+than more general (non-additive) functions.
+Typically, in most nonparametric regression methods using kernels such as the
+Nadaraya-Watson
+(\nw) estimator and Kernel Ridge Regression (\krr), the bias-variance tradeoff
+is managed via the bandwidth of the kernel. However, this is only one way to
+manage the tradeoff. In this work we demonstrate that using an additive model
+provides another ``knob" to control this tradeoff and provides significant gains
+in high dimensional regression.
 
-We choose to model the low-order interaction basis functions implicitly using kernels.
-We then minimize the squared-error loss combined with 
+Our methods are based on \krr, where
+we choose to model the low-order interaction implicitly using kernels acting on
+subsets of the coordinates (groups).
+We minimize the squared-error loss with 
 a squared RKHS norm penalty to enforce smoothness
 and a mixed $\ell_{1,2}$-norm (group lasso style) penalty 
-to limit the number of non-zero basis functions.
+to enforce a sparse collection of functions.
 This leads to a convex objective function where the number of parameters is
 the product of the number of samples and the number of basis functions.
 
@@ -46,7 +65,6 @@ smooth objective with non-negativity constraint.
 Finally, safe screening rules for the group lasso have been developed 
 \citep{group-lasso-screening:2013} which quickly eliminate many of the all-0 
 groups.
-
 For Sparse Additive Models, parameters are typically 
 optimized via the backfitting algorithm \citep{ravikumar09spam}, 
 a special case of (block) coordinate descent with group sizes of 1.

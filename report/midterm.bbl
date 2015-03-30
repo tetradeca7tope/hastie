@@ -1,0 +1,106 @@
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Beck and Teboulle(2009)]{beck2009fast}
+Amir Beck and Marc Teboulle.
+\newblock A fast iterative shrinkage-thresholding algorithm for linear inverse
+  problems.
+\newblock \emph{SIAM Journal on Imaging Sciences}, 2\penalty0 (1):\penalty0
+  183--202, 2009.
+
+\bibitem[Duvenaud et~al.(2011)Duvenaud, Nickisch, and
+  Rasmussen]{duvenaud11additivegps}
+David~K. Duvenaud, Hannes Nickisch, and Carl~Edward Rasmussen.
+\newblock Additive gaussian processes.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2011.
+
+\bibitem[Friedman et~al.(2010)Friedman, Hastie, and
+  Tibshirani]{note-group-lasso:2010}
+Jerome Friedman, Trevor Hastie, and Robert Tibshirani.
+\newblock A note on the group lasso and a sparse group lasso.
+\newblock \emph{arXiv preprint arXiv:1001.0736}, 2010.
+
+\bibitem[G{\"o}nen and Alpayd{\i}n(2011)]{mkl-review:2011}
+Mehmet G{\"o}nen and Ethem Alpayd{\i}n.
+\newblock Multiple kernel learning algorithms.
+\newblock \emph{The Journal of Machine Learning Research}, 12:\penalty0
+  2211--2268, 2011.
+
+\bibitem[Gy\"orfi et~al.(2002)Gy\"orfi, Kohler, Krzyzak, and
+  Walk]{gyorfi02distributionfree}
+L\'aszl\'o Gy\"orfi, Micael Kohler, Adam Krzyzak, and Harro Walk.
+\newblock \emph{{A Distribution Free Theory of Nonparametric Regression}}.
+\newblock Springer Series in Statistics, 2002.
+
+\bibitem[Hastie and Tibshirani(1990)]{hastie90gam}
+T.~J. Hastie and R.~J. Tibshirani.
+\newblock \emph{{Generalized Additive Models}}.
+\newblock London: Chapman \& Hall, 1990.
+
+\bibitem[Lafferty and Wasserman(2005)]{lafferty05rodeo}
+John~D. Lafferty and Larry~A. Wasserman.
+\newblock {Rodeo: Sparse Nonparametric Regression in High Dimensions}.
+\newblock In \emph{NIPS}, 2005.
+
+\bibitem[Lou et~al.(2013)Lou, Caruana, Gehrke, and Hooker]{intelligible:2013}
+Yin Lou, Rich Caruana, Johannes Gehrke, and Giles Hooker.
+\newblock Accurate intelligible models with pairwise interactions.
+\newblock In \emph{Proceedings of the 19th ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, pages 623--631. ACM, 2013.
+
+\bibitem[Meier et~al.(2008)Meier, Van De~Geer, and
+  B{\"u}hlmann]{meier2008group}
+Lukas Meier, Sara Van De~Geer, and Peter B{\"u}hlmann.
+\newblock The group lasso for logistic regression.
+\newblock \emph{Journal of the Royal Statistical Society: Series B (Statistical
+  Methodology)}, 70\penalty0 (1):\penalty0 53--71, 2008.
+
+\bibitem[Qin et~al.(2013)Qin, Scheinberg, and Goldfarb]{bcd-group-lasso:2013}
+Zhiwei Qin, Katya Scheinberg, and Donald Goldfarb.
+\newblock Efficient block-coordinate descent algorithms for the group lasso.
+\newblock \emph{Mathematical Programming Computation}, 5\penalty0 (2):\penalty0
+  143--169, 2013.
+
+\bibitem[Ravikumar et~al.(2009)Ravikumar, Lafferty, Liu, and
+  Wasserman]{ravikumar09spam}
+Pradeep Ravikumar, John Lafferty, Han Liu, and Larry Wasserman.
+\newblock {Sparse Additive Models}.
+\newblock \emph{Journal of the Royal Statistical Society: Series B (Statistical
+  Methodology)}, 2009.
+
+\bibitem[Scholkopf and Smola(2001)]{scholkopf01kernels}
+Bernhard Scholkopf and Alexander~J. Smola.
+\newblock \emph{{Learning with Kernels: Support Vector Machines,
+  Regularization, Optimization, and Beyond}}.
+\newblock MIT Press, Cambridge, MA, USA, 2001.
+
+\bibitem[Tseng and Yun(2009)]{cgd:2009}
+Paul Tseng and Sangwoon Yun.
+\newblock A coordinate gradient descent method for nonsmooth separable
+  minimization.
+\newblock \emph{Mathematical Programming}, 117\penalty0 (1-2):\penalty0
+  387--423, 2009.
+
+\bibitem[Tsybakov(2008)]{tsybakov08nonparametric}
+Alexandre~B. Tsybakov.
+\newblock \emph{Introduction to Nonparametric Estimation}.
+\newblock Springer Publishing Company, Incorporated, 2008.
+
+\bibitem[Wang et~al.(2013)Wang, Zhou, Wonka, and
+  Ye]{group-lasso-screening:2013}
+Jie Wang, Jiayu Zhou, Peter Wonka, and Jieping Ye.
+\newblock Lasso screening rules via dual polytope projection.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  1070--1078, 2013.
+
+\bibitem[Wytock et~al.(2014)Wytock, Sra, and Kolter]{group-fused-lasso:2014}
+Matt Wytock, Suvrit Sra, and J~Zico Kolter.
+\newblock Fast newton methods for the group fused lasso.
+\newblock In \emph{Proceedings of the 30th Conference on Uncertainty in
+  Artificial Intelligence}, 2014.
+
+\end{thebibliography}

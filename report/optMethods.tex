@@ -6,8 +6,8 @@
 Because our objective function is non-smooth, the simplest method is to solve it via 
 the subgradient method. We implemented subgradient method with 
 decreasing step sizes for our experiments. 
-While subgradients can be computed cheaply in $O(nM)$, we observed poor convergence on 
-our problem, as we would expect.
+While subgradients can be computed cheaply in $O(nM)$, we observed poor 
+convergence on our problem. %, as we would expect.
 
 \subsubsection*{Proximal Gradient Method}
 
@@ -42,8 +42,8 @@ and $b_j = -\KKj^T (y-\sum_{i\ne j}{\KKi \alphai}$.
 This problem can be efficiently solved \citep{bcd-group-lasso:2013} 
 by converting it to a one-dimensional trust-region problem. 
 When $\|b_j\|_2 \le \lambda_2$, we have $\alphaj = 0$. 
-Otherwise, there exists some $t_j$ such that $\alphaj$ is the solution of the following
-problem
+Otherwise, there exists $t_j$ such that $\alphaj$ is the solution of
+the following problem
 \[
 \arg\min_\alphaj \frac{1}{2}\alphaj^T A_j \alphaj + b_j^T \alphaj, 
 \text{ such that } \|\alphaj\|_2 \le t_j.
