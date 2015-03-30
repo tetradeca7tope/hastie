@@ -1,28 +1,29 @@
-This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: midterm.aux
 The style file: plainnat.bst
 Database file #1: convexopt.bib
 Database file #2: kky.bib
 You've used 10 entries,
             2773 wiz_defined-function locations,
-            651 strings with 6405 characters,
-and the built_in function-call counts, 4457 in all, are:
-= -- 385
-> -- 240
+            652 strings with 6457 characters,
+and the built_in function-call counts, 4526 in all, are:
+= -- 392
+> -- 251
 < -- 8
-+ -- 82
-- -- 72
-* -- 322
-:= -- 679
++ -- 85
+- -- 75
+* -- 331
+:= -- 689
 add.period$ -- 31
 call.type$ -- 10
-change.case$ -- 51
+change.case$ -- 52
 chr.to.int$ -- 10
 cite$ -- 20
 duplicate$ -- 230
 empty$ -- 389
-format.name$ -- 88
-if$ -- 947
+format.name$ -- 93
+if$ -- 962
 int.to.chr$ -- 1
 int.to.str$ -- 1
 missing$ -- 13
@@ -30,9 +31,9 @@ newline$ -- 58
 num.names$ -- 40
 pop$ -- 127
 preamble$ -- 1
-purify$ -- 44
+purify$ -- 45
 quote$ -- 0
-skip$ -- 171
+skip$ -- 174
 stack$ -- 0
 substring$ -- 137
 swap$ -- 31
@@ -43,4 +44,4 @@ type$ -- 95
 warning$ -- 0
 while$ -- 40
 width$ -- 0
-write$ -- 132
+write$ -- 133

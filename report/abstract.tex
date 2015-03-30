@@ -1,6 +1,14 @@
 
 \begin{abstract}
-We describe additive kernel ridge regression, a generalisation of the kernel
-ridge method for nonparametric regression.
-...
+We describe additive kernel ridge regression (\addkrr), 
+a generalisation of the kernel ridge method for nonparametric regression.
+Nonparametric regression is exponentially difficult in high dimensions. It is
+difficult to make progress without making strong assumptions about the function.
+A common assumption in high dimensional regression models is to assume that the
+function is additive. In this work, we leverage this assumption, but 
+considerably generalise existing additive models.
+We propose a convex optimisation objective for our problem. We compare several
+algorithms to optimise this objective on synthetic datasets. We also demonstrate
+that \addkrr significantly outperforms other popular algorithms for nonparametric
+regression on moderate dimensional problems.
 \end{abstract}

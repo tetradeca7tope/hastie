@@ -2,18 +2,18 @@
 \section{Problem Set up \& Algorithm}
 \label{sec:additiveKR}
 
-In this section we describe the problem, the proposed algorithm and its objective and our
-methods for optimising the objective. 
-% We begin with a brief review of Kernel Ridge Regression.
+% In this section we describe the problem, the proposed algorithm and its objective and our
+% methods for optimising the objective. 
+% % We begin with a brief review of Kernel Ridge Regression.
 
 \subsection{Problem Statement \& Notation}
 \label{sec:setup}
 
 Let $\func : \Xcal \rightarrow \RR$ be the function of interest. 
-Here $x = [x_1, \dots, x_D] \in \RR^D$ and $\Xcal \subset \RR^D$.
+Here $\Xcal \ni x = [x_1, \dots, x_D] \in \RR^D$ and $\Xcal \subset \RR^D$.
 We have data $\XYn$ and wish to obtain an estimate
 $\funchat$ of $\func$.
-In this work, we seek additive approximations to the
+In this work, we seek an additive approximation to the
 function. That is, $\funchat$ can be expressed as,
 \begin{align*}
 \funchat(x) = \funchatii{1}(\xii{1}) + \funchatii{2}(\xii{2}) + \dots +
@@ -22,8 +22,8 @@ function. That is, $\funchat$ can be expressed as,
 \label{eqn:addAssumption}
 \end{align*}
 where $\xii{j} \in \Xcalj \subset \RR^{d_j}$ and $\funchatj:\Xcalj \rightarrow
-\RR$. We shall refer to the $\Xcalj$'s as groups and the collection of all
-groups $\bigcup_j \Xcalj$ as the decomposition.
+\RR$. We shall refer to the $\Xcalj$'s as \emph{groups} and the collection of all
+groups $\bigcup_{j=1}^M \Xcalj$ as the \emph{decomposition}.
 We are particularly  interested in the case
 where $D$ is very large and the group dimensionality is bounded-- i.e. $d_j \leq
 d \ll D$. 
@@ -33,7 +33,8 @@ dimensional components. The decomposition here corresponds to
 $\xii{j} = x_j$, $d_j = d =1\; \forall j$ and $M = D$. 
 In this project, we would like to be more expressive than this model. We will
 consider decompositions for which $d > 1$ and more importantly allows for
-overlap between the groups.
+overlap between the groups. For e.g. $\funchat(x_1, x_2,
+x_3) = \funchatii{1}(x_1) + \funchatii{2}(x_1, x_2) + \funchatii{3}(x_2, x_3)$.
 \citet{ravikumar09spam} treat $\funchat$ as a sparse combination of one
 dimensional functions. While this is seemingly restrictive than
 \citep{hastie90gam}, the sparse approximation may provide favourable
@@ -42,24 +43,97 @@ will consider models where $M$ is very large and seek a sparse collection of
 groups to approximate the function - i.e. $\funchatj = \zero$ for several $j$.
 
 
-\subsection{Kernel Ridge Regression}
-\label{sec:krReview}
-
-One method to formulate a regression problem is to consider the following
-optimisation problem.
-
 
 \subsection{Additive Kernel Ridge Regression}
 \label{sec:addKR}
 
-Therefore the optimisation objective can be written as,
+We begin with a brief review on Kernel Ridge Regression.
+One of several ways to formulate a nonparametric regression problem is to 
+minimise an
+objective of the form $J(f) = \sum_{i=1}^n \ell(f(X_i), Y_i) + \lambda P(f)$ 
+over a nonparametric class of functions $\Fcal$.
+Here $\ell$ is a loss function and $P$ is a term that penalises the complexity
+of the function $f$. Several nonparametric regression problems such as smoothing
+splines, natural splines and Kernel Ridge Regression can be written this way.
+Central to \krrs is a positive semidefinite kernel 
+$\kernel: \Xcal \times \Xcal \rightarrow \RR$ \citep{scholkopf01kernels}.
+Then, $\Fcal$ is taken to be the reproducing kernel Hilbert
+space (RKHS) $\Hcal_\kernel$ corresponding to $\kernel$, $P$ to be the squared
+RKHS norm of $f$ and $\ell$ the squared error loss.  Accordingly, \krrs is
+characterised via,
+\[
+\funchat = \argmin_{f \in \Hcal_\kernel} \sum_{i=1}^n (Y_i - f(X_i))^2 +
+\lambda \|f\|^2_\Hcalk
+\]
+However, as mentioned previously  \krrs suffers from the curse of
+dimensionality. To obtain an additive approximation using a given decomposition
+$\bigcup_j \Xcalj$, we consider kernels $\kernelj :\Xcalj \times \Xcalj
+\rightarrow \RR$ acting on each group and their associated RKHSs $\Hcalkj$.
+Further, since we will set $M$ to be large and seek a sparse collection of
+functions in our additive model we introduce an additional penalty term for
+nonzero $\funcj$.
+Putting it all together, our additive Kernel Ridge Regressin (\addkrr) is
+characterised via the following problem where we jointly optimise over
+$\funcii{1}, \dots, \funcii{M}$,
+\begin{align*}
+&\left( \funcii{1}, \funcii{2}, \dots, \funcii{M} \right) \;=\; 
+\argmin_{\funcj \in \Hcalkj, j = 1,\dots, M} \;\;
+  F\left( \{\funcj\}_{j=1}^M \right) \hspace{0.2in} \textrm{where, } \\
+& F\left( \{\funcj\}_{j=1}^M \right)  \;= \;
+  \frac{1}{2}\sum_{i=1}^n \Big(Y_i - \sum_{j=1}^M \funcj (\xj) \Big)^2 
+  + \frac{\lambda_1}{2} \sum_{j=1}^M \|\funcj\|^2_\Hcalkj 
+  + \lambda_2 \sum_{j=1}^M \indfone(\funcj \neq \zero)
+  \numberthis \label{eqn:rkhsObjective}
+\end{align*}
+Our estimate for $\func$ is then $\funchat(\cdot) = \sum_j \funchatj(\cdot)$.
+
+Via an argument that uses the representer theorem it is straightforward to show
+that $\funcj$ will be in the linear span of the reprodcing kernel maps of the
+training points $\Xjn$ -- i.e. $\funcj(\cdot) = 
+\sum_j \alphaj_i \kernelj(\cdot, \Xj_i) $.
+Then, the $j$\superscript{th} term inside the summations of the second and third
+terms of equation~\eqref{eqn:rkhsObjective} can be written as 
+${\alphaj}^\top \KKj \alphaj$ and $\indfone(\alphaj \neq 0)$.
+Here $\KKj \in \RR^{n\times n}\; \forall
+j$ such that $\KKj_{rc} = \kernelj(X_r, X_c)$.
+Since the latter term is nonconvex we relax it via a group lasso type penalty.
+After simplifying the first term, our optimisation objective can be written as,
+$\aalpha = \argmin_{\aalpha \in \RR^{nM}} F(\aalpha)$ where,
 \begin{equation}
 F(\aalpha) = \frac{1}{2}\|Y - \sum_{j=1}^m \KKj \alphaj\|_2^2 + 
-  \frac{1}{2} \sum_{j=1}^M {\alphaj}^\top \KKj \alphaj +
-  \sum_{j=1}^M \| \alphaj \|_2
+  \frac{\lambda_1}{2} \sum_{j=1}^M {\alphaj}^\top \KKj \alphaj +
+  \lambda_2 \sum_{j=1}^M \| \alphaj \|_2.
 \label{eqn:optObjective}
 \end{equation}
-where $\alphaj \in \RR^n \; \forall j$, $\aalpha = [{\alphaii{1}}^\top, \dots, 
-{\alphaii{M}}^\top]^\top  \in\RR^{nM}$ and $\KKj \in \RR^{n\times n}\; \forall
-j$.
+Here $\alphaj \in \RR^n \; \forall j$, $\aalpha = [{\alphaii{1}}^\top, \dots, 
+{\alphaii{M}}^\top]^\top  \in\RR^{nM}$. Given the solution to the above, our
+estimate is obtained via $\funchat(\cdot) = \sum_{j=1}^M \sum_{i=1}^n \alphaj_i
+\kernelj(\cdot, \Xj_i)$.
+Equation~\eqref{eqn:optObjective} will the (convex) optimisation problem in our
+algorithm.
+
+\subsection{Practical Considerations}
+
+All that is left to do to complete the specification of our algorithm is to
+describe the kernel used. As is the case in several kernel methods, the choice
+of the kernel is crucial for good empirical performance.
+For each $\kernelj$ we use an RBF kernel, with scale parameter $\sigma_j$
+and bandwidth parameter $h_j$.
+\[
+\kernelj(\xj_s, \xj_t) = \sigma_j \exp \left( \frac{\|\xj_s -\xj_t\|_2^2 } 
+  {2h_j^2} \right)
+\]
+Here $\sigma_j$ captures the variation in the output and $h_j$ captures the
+variation in the input.
+In \krrs , these parameters along with the penalty coefficient $\lambda$ are
+chosen via cross validation.
+However, this is infeasible in our setting as $M$ is potentially very large. 
+In our case we set $h_j = 1.5 \| \textrm{std}(\Xjn) \|_2 n^{\frac{-1}{4+d_j}}$.
+Here $\textrm{std}(\Xjn)$ is the vector of standard deviations of the training
+dataset on the coordinates belonging to group $j$. This choice of bandwidth is
+motivated by the Silverman bandwidth and several kernel methods which choose 
+a bandidth on the order $O(n^{\frac{-1}{2\beta+d_j}})$  where $\beta$ is the
+smoothness of the function. We set $\sigma_j = \textrm{std}(Y) / \sqrt{M}$.
+Finally, the penalty coefficients $\lambda_1$ and $\lambda_2$ are chosen via cross
+validation.
 
