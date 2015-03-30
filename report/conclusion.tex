@@ -7,7 +7,13 @@ Going forward we wish to perform comparisons with other nonparametric regression
 methods such as Gaussian process regression, locally polynomial regression and
 other additive models \citep{hastie90gam, ravikumar09spam,
 duvenaud11additivegps} on other synthetic and real datasets.
-One challenge will be in scaling this to large datasets as we need to construct
-several $n\times n$ kernel matrices. We wish to explore some ideas on this front
-as well.
 
+Because we hope to apply the proposed method to high-dimensional problems,
+we are especially interested in making the proposed method scalable for large $M$. 
+A safe screening method \citep{group-lasso-screening:2013} was recently developed 
+for the group lasso problem. We hope to adapt this method to our problem, which
+could potentially lead to large speedup since for high-dimensional problems
+only a small fraction of the $M$ groups will be chosen as non-zero.
+%Recent work \citep{group-fused-lasso:2014} on the group fused lasso 
+%has sidestepped the $\ell_{1,2}$-norm penalty, transforming it to a 
+%smooth objective with non-negativity constraint.
