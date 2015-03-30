@@ -46,9 +46,9 @@ Otherwise, there exists some $t_j$ such that $\alphaj$ is the solution of the fo
 problem
 \[
 \arg\min_\alphaj \frac{1}{2}\alphaj^T A_j \alphaj + b_j^T \alphaj, 
-\text{ such that } \|\alphaj\|_2 le t_j.
+\text{ such that } \|\alphaj\|_2 \le t_j.
 \]
-If $t$ is known we have $\alphaj = t * \left(-(t_j A_j + \lambda_2 I_n)^{-1} b_j\right)$
+If $t_j$ is known we have $\alphaj = t_j * \left(-(t_j A_j + \lambda_2 I_n)^{-1} b_j\right)$
 Because in this case $\|\alphaj\|_2 = t_j$, we have $(t_j A_j + \lambda_2 I_n)^{-1} b_j = 1$.
 As described in \citet{bcd-group-lasso:2013}, 
 we can use Newton's method to solve this equation efficiently 
@@ -67,7 +67,7 @@ For each block of $\alphaj$, we solve
 + \lambda_2 \|\alphaj+d_j\|_2
 \]
 where $H_j \approx \nabla^2_{jj}G(\aalpha) = \KKj^T \KKj + \frac{\lambda_1}{2}\KKj$ 
-and $\nabla_j G(\aalpha) = -\KKj^T (y-\sum_{i\ne j}{\KKi \alphai}$.
+and $\nabla_j G(\aalpha) = -\KKj^T (y-\sum_{i\ne j}{\KKi \alphai})$.
 As suggested \citet{cgd:2009}, we use a diagonal matrix to approximate the true block Hessian.
 We set $H_j = \max(\diag(\nabla^2_{jj}G(\aalpha))) I_n := h_j I_n$, so that a closed-form solution exists
 for $d_j$:
@@ -77,7 +77,7 @@ d_j = \frac{1}{h_j}\left(\lambda_2 \frac{\nabla_j G(\aalpha) - h_j \alphaj}
 \]
 We use backtracking to determine the step size, then update $\alphaj \leftarrow \alphaj + t d_j$.
 
-Because the Hessian is constant, each block update costs $O(n)$ and updating all blocks costs $O(nm)$.
+Because the Hessian is constant, each block update costs $O(n)$ and updating all blocks costs $O(nM)$.
 Alternatively, as suggested in \citet{note-group-lasso:2010}, rather than using the 
 diagonal Hessian approximation, we could approximately solve each block subproblem via 
 coordinate descent.
