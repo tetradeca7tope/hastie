@@ -115,8 +115,17 @@ algorithm.
 \subsection{Practical Considerations}
 
 All that is left to do to complete the specification of our algorithm is to
-describe the kernel used. As is the case in several kernel methods, the choice
-of the kernel is crucial for good empirical performance.
+describe the allocation of coordinates into different groups and the kernel used
+for each such group. For this we tried 3 different strategies, all of which
+require the specification of a group size parameter $d$. The first sets $M = {D
+\choose d}$ and uses all combinations of size $d$ groups. The second sets $M =
+\sum_{k=1}^d {D \choose k}$ and uses all combinations of up to size $d$. In the
+third we also specify $M$ and then randomly generate $M$ groups of size $d$.
+All three performed equally well so we only consider the third option as $M$
+does not grow combinatorially with $D$ and $d$.
+
+As is the case in several kernel methods, the choice
+of the kernel is important for good empirical performance.
 For each $\kernelj$ we use an RBF kernel, with scale parameter $\sigma_j$
 and bandwidth parameter $h_j$.
 \[
@@ -125,15 +134,20 @@ and bandwidth parameter $h_j$.
 \]
 Here $\sigma_j$ captures the variation in the output and $h_j$ captures the
 variation in the input.
-In \krrs , these parameters along with the penalty coefficient $\lambda$ are
+In \krr, these parameters along with the penalty coefficient $\lambda$ are
 chosen via cross validation.
 However, this is infeasible in our setting as $M$ is potentially very large. 
 In our case we set $h_j = 1.5 \| \textrm{std}(\Xjn) \|_2 n^{\frac{-1}{4+d_j}}$.
 Here $\textrm{std}(\Xjn)$ is the vector of standard deviations of the training
 dataset on the coordinates belonging to group $j$. This choice of bandwidth is
 motivated by the Silverman bandwidth and several kernel methods which choose 
-a bandidth on the order $O(n^{\frac{-1}{2\beta+d_j}})$  where $\beta$ is the
-smoothness of the function. We set $\sigma_j = \textrm{std}(Y) / \sqrt{M}$.
-Finally, the penalty coefficients $\lambda_1$ and $\lambda_2$ are chosen via cross
+a bandidth on the order $O(n^{\frac{-1}{2\beta+p}})$  where $\beta$ is the
+smoothness of the function \cite{tsybakov08nonparametric} and $p$ is the
+dimensionality. 
+We set $\sigma_j = \textrm{std}(Y) / \sqrt{M}$ to capture the per group variance.
+The performance of the algorithm was usually insensitive to the choices of $h_j$
+and $\sigma_j$ provided they were roughly in the correct range.
+The penalty coefficients $\lambda_1$ and $\lambda_2$ are chosen via cross
 validation.
+
 
