@@ -6,6 +6,7 @@ clear all;
 clc;
 addpath ../addRKHSRegression/
 addpath ../utils/
+addpath ~/libs/kky-matlab/utils/
 rng('default');
 
 regressionAlgorithms = {'add-KR', 'KR', 'NW'};

@@ -19,6 +19,10 @@ for j = 1:numRegAlgos
 end
 legend(regressionAlgorithms);
 
+set(0,'defaultAxesFontName', 'Dejavu Sans')
+  set(findall(gca, '-property', 'FontSize'), 'FontSize', 18, ...
+    'fontWeight', 'bold');
+
 % Now plot error bars
 if numExperiments > 1
   stdErrs = errStds/sqrt(numExperiments);
@@ -35,3 +39,7 @@ ylim( [0.9*minMean 1.1*maxMean] );
 xlabel('Number of Data');
 ylabel('Test Error');
 
+
+set(0,'defaultAxesFontName', 'Dejavu Sans')
+  set(findall(gca, '-property', 'FontSize'), 'FontSize', 18, ...
+    'fontWeight', 'bold');

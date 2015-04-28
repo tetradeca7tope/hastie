@@ -1,0 +1,93 @@
+\documentclass[10pt]{article}
+
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{calc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{color,hyperref}
+\usepackage{epsfig}
+\usepackage{subfigure} 
+\usepackage{verbatim}
+% For algorithms
+\usepackage{algorithm}
+\usepackage{algorithmic}
+% Add my definitions file
+\usepackage{kky}
+\usepackage{hastieDefns}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% New Commands
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\toworkon}[1]{\textcolor{magenta}{[#1]}}
+% \newcommand{\toworkon}[1]{}
+
+% Title
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter% since there's an at-sign (@) in the command name
+\renewcommand{\@maketitle}{
+  \parindent=0pt
+  {\Large \bfseries {\@title}}  \\[1mm]
+   \textbf{\@author} \hfill   \textit{\@date } \\[-1mm]
+  \Hrule
+	\vspace{0.4in}
+}
+\makeatother % resets the meaning of the at-sign (@)
+\title{\textbf{Notation \& Setup}}
+\author{}
+\date{\today}
+
+% Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+
+Hey, Let's use the following notation in our writeups and code ?
+
+The first primal objective is,
+\[
+F_1(\aalpha) = \frac{1}{2n} \|Y - \sum_{j=1}^M \KKj \alphaj \|_2^2 
+  + \frac{\lambda}{M} \sum_{j=1}^M \sqrt{\alphaj^\top \KKj \alphaj}
+\]
+
+Let the Cholesky decomposition of $\KKj$ be, $\KKj = \LLj \LLj^\top$ where
+$\LLj$ is lower triangular\footnote{Matlab's \texttt{chol} gives the upper triangular
+matrix, but my wrapper \texttt{stableCholesky} takes care of it. It also,
+takes care of numerical issues in PSD matrices but be careful when using a
+non-PSD matrix with it.}. Let  $\beta_j =  \LLjt \alphaj$. Then, we can write
+the above objective as,
+\[
+F_2(\bbeta) = \frac{1}{2n}\|Y - \sum_{j=1}^M \LLj \alphaj\|_2^2 +
+  \frac{\lambda}{M}\sum_{j=1}^M \|\betaj\|_2
+\]
+Lets call this the second primal objective.
+
+
+\section*{Coding}
+
+Lets use the following standards, its basically what we are using right now.
+\begin{itemize}
+\item Maintain $\aalpha$ as an $\RR^{n\times M}$ matrix. Each column corresponds
+to an $\alphaj$.
+\item Maintain all the Kernel matrices in a $\RR^{n\times n\times M}$ tensor
+\texttt{K}, where \texttt{K(:,:,j)} is $\KKj$.
+\item Same for all the $\LLj$'s.
+\end{itemize}
+
+
+
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{alpha}
+\bibliography{kky}
+
+
+% Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \appendix
+
+
+\end{document}
+
