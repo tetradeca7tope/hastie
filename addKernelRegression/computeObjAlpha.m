@@ -1,9 +1,12 @@
 function obj = computeObj(Alpha, Ks, Y, lambda)
 % Computes the objective
   M = size(Ks, 2);
-
-  g = computeSmoothObjGrad(Alpha, Ks, Y, lambda1);
-  h = (lambda/M) * l21Norm(Alpha);
+  [g, KAlpha] = computeSmoothObjGradAlpha(Alpha, Ks, Y);
+  h = 0;
+  for j = 1:M
+    h = h + Alpha(:,j)'*KAlpha(:,j);
+  end
+  h = (lambda/M) * h;
   obj = g + h;
 end
 

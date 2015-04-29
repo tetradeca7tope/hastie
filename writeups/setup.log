@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  28 APR 2015 11:36
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  28 APR 2015 12:29
 entering extended mode
  %&-line parsing enabled.
 **setup.tex
@@ -463,13 +463,13 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 50.
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 71.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 72.
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 71.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 72.
 
 No file setup.bbl.
 [1
@@ -478,7 +478,7 @@ No file setup.bbl.
 Here is how much of TeX's memory you used:
  6764 strings out of 493848
  92641 string characters out of 1152822
- 169822 words of memory out of 3000000
+ 170822 words of memory out of 3000000
  9891 multiletter control sequences out of 15000+50000
  14332 words of font info for 54 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
@@ -497,7 +497,7 @@ onts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti
 10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb></us
 r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texm
 f-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on setup.pdf (1 page, 141421 bytes).
+Output written on setup.pdf (1 page, 141660 bytes).
 PDF statistics:
  74 PDF objects out of 1000 (max. 8388607)
  4 named destinations out of 1000 (max. 500000)
