@@ -59,7 +59,7 @@ takes care of numerical issues in PSD matrices but be careful when using a
 non-PSD matrix with it.}. Let  $\beta_j =  \LLjt \alphaj$. Then, we can write
 the above objective as,
 \[
-F_2(\bbeta) = \frac{1}{2n}\|Y - \sum_{j=1}^M \LLj \alphaj\|_2^2 +
+F_2(\bbeta) = \frac{1}{2n}\|Y - \sum_{j=1}^M \LLj \betaj\|_2^2 +
   \frac{\lambda}{M}\sum_{j=1}^M \|\betaj\|_2
 \]
 Lets call this the second primal objective.
@@ -74,6 +74,8 @@ to an $\alphaj$.
 \item Maintain all the Kernel matrices in a $\RR^{n\times n\times M}$ tensor
 \texttt{K}, where \texttt{K(:,:,j)} is $\KKj$.
 \item Same for all the $\LLj$'s.
+\item Lets use $n$ to denote the number of data points and upper case $M$ to
+denote the number of groups -- even in the code.
 \end{itemize}
 
 
