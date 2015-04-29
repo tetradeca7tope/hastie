@@ -10,10 +10,11 @@ function [all_alphas, all_betas, all_stats] = bcd_exact(y, L_all, lambdas)
 
     [n, ~, m] = size(L_all);
     k = size(lambdas(:),1);
+    lambdas = sort(lambdas,'descend');
     %params = processOptParamsCommon(params, n, m);
     %max_iters = params.maxNumIters;
     %f_tol = params.tolerance;
-    max_iters = 100;
+    max_iters = 10;
     f_tol = 1.0e-4;
 
     %alphas = params.initAlpha; % zeros(n, m);
@@ -45,7 +46,7 @@ function [all_alphas, all_betas, all_stats] = bcd_exact(y, L_all, lambdas)
     end
     
     for warm_iter = 1:k
-        lambda = lambda(warm_iter);
+        lambda = lambdas(warm_iter)/m;
         obj_history = objective_betas(y, L_betas, lambda, betas);
         time_history = cputime - startTime;
 
@@ -53,21 +54,21 @@ function [all_alphas, all_betas, all_stats] = bcd_exact(y, L_all, lambdas)
         for iter=1:max_iters
             for g=randperm(m)
                 L_g = L_all(:,:,g);
-                y_minus_other = y - sum(L_betas(:,setdiff(1:m,g)),2);
+                y_minus_other = 1/(n)*(y - sum(L_betas(:,setdiff(1:m,g)),2));
                 L_g_y_minus_other = L_g*y_minus_other;
-                newalpha = zeros(n,1);
-                if norm(K_g_y_minus_other,2) > lambda
+                newbeta = zeros(n,1);
+                if norm(L_g_y_minus_other,2) > lambda
                     Delta = newton_trust(-L_g_y_minus_other, ...
                         evectors_all(:,:,g), evalues_all(:,g), lambda);
                     Lhs = Delta*M_all(:,:,g)+lambda*eye(n);
                     yy = Lhs\L_g_y_minus_other;
-                    newalpha = Delta*yy;
+                    newbeta = Delta*yy;
                 end
-                if ~isequal(alphas(:,g), newalpha)
-                    alphas(:,g) = newalpha;
-                    L_betas(:,g) = L_g*betas(:,g);
-                    %obj_after = objective(alphas,y,K_all,lambda_1,lambda_2,lambda_3);
-                    %fprintf('iter=%i g=%i obj_after=%4.10f\n', iter, g, obj_after);
+                if ~isequal(betas(:,g), newbeta)
+                    betas(:,g) = newbeta;
+                    L_betas(:,g) = L_g*newbeta;
+                    obj_after = objective_betas(y,L_betas,lambda,betas)
+                    fprintf('iter=%i g=%i obj_after=%4.5e\n', iter, g, obj_after);
                 end
             end
 
@@ -77,7 +78,7 @@ function [all_alphas, all_betas, all_stats] = bcd_exact(y, L_all, lambdas)
             time_history = [time_history; currTime];
 
             %if params.verbose & mod(iter, params.verbosePerIter) == 0
-              fprintf('#%d (%.4f): currObj: %0.5f\n', ...
+              fprintf('#%d (%.4f): currObj: %0.5e\n', ...
                 iter, currTime, obj);
             %end
             
@@ -132,10 +133,11 @@ end
 
 function [obj] = objective_betas(y, L_betas, lambda, betas)
     [n, m] = size(L_betas);
-    fit = (1/2*n)*(y - sum(L_betas,2));
+    fit = y - sum(L_betas,2);
+    obj_fit = 1/(2*n)*fit'*fit;
     l12norm = 0;
     for g=1:m
         l12norm = l12norm + norm(betas(:,g),2);
     end
-    obj = fit + lambda/m*l12norm;
+    obj = obj_fit + lambda/m*l12norm;
 end
