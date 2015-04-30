@@ -1,4 +1,5 @@
-function [all_alphas, all_betas, all_stats] = bcd_exact(y, L_all, lambdas)
+function [all_alphas, all_betas, all_stats] = bcd_exact(y, L_all, lambdas, ...
+params)
 % Uses trust-region Newton to solve each group exactly
 % Efficient Block-coordinate Descent Algorithms for the Group Lasso
 % http://www.optimization-online.org/DB_FILE/2010/11/2806.pdf
@@ -77,10 +78,10 @@ function [all_alphas, all_betas, all_stats] = bcd_exact(y, L_all, lambdas)
             obj_history = [obj_history; obj];
             time_history = [time_history; currTime];
 
-            %if params.verbose & mod(iter, params.verbosePerIter) == 0
-              fprintf('#%d (%.4f): currObj: %0.5e\n', ...
+            if params.verbose & mod(iter, params.verbosePerIter) == 0
+              fprintf('bcdExact #%d (%.4f): currObj: %0.5e\n', ...
                 iter, currTime, obj);
-            %end
+            end
             
             if abs((obj-obj_history(end-1))/obj_history(end-1)) <= f_tol
                 fprintf('Terminating BCD for lambda=%f at %d iterations.\n', ...

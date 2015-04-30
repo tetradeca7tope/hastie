@@ -14,6 +14,13 @@ function [optBeta, optStats, decomposition] = ...
   groups = decomposition.groups;
   M = numel(groups);
 
+  if ~isfield(params, verbose)
+    params.verbose = false;
+  end
+  if ~isfield(params, verbosePerIter)
+    params.verbosePerIter = 20;
+  end
+
   % Determine which method to use for optimisation
   switch params.optMethod
 
