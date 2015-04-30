@@ -1,5 +1,5 @@
 function [optBeta, optStats, decomposition] = ...
-  addKernelRegTrain(Ls, Y, decomposition, lambda, initPt, params)
+  addKernelRegOpt(Ls, Y, decomposition, lambda, initPt, params)
 % Performs Additive Kernel Regression.
 % Ks, Y: All Kernels Covariates and Labels
 % decomposition is a struct containing the groups.
