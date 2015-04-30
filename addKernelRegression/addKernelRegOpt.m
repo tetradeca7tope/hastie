@@ -14,10 +14,10 @@ function [optBeta, optStats, decomposition] = ...
   groups = decomposition.groups;
   M = numel(groups);
 
-  if ~isfield(params, verbose)
+  if ~isfield(params, 'optVerbose')
     params.verbose = false;
   end
-  if ~isfield(params, verbosePerIter)
+  if ~isfield(params, 'optVerbosePerIter')
     params.verbosePerIter = 20;
   end
 
@@ -36,6 +36,7 @@ function [optBeta, optStats, decomposition] = ...
       [optBeta, optStats] = proxGradMethod(Ls, Y, lambda, params);
 
     case 'bcdExact'
+      [~, optBeta, optStats] = bcd_exact(Y, Ls, lambda, params);
 
     case 'bcgd'
 

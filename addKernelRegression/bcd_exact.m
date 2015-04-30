@@ -9,6 +9,8 @@ params)
 % alphas(n,M,k) 
 % betas(n,M,k)
 
+%     L_all, lambdas, params, pause,
+
     [n, ~, m] = size(L_all);
     k = size(lambdas(:),1);
     lambdas = sort(lambdas,'descend');
@@ -78,7 +80,7 @@ params)
             obj_history = [obj_history; obj];
             time_history = [time_history; currTime];
 
-            if params.verbose & mod(iter, params.verbosePerIter) == 0
+            if params.optVerbose & mod(iter, params.optVerbosePerIter) == 0
               fprintf('bcdExact #%d (%.4f): currObj: %0.5e\n', ...
                 iter, currTime, obj);
             end
