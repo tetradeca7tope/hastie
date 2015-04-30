@@ -1,5 +1,5 @@
-function [optBeta, optStats, decomposition] = addKernelRegTrainOnly( ...
-  X, Y, decomposition, lambda, params)
+function [predFunc, optAlpha, optBeta, optStats, decomposition] = ...
+  addKernelRegTrainOnly(X, Y, decomposition, lambda, params)
 % This is a wrapper for addKernelRegOpt - it constructs kernels and obtains
 % their cholesky decomposition before calling addKernelRegOpt. It does not do
 % any cross validation. I am writing this function because it is useful to
@@ -30,6 +30,13 @@ function [optBeta, optStats, decomposition] = addKernelRegTrainOnly( ...
   % Now call addKernelRegOpt
   [optBeta, optStats] = addKernelRegOpt(allLs, Y, decomposition, ...
     lambda, initBeta, params);
+
+  % Now return the predictor function
+  optAlpha = zeros(n, M);
+  for j = 1:M
+    optAlpha(:,j) = (allLs(:,:,j)') \ optBeta(:,j);
+  end
+  predFunc = @(Xte) getPrediction(Xte, X, optAlpha, kernelFunc);
 
 end
 

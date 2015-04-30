@@ -8,9 +8,9 @@ addpath ~/libs/kky-matlab/utils/
 addpath ../utils/
 rng('default');
 
-% numDims = 10; n = 200; numRandGroups = 20; 
-numDims = 10; n = 10; numRandGroups = 5; % Debug setting
-lambda = 5;
+numDims = 10; n = 200; numRandGroups = 25; 
+% numDims = 10; n = 12; numRandGroups = 5; % Debug setting
+lambda = 0.01;
 
 % Generate Toy Data
 f = @(X) 0.1*(sum(X.^2, 2) + sum(X, 2).^2 + X(:,1) );
@@ -25,13 +25,14 @@ decomposition.setting = 'randomGroups';
 decomposition.numRandGroups = numRandGroups;
 decomposition.maxGroupSize = 3;
 decomposition.groupSize = 4;
+decomposition.addAll1DComps = false;
 % params.optMethod = 'proxGradient';
-% params.optMethod = 'subGradient';
-params.optMethod = 'bcdExact';
+params.optMethod = 'subGradient';
+% params.optMethod = 'bcdExact';
 % params.optMethod = 'bcgdDiagHessian';
 params.maxNumIters = 1000;
 params.optVerbose = true;
-[predFunc, decomposition, stats] = ...
+[predFunc, optAlpha, optBeta, optStats, decomposition] = ...
   addKernelRegTrainOnly(Xtr, Ytr, decomposition, lambda, params);
 
 % Now do a prediction

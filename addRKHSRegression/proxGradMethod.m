@@ -84,6 +84,7 @@ function [currBestAlpha, stats] =  ...
     % Update Alpha1 and Alpha2
     Alpha2 = Alpha1;
     Alpha1 = Alpha;
+    prevObj = currObj;
 
 %     debugIdxs = [3 4 8 12];
 %     size(Alpha), Alpha(debugIdxs, :), G(debugIdxs, :), pause,

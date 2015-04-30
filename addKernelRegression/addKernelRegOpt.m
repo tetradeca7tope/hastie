@@ -1,4 +1,4 @@
-function [optBeta, optStats, decomposition] = ...
+function [optBeta, optStats] = ...
   addKernelRegOpt(Ls, Y, decomposition, lambda, initPt, params)
 % Performs Additive Kernel Regression.
 % Ks, Y: All Kernels Covariates and Labels
@@ -13,13 +13,6 @@ function [optBeta, optStats, decomposition] = ...
   n = size(Y, 1);
   groups = decomposition.groups;
   M = numel(groups);
-
-  if ~isfield(params, 'optVerbose')
-    params.verbose = false;
-  end
-  if ~isfield(params, 'optVerbosePerIter')
-    params.verbosePerIter = 20;
-  end
 
   % Determine which method to use for optimisation
   switch params.optMethod

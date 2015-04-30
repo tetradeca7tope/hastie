@@ -7,13 +7,12 @@ function [obj, G] = computeSmoothObjGradBeta(Beta, Ls, Y)
 % Y are the labels.
 
   % Prelims
-  n = size(Beta, 1);
-  m = size(Beta, 2);
+  [n, M] = size(Beta);
 
   % Compute the following
   LBeta = zeros(n,M);
   for j = 1:M
-    LBeta(:,:,j) = Ls(:,:,j) * Beta(:,j);
+    LBeta(:,j) = Ls(:,:,j) * Beta(:,j);
   end
   diff = sum(LBeta, 2) - Y; % The difference between the predictions and labels.
 
