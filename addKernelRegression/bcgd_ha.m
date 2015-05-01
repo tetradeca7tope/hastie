@@ -29,26 +29,37 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
         hess_all(:,:,g) = hess_g;
         h_all(g) = max(max(diag(hess_g)), 0.1);
     end
+
+    pred_not_g = zeros(n, m);
+    for g=1:m
+        pred_not_g(:,g) = sum(L_beta(:,setdiff(1:m,g)),2);
+    end
     
     for iter=1:params.maxNumIters
         for g=randperm(m)
             Beta_g = Beta(:,g);
             L_beta_g = L_beta(:,g);
             L_g =  Ls(:,:,g);
-            y_minus_other = (1/(2*n))*(Y - sum(L_beta(:,setdiff(1:m,g)),2));
+            y_minus_other = (1/(2*n))*(Y - pred_not_g(:,g));
             L_g_y_minus = L_g'*y_minus_other;
-            grad_g = -L_g_y_minus + (1/(2*n))*L_g'*L_beta_g;
-            if norm(L_g_y_minus,2) <= lambda/m
+            if norm(L_g_y_minus,2) <= lambda/m && any(Beta_g)
                 d_g = -Beta_g;
+                Beta(:,g) = 0;
+                L_beta(:,g) = 0;
+                diff_L_beta = L_g*d_g;
+                pred_not_g = bsxfun(@plus,pred_not_g,diff_L_beta);
+                pred_not_g(:,g) = pred_not_g(:,g) - diff_L_beta;
             else
+                grad_g = -L_g_y_minus + (1/(2*n))*L_g'*L_beta_g;
                 grad_minus_h = -grad_g + h_all(g)*Beta_g;
                 d_g = 1/h_all(g)*(-grad_g - (lambda/m)*grad_minus_h/norm(grad_minus_h,2));
+                Beta(:,g) = Beta_g + d_g;
+                diff_L_beta = L_g*d_g;
+                L_beta(:,g) = L_beta(:,g) + diff_L_beta;
+                pred_not_g = bsxfun(@plus,pred_not_g,diff_L_beta);
+                pred_not_g(:,g) = pred_not_g(:,g) - diff_L_beta;
             end
-            
-            Beta(:,g) = Beta_g + 1*d_g;
-            L_beta(:,g) = L_g*Beta(:,g);
         end
-
         currObj = objective(Beta);
         currTime = cputime - startTime;
         objHistory = [objHistory; currObj];
