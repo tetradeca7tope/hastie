@@ -39,11 +39,6 @@ function [optBeta, optStats] = subGradMethod(Ls, Y, lambda, params)
     end
     objHistory = [objHistory; currBestObj];
     timeHistory = [timeHistory; currTime];
-    
-    % Termination condition
-    if abs( (currObj - prevObj) / currObj ) < params.tolerance
-      terminateNow = true;
-    end
 
     % Print results out
     if params.optVerbose & mod(iter, params.optVerbosePerIter) == 0,
@@ -53,6 +48,11 @@ function [optBeta, optStats] = subGradMethod(Ls, Y, lambda, params)
 
     % Update
     prevObj = currObj;
+    
+    % Termination condition
+    if abs( (currObj - prevObj) / currObj ) < params.tolerance
+      break;
+    end
 
   end
 

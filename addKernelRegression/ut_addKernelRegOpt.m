@@ -8,7 +8,7 @@ addpath ~/libs/kky-matlab/utils/
 addpath ../utils/
 rng('default');
 
-numDims = 10; n = 200; numRandGroups = 25; 
+numDims = 10; n = 200; numRandGroups = 60; 
 % numDims = 10; n = 12; numRandGroups = 5; % Debug setting
 lambda = 0.01;
 
@@ -27,7 +27,8 @@ decomposition.maxGroupSize = 3;
 decomposition.groupSize = 4;
 decomposition.addAll1DComps = false;
 % params.optMethod = 'proxGradient';
-params.optMethod = 'subGradient';
+params.optMethod = 'proxGradientAccn';
+% params.optMethod = 'subGradient';
 % params.optMethod = 'bcdExact';
 % params.optMethod = 'bcgdDiagHessian';
 params.maxNumIters = 1000;
