@@ -1,9 +1,9 @@
 % Unit test for addKernelRegOpt
 % We will be calling addKernelRegTrainOnly to interface the function.
 
-clear all;
+%clear all;
 close all;
-clc;
+%clc;
 addpath ../utils/
 addpath ../otherMethods/
 rng('default');
@@ -27,10 +27,10 @@ decomposition.maxGroupSize = 3;
 decomposition.groupSize = 4;
 decomposition.addAll1DComps = false;
 % params.optMethod = 'proxGradient';
-params.optMethod = 'proxGradientAccn';
+% params.optMethod = 'proxGradientAccn';
 % params.optMethod = 'subGradient';
 % params.optMethod = 'bcdExact';
-% params.optMethod = 'bcgdDiagHessian';
+params.optMethod = 'bcgdDiagHessian';
 params.maxNumIters = 200;
 params.optVerbose = true;
 [predFunc, optAlpha, optBeta, optStats, decomposition] = ...

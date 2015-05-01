@@ -29,10 +29,10 @@ function [optBeta, optStats] = ...
       [optBeta, optStats] = proxGradMethod(Ls, Y, lambda, params);
 
     case 'bcdExact'
-      [~, optBeta, optStats] = bcd_exact(Y, Ls, lambda, params);
+      [optBeta, optStats] = bcd_exact(Ls, Y, lambda, params);
 
-    case 'bcgd'
-
+    case 'bcgdDiagHessian'
+      [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params);
     case 'admm'
 
     case 'proxNewton'
