@@ -42,7 +42,7 @@ function [optBeta, optStats] = subGradMethod(Ls, Y, lambda, params)
 
     % Print results out
     if params.optVerbose & mod(iter, params.optVerbosePerIter) == 0,
-      fprintf('SubGrad #%d (%0.3fs): currObj: %0.4f, bestObj: %.4f, stepSize: %e\n', ...
+      fprintf('SubGrad #%d (%0.3fs): currObj: %0.4e, bestObj: %.4e, stepSize: %e\n', ...
         iter, currTime, currObj, currBestObj, stepSize);
     end
 

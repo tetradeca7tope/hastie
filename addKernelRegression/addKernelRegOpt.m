@@ -33,6 +33,7 @@ function [optBeta, optStats] = ...
 
     case 'bcgdDiagHessian'
       [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params);
+
     case 'admm'
 
     case 'proxNewton'

@@ -10,6 +10,7 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
 
     % Set up book keeping
     prevObj = objective(Beta);
+    currBestObj = prevObj;
     objHistory = prevObj;
     timeHistory = 0;
     startTime = cputime;
@@ -61,13 +62,17 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
             end
         end
         currObj = objective(Beta);
+        if currObj < currBestObj
+          currBestObj = currObj;
+          currBestBeta = Beta;
+        end
         currTime = cputime - startTime;
-        objHistory = [objHistory; currObj];
+        objHistory = [objHistory; currBestObj];
         timeHistory = [timeHistory; currTime];
 
         if params.optVerbose && mod(iter, params.optVerbosePerIter) == 0
-            fprintf('bcgdDiagHessian #%d (%.4f): currObj: %0.5e\n\n', ...
-                iter, currTime, currObj);
+            fprintf('bcgdDH #%d (%.4f): currObj: %0.4e, currBest: %0.4e\n', ...
+                iter, currTime, currObj, currBestObj);
         end
         if abs( (currObj - prevObj) / currObj ) < params.tolerance
             break;
@@ -80,5 +85,5 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
     % statistics
     optStats.objective = objHistory;
     optStats.time = timeHistory;
-    optBeta = Beta;
+    optBeta = currBestBeta;
 end

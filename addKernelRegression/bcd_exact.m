@@ -62,7 +62,7 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
         timeHistory = [timeHistory; currTime];
 
         if params.optVerbose && mod(iter, params.optVerbosePerIter) == 0
-            fprintf('bcdExact #%d (%.4f): currObj: %0.5e\n\n', ...
+            fprintf('bcdExact #%d (%.4f): currObj: %0.4e\n', ...
                 iter, currTime, currObj);
         end
         

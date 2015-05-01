@@ -59,7 +59,7 @@ function [optBeta, optStats] = proxGradMethod(Ls, Y, lambda, params)
 
     % Print results
     if params.optVerbose & mod(iter, params.optVerbosePerIter) == 0,
-      fprintf('ProxG #%d (%0.3f): currObj: %0.4f, currBestObj: %0.4f, stepSize: %e\n', ...
+      fprintf('ProxG #%d (%0.3f): currObj: %0.4e, currBestObj: %0.4e, stepSize: %e\n', ...
         iter, currTime, currObj, currBestObj, stepSize);
     end
 

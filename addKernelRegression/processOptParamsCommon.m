@@ -5,18 +5,18 @@ function params = processOptParamsCommon(params, n, M)
 
   if ~isfield(params, 'initBeta'),
     params.initBeta = zeros(n, M);
-    fprintf('Initialising with all Zeros.\n');
+%     fprintf('Initialising with all Zeros.\n');
   end
   if ~isfield(params, 'useAcceleration'),
     params.useAcceleration = true;
-    fprintf('Using Acceleration.\n');
+%     fprintf('Using Acceleration.\n');
   end
   if ~isfield(params, 'stepSizeCriterion'), 
     params.stepSizeCriterion = 'backTracking';
-    fprintf('Using Backtracking Line Search\n');
+%     fprintf('Using Backtracking Line Search\n');
   end
 
-  if ~isfield(params, 'tolerance'), params.tolerance = 1e-8;
+  if ~isfield(params, 'tolerance'), params.tolerance = 1e-5;
   end
   if ~isfield(params, 'maxNumIters'), params.maxNumIters = 1e5;
   end

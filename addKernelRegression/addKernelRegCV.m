@@ -1,4 +1,4 @@
-function [predFunc, decomposition, bestLambda, optStats] = ...
+function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
   addKernelRegCV(X, Y, decomposition, lambdaRange, params)
 % Performs Additive RKHS regression and selects the optimal hyper parameters via
 % cross validation.
@@ -7,7 +7,7 @@ function [predFunc, decomposition, bestLambda, optStats] = ...
 % lambdaRange: range of values for regularization penalty
 
   % prelims
-  n = size(X, 1);
+  n = size(X,1);
   % shuffle the data
   shuffleOrder = randperm(n);
   X = X(shuffleOrder, :);
@@ -21,23 +21,24 @@ function [predFunc, decomposition, bestLambda, optStats] = ...
     params.numTrialsCV = 2;
   end
   if ~isfield(params, 'numLambdaCands')
-    params.numLambdaCands = 100;
+    params.numLambdaCands = 20;
   end
   % Copy over to workspace
   numPartsKFoldCV = params.numPartsKFoldCV;
   numLambdaCands = params.numLambdaCands;
 
+  % Obtain the kernel Function and the decomposition
+  [kernelFunc, decomposition] = kernelSetup(X, Y, decomposition);
+  decomp = decomposition;
+  M = numel(decomp.groups);
+  decomp.setting = 'groups';
+
   % Set things up for cross validation
   if isempty(lambdaRange), lambdaRange = [1e-4 10]; end
   lambdaCands = fliplr( ...
-    logspace(log(lambdaRange(1)), log(lambdaRange(2)), numLambdaCands) );
+    logspace(log10(lambdaRange(1)), log10(lambdaRange(2)), numLambdaCands) )';
   errorAccum = zeros(numLambdaCands, 1);
   normBetaVals = zeros(numLambdaCands, M);
-
-  % Obtain the kernel Function and the decomposition
-  [kernelFunc, decomposition] = kernelSetup(X, decomposition);
-  decomp = decomposition;
-  decomp.setting = 'groups';
 
   %% Cross validation begins here
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,6 +64,9 @@ function [predFunc, decomposition, bestLambda, optStats] = ...
     Xte = X(testIdxs, :);
     Yte = Y(testIdxs, :);
 
+    fprintf('CV iter %d/%d, nTRain: %d, nTest: %d\n', ...
+      cvIter, params.numTrialsCV, nTr, nTe);
+
     % 2. Obtain Kernels and the Cholesky Decomposition
     [~, allKs] = kernelFunc(Xtr, Xtr);
     allLs = zeros(size(allKs));
@@ -71,19 +75,22 @@ function [predFunc, decomposition, bestLambda, optStats] = ...
     end
 
     % 3. Obtain validation errors for each value of Lambda
-    Beta = zeros(nTr, 1); % Initialisation for largest Lambda
+    Beta = zeros(nTr, M); % Initialisation for largest Lambda
     % Optimise for each lambda
     for candIter = 1:numLambdaCands
 
       lambda = lambdaCands(candIter);
+      fprintf('lambda = %0.4f\n', lambda);
 
       % Call the optimisation routine
       params.initBeta = Beta;
       [Beta] = addKernelRegOpt(allLs, Ytr, decomp, lambda, params);
 
       % Some book-keeping to analyse sparsity.
-      normBetaVals(candIter, :) = sqrt( sum(Beta.^2) ); % this gets overwritten
-                                                 % each iteration but that's ok.
+      if candIter == 1
+        % this gets overwritten at each iteration but that is ok.
+        normBetaVals(candIter, :) = sqrt( sum(Beta.^2) );
+      end
 
       % Now obtain the predictions and record the validation error
       Alpha = zeros(nTr, M);
@@ -91,7 +98,7 @@ function [predFunc, decomposition, bestLambda, optStats] = ...
         Alpha(:,j) = (allLs(:,:,j)') \ Beta(:,j);
       end
       Ypred = getPrediction(Xte, Xtr, Alpha, kernelFunc);
-      errorAccum(candIter) = errorAccum(candIter) + norm(Ypred - Yte).^2;
+      errorAccum(candIter) = errorAccum(candIter) + norm(Ypred - Yte).^2/nTe;
 
     end
 
@@ -100,7 +107,7 @@ function [predFunc, decomposition, bestLambda, optStats] = ...
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   % Determine the best lambda value
-  bestLambdaIdx = min(errorAccum);
+  [~, bestLambdaIdx] = min(errorAccum);
   bestLambda = lambdaCands(bestLambdaIdx);
 
   % Perform Optimisation over all data points now
@@ -109,18 +116,19 @@ function [predFunc, decomposition, bestLambda, optStats] = ...
   for j = 1:M
     allLs(:,:,j) = stableCholesky(allKs(:,:,j));
   end
-  params.initBeta = zeros(n, 1);
+  params.initBeta = zeros(n, M);
   [optBeta, optStats] = addKernelRegOpt(allLs, Y, decomp, bestLambda, params);
 
   % Obtain the function handle
-  Alpha = zeros(n, M);
+  optAlpha = zeros(n, M);
   for j = 1:M
-    Alpha(:,j) = (allLs(:,:,j)') \ Beta(:,j);
+    optAlpha(:,j) = (allLs(:,:,j)') \ optBeta(:,j);
   end
-  predFunc = @(arg) getPrediction(arg, X, Alpha, kernelFunc);
+  predFunc = @(arg) getPrediction(arg, X, optAlpha, kernelFunc);
 
   % Before returning
   optStats.normBetaVals = normBetaVals;
+  optStats.cvResults = [lambdaCands errorAccum/params.numTrialsCV];
 
 end
 
