@@ -1,4 +1,4 @@
-function [predFunc, decomposition, optStats] = ...
+function [predFunc, decomposition, bestLambda, optStats] = ...
   addKernelRegCV(X, Y, decomposition, lambdaRange, params)
 % Performs Additive RKHS regression and selects the optimal hyper parameters via
 % cross validation.
@@ -28,8 +28,19 @@ function [predFunc, decomposition, optStats] = ...
   numLambdaCands = params.numLambdaCands;
 
   % Set things up for cross validation
+  if isempty(lambdaRange), lambdaRange = [1e-4 10]; end
+  lambdaCands = fliplr( ...
+    logspace(log(lambdaRange(1)), log(lambdaRange(2)), numLambdaCands) );
   errorAccum = zeros(numLambdaCands, 1);
+  normBetaVals = zeros(numLambdaCands, M);
 
+  % Obtain the kernel Function and the decomposition
+  [kernelFunc, decomposition] = kernelSetup(X, decomposition);
+  decomp = decomposition;
+  decomp.setting = 'groups';
+
+  %% Cross validation begins here
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   for cvIter = 1:params.numTrialsCV
 
     % So here's the plan in this loop.
@@ -53,20 +64,63 @@ function [predFunc, decomposition, optStats] = ...
     Yte = Y(testIdxs, :);
 
     % 2. Obtain Kernels and the Cholesky Decomposition
-    [kernelFunc, decomposition] = kernelSetup(X, decomposition);
-    Ktr = 
+    [~, allKs] = kernelFunc(Xtr, Xtr);
+    allLs = zeros(size(allKs));
+    for j = 1:M
+      allLs(:,:,j) = stableCholesky(allKs(:,:,j));
+    end
 
-    initBeta = zeros(n, 1);
-    
+    % 3. Obtain validation errors for each value of Lambda
+    Beta = zeros(nTr, 1); % Initialisation for largest Lambda
+    % Optimise for each lambda
+    for candIter = 1:numLambdaCands
+
+      lambda = lambdaCands(candIter);
+
+      % Call the optimisation routine
+      params.initBeta = Beta;
+      [Beta] = addKernelRegOpt(allLs, Ytr, decomp, lambda, params);
+
+      % Some book-keeping to analyse sparsity.
+      normBetaVals(candIter, :) = sqrt( sum(Beta.^2) ); % this gets overwritten
+                                                 % each iteration but that's ok.
+
+      % Now obtain the predictions and record the validation error
+      Alpha = zeros(nTr, M);
+      for j = 1:M
+        Alpha(:,j) = (allLs(:,:,j)') \ Beta(:,j);
+      end
+      Ypred = getPrediction(Xte, Xtr, Alpha, kernelFunc);
+      errorAccum(candIter) = errorAccum(candIter) + norm(Ypred - Yte).^2;
+
+    end
 
   end
+  %% Cross validation ends here
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-  
+  % Determine the best lambda value
+  bestLambdaIdx = min(errorAccum);
+  bestLambda = lambdaCands(bestLambdaIdx);
+
+  % Perform Optimisation over all data points now
+  [~, allKs] = kernelFunc(X, X);
+  allLs = zeros(size(allKs));
+  for j = 1:M
+    allLs(:,:,j) = stableCholesky(allKs(:,:,j));
+  end
+  params.initBeta = zeros(n, 1);
+  [optBeta, optStats] = addKernelRegOpt(allLs, Y, decomp, bestLambda, params);
+
+  % Obtain the function handle
+  Alpha = zeros(n, M);
+  for j = 1:M
+    Alpha(:,j) = (allLs(:,:,j)') \ Beta(:,j);
+  end
+  predFunc = @(arg) getPrediction(arg, X, Alpha, kernelFunc);
+
+  % Before returning
+  optStats.normBetaVals = normBetaVals;
 
 end
-
-
-
-end
-
 

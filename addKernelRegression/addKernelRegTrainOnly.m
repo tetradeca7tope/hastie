@@ -25,11 +25,11 @@ function [predFunc, optAlpha, optBeta, optStats, decomposition] = ...
   end
 
   % Set initialisation
-  initBeta = zeros(n, M);
+  params.initBeta = zeros(n, M);
 
   % Now call addKernelRegOpt
   [optBeta, optStats] = addKernelRegOpt(allLs, Y, decomposition, ...
-    lambda, initBeta, params);
+    lambda, params);
 
   % Now return the predictor function
   optAlpha = zeros(n, M);

@@ -10,7 +10,7 @@ rng('default');
 
 numDims = 10; n = 200; numRandGroups = 200; 
 % numDims = 10; n = 12; numRandGroups = 5; % Debug setting
-lambda = 0.05;
+lambda = 0.02;
 
 % Generate Toy Data
 f = @(X) 0.1*(sum(X.^2, 2) + sum(X, 2).^2 + X(:,1) );
