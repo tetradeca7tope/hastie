@@ -4,13 +4,13 @@
 clear all;
 close all;
 clc;
-addpath ~/libs/kky-matlab/utils/
 addpath ../utils/
+addpath ../otherMethods/
 rng('default');
 
-numDims = 10; n = 200; numRandGroups = 60; 
+numDims = 10; n = 200; numRandGroups = 200; 
 % numDims = 10; n = 12; numRandGroups = 5; % Debug setting
-lambda = 0.01;
+lambda = 0.05;
 
 % Generate Toy Data
 f = @(X) 0.1*(sum(X.^2, 2) + sum(X, 2).^2 + X(:,1) );
@@ -31,7 +31,7 @@ params.optMethod = 'proxGradientAccn';
 % params.optMethod = 'subGradient';
 % params.optMethod = 'bcdExact';
 % params.optMethod = 'bcgdDiagHessian';
-params.maxNumIters = 1000;
+params.maxNumIters = 200;
 params.optVerbose = true;
 [predFunc, optAlpha, optBeta, optStats, decomposition] = ...
   addKernelRegTrainOnly(Xtr, Ytr, decomposition, lambda, params);
