@@ -51,16 +51,8 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
                 newbeta = Delta*yy;
             end
             if ~isequal(Beta(:,g), newbeta)
-                obj_before = objective(Beta);
-                oldbeta = Beta(:,g);
                 Beta(:,g) = newbeta;
                 L_beta(:,g) = L_g*newbeta;
-                obj_after = objective(Beta);
-                if obj_after > obj_before
-                    %fprintf('before:%f after:%f normbefore:%f normafter:%f\n', ...
-                    %    obj_before, obj_after, norm(oldbeta), norm(newbeta));
-                end
-                fprintf('iter=%i g=%i obj_after=%4.5e\n', iter, g, obj_after);
             end
         end
 
@@ -71,11 +63,11 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
 
         if params.optVerbose && mod(iter, params.optVerbosePerIter) == 0
             fprintf('bcdExact #%d (%.4f): currObj: %0.5e\n\n', ...
-                iter, currTime, obj);
+                iter, currTime, currObj);
         end
         
         if abs( (currObj - prevObj) / currObj ) < params.tolerance
-            %break;
+            break;
         end
 
         % Update
@@ -92,16 +84,15 @@ end
 
 function [Delta] = newton_trust(p_g, evectors, evalues, lambda)
     max_trust_iters = 10;
-    trust_tol = 1.0e-3;
+    trust_tol = 1.0e-4;
     n = size(p_g, 1);
     qtp2 = zeros(n,1);
     for i=1:n
         qtp2(i) = (evectors(:,i)'*p_g)^2;
     end
-    fun = @(x) 1 - 1/sqrt(sum(qtp2 ./ ((evalues*x+lambda).^2)));
-    Delta = fzero(fun, 0);
-    assert(Delta > 0);
-    return; % TODO
+    %fun = @(x) 1 - 1/sqrt(sum(qtp2 ./ ((evalues*x+lambda).^2)));
+    %Delta = fzero(fun, 0);
+    %assert(Delta > 0);
     success = 0;
     Delta = 0;
     for iter=1:max_trust_iters
