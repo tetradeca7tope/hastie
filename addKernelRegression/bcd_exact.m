@@ -38,7 +38,7 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
     end
 
     for iter = 1:params.maxNumIters
-        for g=1:m
+        for g=randperm(m)
             L_g = Ls(:,:,g);
             y_minus_other = (1/n)*(Y - sum(L_beta(:,setdiff(1:m,g)),2));
             L_g_y_minus_other = L_g'*y_minus_other;
