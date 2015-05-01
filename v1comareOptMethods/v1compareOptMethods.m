@@ -3,7 +3,7 @@
 close all;
 clear all;
 clc;
-addpath ../addRKHSRegression/
+addpath ../addKernelRegression/
 addpath ../utils/
 rng('default');
 
@@ -14,21 +14,21 @@ plotMarkers = {'-x', '-o', '-*', '-s', '-^'};
 plotFunc = @loglog;
 
 % Problem Set up
-numDims = 20; n = 500; M = 50; maxNumIters = 2000;
+numDims = 20; n = 500; M = 100; maxNumIters = 1000;
 % numDims = 6; n = 100; M = 10; maxNumIters = 100;  % For debugging
 [func, funcProps] = getAdditiveFunction(numDims, numDims);
 bounds = funcProps.bounds;
 nTest = n;
-lambda1 = 1;
-lambda2 = 5;
+lambda = 0.001;
 
 % For the Decomposition
 decomposition.setting = 'randomGroups';
 decomposition.numRandGroups = M;
 decomposition.groupSize = 4;
-decomposition.maxGroupSize = 3;
 % Parameters for Optimisation
 optParams.maxNumIters = maxNumIters;
+optParams.optVerbose = true;
+optParams.tolerance = 0;
 
 % Sample train and test data uniformly within the bounds
 Xtr = bsxfun(@plus, ...
@@ -48,8 +48,8 @@ timeHistories = cell(numMethods, 1);
 for methIter = 1:numMethods
 
   optParams.optMethod = compareMethods{methIter};
-  [predFunc, decomposition, stats] = ...
-    addKernelRidgeRegression(Xtr, Ytr, decomposition, lambda1, lambda2, optParams);
+  [predFunc, optAlpha, optBeta, stats, decomposition] = ...
+    addKernelRegTrainOnly(Xtr, Ytr, decomposition, lambda, optParams);
   objHistories{methIter} = stats.objective;
   timeHistories{methIter} = stats.time;
 

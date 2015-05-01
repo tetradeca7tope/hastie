@@ -8,7 +8,7 @@ addpath ../utils/
 addpath ../otherMethods/
 rng('default');
 
-numDims = 10; n = 400; numRandGroups = 30; 
+numDims = 10; n = 400; numRandGroups = 200; 
 
 % Generate Toy Data
 f = @(X) 0.1*(sum(X.^2, 2) + sum(X, 2).^2 + X(:,1) );
@@ -24,7 +24,7 @@ decomposition.numRandGroups = numRandGroups;
 decomposition.maxGroupSize = 3;
 decomposition.groupSize = 4;
 decomposition.addAll1DComps = false;
-lambdaRange = [1e-8 1];
+lambdaRange = [1e-16 1];
 % params.optMethod = 'proxGradient';
 % params.optMethod = 'proxGradientAccn';
 % params.optMethod = 'subGradient';
