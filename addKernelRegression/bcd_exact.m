@@ -1,118 +1,107 @@
-function [all_alphas, all_betas, all_stats] = bcd_exact(y, L_all, lambdas, ...
-params)
+function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
 % Uses trust-region Newton to solve each group exactly
 % Efficient Block-coordinate Descent Algorithms for the Group Lasso
 % http://www.optimization-online.org/DB_FILE/2010/11/2806.pdf
-% y(n,1)
-% L_all(n,n,M)
-% lambdas(k,1) for warm-starting with k warm-starts
-% alphas(n,M,k) 
-% betas(n,M,k)
 
-%     L_all, lambdas, params, pause,
+    [n, ~, m] = size(Ls);
+    % Create a function handle for the objective
+    objective = @(arg) computeObjBeta(arg, Ls, Y, lambda);
+    smoothObjGrad = @(arg) computeSmoothObjGradBeta(arg, Ls, Y);
+    % Obtain optimisation params
+    params = processOptParamsCommon(params, n, m);
+    Beta = params.initBeta;
 
-    [n, ~, m] = size(L_all);
-    k = size(lambdas(:),1);
-    lambdas = sort(lambdas,'descend');
-    %params = processOptParamsCommon(params, n, m);
-    %max_iters = params.maxNumIters;
-    %f_tol = params.tolerance;
-    max_iters = 10;
-    f_tol = 1.0e-4;
+    % Set up book keeping
+    prevObj = objective(Beta);
+    objHistory = prevObj;
+    timeHistory = 0;
+    startTime = cputime;
 
-    %alphas = params.initAlpha; % zeros(n, m);
-    %alphas = zeros(n,m);
-    betas = zeros(n,m);
-    L_betas = zeros(n,m);
+    % Maintain L_g*Beta_g for all groups
+    L_beta = zeros(n, m);
     for g=1:m
-        L_betas(:,g) = L_all(:,:,g)*betas(:,g);
+        L_beta(:,g) = Ls(:,:,g)*Beta(:,g);
     end
-
-    % Saved outputs for all warm-starts
-    all_alphas = zeros(n,m,k);
-    all_betas = zeros(n,m,k);
-    all_stats = [];
-    tic; startTime = cputime;
 
     % Compute eigenvalues and eigenvectors of Hessian
     M_all = zeros(n, n, m);
     evectors_all = zeros(n,n,m);
     evalues_all = zeros(n,m);
     for g=1:m
-        L_g = L_all(:,:,g);
-        M_g = 1/(2*n)*L_g'*L_g;
+        L_g = Ls(:,:,g);
+        M_g = 1/(n)*L_g'*L_g;
         [V, D] = eig(M_g);
         evectors_all(:,:,g) = V; % each column is an evector
         evalues_all(:,g) = diag(D);
         assert(min(diag(D))>0);
         M_all(:,:,g) = M_g;
     end
-    
-    for warm_iter = 1:k
-        lambda = lambdas(warm_iter)/m;
-        obj_history = objective_betas(y, L_betas, lambda, betas);
-        time_history = cputime - startTime;
 
-        % Run block coordinate descent
-        for iter=1:max_iters
-            for g=randperm(m)
-                L_g = L_all(:,:,g);
-                y_minus_other = 1/(n)*(y - sum(L_betas(:,setdiff(1:m,g)),2));
-                L_g_y_minus_other = L_g*y_minus_other;
-                newbeta = zeros(n,1);
-                if norm(L_g_y_minus_other,2) > lambda
-                    Delta = newton_trust(-L_g_y_minus_other, ...
-                        evectors_all(:,:,g), evalues_all(:,g), lambda);
-                    Lhs = Delta*M_all(:,:,g)+lambda*eye(n);
-                    yy = Lhs\L_g_y_minus_other;
-                    newbeta = Delta*yy;
-                end
-                if ~isequal(betas(:,g), newbeta)
-                    betas(:,g) = newbeta;
-                    L_betas(:,g) = L_g*newbeta;
-                    obj_after = objective_betas(y,L_betas,lambda,betas)
-                    fprintf('iter=%i g=%i obj_after=%4.5e\n', iter, g, obj_after);
-                end
-            end
-
-            obj = objective_betas(y, L_betas, lambda, betas);
-            currTime = cputime - startTime;
-            obj_history = [obj_history; obj];
-            time_history = [time_history; currTime];
-
-            if params.optVerbose & mod(iter, params.optVerbosePerIter) == 0
-              fprintf('bcdExact #%d (%.4f): currObj: %0.5e\n', ...
-                iter, currTime, obj);
-            end
-            
-            if abs((obj-obj_history(end-1))/obj_history(end-1)) <= f_tol
-                fprintf('Terminating BCD for lambda=%f at %d iterations.\n', ...
-                    lambda, iter);
-                break;
-            end
-        end
-
-        % Compute alphas from betas and save everything
-        all_betas(:,:,warm_iter) = betas;
+    for iter = 1:params.maxNumIters
         for g=1:m
-            all_alphas(:,g,warm_iter) = (L_all(:,:,g)')\betas(:,g);
+            L_g = Ls(:,:,g);
+            y_minus_other = (1/n)*(Y - sum(L_beta(:,setdiff(1:m,g)),2));
+            L_g_y_minus_other = L_g'*y_minus_other;
+            newbeta = zeros(n,1);
+            if norm(L_g_y_minus_other,2) > lambda/m
+                Delta = newton_trust(-L_g_y_minus_other, ...
+                    evectors_all(:,:,g), evalues_all(:,g), lambda/m);
+                Lhs = Delta*M_all(:,:,g)+(lambda/m)*eye(n);
+                yy = Lhs\L_g_y_minus_other;
+                newbeta = Delta*yy;
+            end
+            if ~isequal(Beta(:,g), newbeta)
+                obj_before = objective(Beta);
+                oldbeta = Beta(:,g);
+                Beta(:,g) = newbeta;
+                L_beta(:,g) = L_g*newbeta;
+                obj_after = objective(Beta);
+                if obj_after > obj_before
+                    %fprintf('before:%f after:%f normbefore:%f normafter:%f\n', ...
+                    %    obj_before, obj_after, norm(oldbeta), norm(newbeta));
+                end
+                fprintf('iter=%i g=%i obj_after=%4.5e\n', iter, g, obj_after);
+            end
         end
-        all_stats(warm_iter).objective = obj_history;
-        all_stats(warm_iter).time = time_history;
+
+        currObj = objective(Beta);
+        currTime = cputime - startTime;
+        objHistory = [objHistory; currObj];
+        timeHistory = [timeHistory; currTime];
+
+        if params.optVerbose && mod(iter, params.optVerbosePerIter) == 0
+            fprintf('bcdExact #%d (%.4f): currObj: %0.5e\n\n', ...
+                iter, currTime, obj);
+        end
+        
+        if abs( (currObj - prevObj) / currObj ) < params.tolerance
+            %break;
+        end
+
+        % Update
+        prevObj = currObj;
+
     end
+
+    % statistics
+    optStats.objective = objHistory;
+    optStats.time = timeHistory;
+    optBeta = Beta;
+
 end
 
 function [Delta] = newton_trust(p_g, evectors, evalues, lambda)
-    max_trust_iters = 8;
-    trust_tol = 1.0e-5;
+    max_trust_iters = 10;
+    trust_tol = 1.0e-3;
     n = size(p_g, 1);
     qtp2 = zeros(n,1);
     for i=1:n
         qtp2(i) = (evectors(:,i)'*p_g)^2;
     end
-    %fun = @(x) 1 - 1/sqrt(sum(qtp2 ./ ((evalues*x+lambda).^2)));
-    %Delta = fzero(fun, 0)
-    %assert(Delta > 0);
+    fun = @(x) 1 - 1/sqrt(sum(qtp2 ./ ((evalues*x+lambda).^2)));
+    Delta = fzero(fun, 0);
+    assert(Delta > 0);
+    return; % TODO
     success = 0;
     Delta = 0;
     for iter=1:max_trust_iters
@@ -132,15 +121,4 @@ function [Delta] = newton_trust(p_g, evectors, evalues, lambda)
     end
     assert(success==1);
     assert(Delta > 0);
-end
-
-function [obj] = objective_betas(y, L_betas, lambda, betas)
-    [n, m] = size(L_betas);
-    fit = y - sum(L_betas,2);
-    obj_fit = 1/(2*n)*fit'*fit;
-    l12norm = 0;
-    for g=1:m
-        l12norm = l12norm + norm(betas(:,g),2);
-    end
-    obj = obj_fit + lambda/m*l12norm;
 end
