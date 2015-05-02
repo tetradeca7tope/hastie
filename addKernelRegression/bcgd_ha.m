@@ -29,6 +29,10 @@ function [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params)
         hess_all(:,:,g) = hess_g;
         h_all(g) = max(max(diag(hess_g)), 0.1);
     end
+
+    % Use backtracking ?
+    useBackTracking = strcmp(params.stepSizeCriterion, 'backTracking');
+%     useBackTracking = false;
     
     for iter=1:params.maxNumIters
         for g=randperm(m)
@@ -46,7 +50,7 @@ function [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params)
                 grad_minus_h = -grad_g + h_all(g)*Beta_g;
                 d_g = 1/h_all(g)*(-grad_g - Lambda*grad_minus_h/norm(grad_minus_h,2));
                 step = 1;
-                if params.backtracking  
+                if useBackTracking %params.backtracking  
                     f_g = 0.5*norm(y_minus_other-L_Beta_g,2)^2 + ...
                         Lambda*norm(Beta_g,2);
                     delta = 1*grad_g'*d_g + norm(Beta_g + d_g,2) - norm(Beta_g, 2);

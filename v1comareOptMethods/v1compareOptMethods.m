@@ -14,7 +14,7 @@ plotMarkers = {'-x', '-o', '-*', '-s', '-^'};
 plotFunc = @loglog;
 
 % Problem Set up
-numDims = 20; n = 500; M = 100; maxNumIters = 1000;
+numDims = 20; n = 500; M = 100; maxNumIters = 2000;
 % numDims = 6; n = 100; M = 10; maxNumIters = 100;  % For debugging
 [func, funcProps] = getAdditiveFunction(numDims, numDims);
 bounds = funcProps.bounds;
