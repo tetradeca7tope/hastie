@@ -34,7 +34,7 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
   decomp.setting = 'groups';
 
   % Set things up for cross validation
-  if isempty(lambdaRange), lambdaRange = [1e-4 10]; end
+  if isempty(lambdaRange), lambdaRange = [1e-6 1]; end
   lambdaCands = fliplr( ...
     logspace(log10(lambdaRange(1)), log10(lambdaRange(2)), numLambdaCands) )';
   errorAccum = zeros(numLambdaCands, 1);
@@ -109,6 +109,7 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
   % Determine the best lambda value
   [~, bestLambdaIdx] = min(errorAccum);
   bestLambda = lambdaCands(bestLambdaIdx);
+  fprintf('Best lambda: %0.4f\n', bestLambda);
 
   % Perform Optimisation over all data points now
   [~, allKs] = kernelFunc(X, X);
@@ -117,6 +118,7 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
     allLs(:,:,j) = stableCholesky(allKs(:,:,j));
   end
   params.initBeta = zeros(n, M);
+  params.maxNumIters = 2*params.maxNumIters;
   [optBeta, optStats] = addKernelRegOpt(allLs, Y, decomp, bestLambda, params);
 
   % Obtain the function handle
