@@ -43,7 +43,7 @@ function predFunc = kernelRidgeReg(X, Y, params)
   [~, bestLambdaIdx] = min(validErrs);
   bestLambda = lambdaCands(bestLambdaIdx);
   fprintf('KRR: chose lambda = %.4f, (%.4f, %.4f)\n', bestLambda, ...
-    lambdaCands(1), lambdaCands(2));
+    lambdaCands(1), lambdaCands(end));
 
   % Now obtain the alphas
   K = kernelFunc(X, X);

@@ -3,15 +3,18 @@
 clear all;
 close all;
 addpath ../utils/
+addpath ~/libs/libsvm/matlab/  % add libsvm path here
 rng('default');
 
 % method = 'NW';
-method = 'localLinear';
-method = 'localQuadratic';
-% method = 'KRR';
+% method = 'localLinear';
+% method = 'localQuadratic';
+method = 'KRR';
+% method = 'epsSVR';
 
 % Set up
-numDims = 10; n = 100;
+% numDims = 10; n = 100;
+numDims = 20; n = 200;
 [func, funcProps] = getAdditiveFunction(numDims, numDims);
 bounds = funcProps.bounds;
 nTest = n;
@@ -41,9 +44,16 @@ switch method
   case 'KRR'
     predFunc = kernelRidgeReg(Xtr, Ytr, struct());
 
+  case 'nuSVR'
+    predFunc = svmRegWrap(Xtr, Ytr, 'nu');
+
+  case 'epsSVR'
+    predFunc = svmRegWrap(Xtr, Ytr, 'eps');
+
 end
 
 % Print results out
-predErr = sqrt( norm(predFunc(Xte) - Yte).^2 /nTest );
+Ypred = predFunc(Xte);
+predErr = sqrt( norm(Ypred - Yte).^2 /nTest );
 fprintf('Method : %s, predErr: %.4f, Ystd: %0.4f\n', method, predErr, std(Yte));
 
