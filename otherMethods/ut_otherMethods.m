@@ -4,7 +4,6 @@ clear all;
 close all;
 addpath ../utils/
 addpath ~/libs/libsvm/matlab/  % add libsvm path here
-addpath ~/libs/gpml/, startup; % add gpml path.
 rng('default');
 
 % method = 'NW';
@@ -15,6 +14,11 @@ method = 'KRR-Poly';
 %method = 'GP';
 %method = 'addGP';
 % method = 'epsSVR';
+
+if isequal(method, 'GP') || isequal(method, 'addGP')
+  addpath ~/libs/gpml/, startup; % add gpml path.
+end
+
 
 % Set up
 % numDims = 10; n = 100;

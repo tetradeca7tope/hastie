@@ -26,6 +26,10 @@ function [predFunc, optAlpha, optBeta, optStats, decomposition] = ...
 
   % Set initialisation
   params.initBeta = zeros(n, M);
+  if isequal(params.optMethod, 'admm')
+      params.initZ = zeros(n, M);
+      params.initU = zeros(n, M);
+  end
 
   % Now call addKernelRegOpt
   [optBeta, optStats] = addKernelRegOpt(allLs, Y, decomposition, ...
