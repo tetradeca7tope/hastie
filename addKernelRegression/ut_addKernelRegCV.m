@@ -48,3 +48,8 @@ nwErr = norm(YNW - Yte),
 lqPred = localPolyKRegressionCV(Xtr, Ytr, [], 2);
 Ylq = nwPred(Xte);
 lqErr = norm(Ylq - Yte),
+
+% Additive GP
+YaddGP = addGPRegWrap(Xtr, Ytr, Xte);
+addGPErr = norm(YaddGP - Yte),
+

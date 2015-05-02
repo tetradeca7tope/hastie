@@ -3,7 +3,7 @@ function [preds] = addGPRegWrap(X, Y, Xte, order)
 
   [n, D] = size(X);
   if ~exist('order', 'var')
-    order = 5;
+    order = 2;
   end
 
   likFunc = @likGauss;
