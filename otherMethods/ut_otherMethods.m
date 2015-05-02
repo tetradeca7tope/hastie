@@ -50,16 +50,13 @@ switch method
 
   case 'KRR'
     predFunc = kernelRidgeReg(Xtr, Ytr, struct());
-<<<<<<< HEAD
+    Ypred = predFunc(Xte);
   case 'KRR-Poly'
     params.kernel = 'Polynomial';
     params.bias = 1;
     params.degree = 2;
     predFunc = kernelRidgeReg(Xtr, Ytr, params);
-=======
     Ypred = predFunc(Xte);
-
->>>>>>> 95416e9ee5d744f76abaab3a63958218271da5e6
   case 'nuSVR'
     predFunc = svmRegWrap(Xtr, Ytr, 'nu');
     Ypred = predFunc(Xte);
