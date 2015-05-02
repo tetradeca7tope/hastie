@@ -16,6 +16,8 @@ function [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params)
     pred = sum(L_Beta,2);
     
     prevObj = objective(Beta);
+    currBestObj = prevObj;
+    optBeta = Beta;
     objHistory = prevObj;
     timeHistory = 0;
     startTime = cputime;
@@ -75,13 +77,17 @@ function [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params)
         end
 
         currObj = objective(Beta);
+        if currObj < currBestObj
+          currBestObj = currObj;
+          optBeta = Beta;
+        end
         currTime = cputime - startTime;
-        objHistory = [objHistory; currObj];
+        objHistory = [objHistory; currBestObj];
         timeHistory = [timeHistory; currTime];
 
         if params.optVerbose && mod(iter, params.optVerbosePerIter) == 0
-            fprintf('bcgdDH #%d (%.4f): currObj: %0.4e\n', ...
-                iter, currTime, currObj);
+            fprintf('bcgdDH #%d (%.4f): currObj: %0.4e, currBestObj: %0.4e\n', ...
+                iter, currTime, currObj, currBestObj);
         end
 
         if abs((currObj-prevObj)/prevObj) <= params.tolerance
@@ -92,7 +98,6 @@ function [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params)
     end
     optStats.objective = objHistory;
     optStats.time = timeHistory;
-    optBeta = Beta;
 end
 
 function [obj] = fast_objective(Beta, y, Ls, Lambda)

@@ -44,3 +44,13 @@ addErr = norm(Ypred - Yte),
 nwPred = localPolyKRegressionCV(Xtr, Ytr, [], 0);
 YNW = nwPred(Xte);
 nwErr = norm(YNW - Yte),
+
+% Locally Quadratic Regression
+lqPred = localPolyKRegressionCV(Xtr, Ytr, [], 2);
+Ylq = nwPred(Xte);
+lqErr = norm(Ylq - Yte),
+
+% Additive GP
+YaddGP = addGPRegWrap(Xtr, Ytr, Xte);
+addGPErr = norm(YaddGP - Yte),
+
