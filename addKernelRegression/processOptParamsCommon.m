@@ -28,6 +28,10 @@ function params = processOptParamsCommon(params, n, M)
   end
   if ~isfield(params, 'optVerbosePerIter'), params.optVerbosePerIter = 25;
   end
+  if isequal(params.optMethod, 'admm')
+      params.rho = 1;
+      params.alpha = 1;
+  end
 
 end
 

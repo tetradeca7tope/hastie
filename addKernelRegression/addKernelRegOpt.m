@@ -35,7 +35,7 @@ function [optBeta, optStats] = ...
       [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params);
 
     case 'admm'
-
+        [optBeta, optStats] = admm(Ls, Y, lambda, params);
     case 'proxNewton'
     
     otherwise

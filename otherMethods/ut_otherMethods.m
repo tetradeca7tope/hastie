@@ -4,16 +4,21 @@ clear all;
 close all;
 addpath ../utils/
 addpath ~/libs/libsvm/matlab/  % add libsvm path here
-addpath ~/libs/gpml/, startup; % add gpml path.
 rng('default');
 
 % method = 'NW';
 % method = 'localLinear';
 % method = 'localQuadratic';
 % method = 'KRR';
-method = 'GP';
-method = 'addGP';
+method = 'KRR-Poly';
+%method = 'GP';
+%method = 'addGP';
 % method = 'epsSVR';
+
+if isequal(method, 'GP') || isequal(method, 'addGP')
+  addpath ~/libs/gpml/, startup; % add gpml path.
+end
+
 
 % Set up
 % numDims = 10; n = 100;
@@ -50,7 +55,12 @@ switch method
   case 'KRR'
     predFunc = kernelRidgeReg(Xtr, Ytr, struct());
     Ypred = predFunc(Xte);
-
+  case 'KRR-Poly'
+    params.kernel = 'Polynomial';
+    params.bias = 1;
+    params.degree = 2;
+    predFunc = kernelRidgeReg(Xtr, Ytr, params);
+    Ypred = predFunc(Xte);
   case 'nuSVR'
     predFunc = svmRegWrap(Xtr, Ytr, 'nu');
     Ypred = predFunc(Xte);
