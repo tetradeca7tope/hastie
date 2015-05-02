@@ -8,9 +8,10 @@ addpath ../utils/
 addpath ../otherMethods/
 rng('default');
 
-numDims = 10; n = 200; numRandGroups = 200; 
-% numDims = 10; n = 12; numRandGroups = 5; % Debug setting
-lambda = 1;
+numDims = 20; n = 200; numRandGroups = 200; 
+% numDims = 40; n = 400; numRandGroups = 200; 
+% numDims = 20; n = 12; numRandGroups = 5; % Debug setting
+lambda = 0.01;
 
 % Generate Toy Data
 f = @(X) 0.1*(sum(X.^2, 2) + sum(X, 2).^2 + X(:,1) );
@@ -24,7 +25,7 @@ decomposition.setting = 'randomGroups';
 % decomposition.setting = 'maxGroupSize';
 decomposition.numRandGroups = numRandGroups;
 decomposition.maxGroupSize = 3;
-decomposition.groupSize = 4;
+decomposition.groupSize = 6;
 decomposition.addAll1DComps = false;
 %params.optMethod = 'proxGradient';
 %params.optMethod = 'proxGradientAccn';

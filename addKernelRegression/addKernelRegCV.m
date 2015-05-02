@@ -21,7 +21,7 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
     params.numTrialsCV = 2;
   end
   if ~isfield(params, 'numLambdaCands')
-    params.numLambdaCands = 20;
+    params.numLambdaCands = 10;
   end
   % Copy over to workspace
   numPartsKFoldCV = params.numPartsKFoldCV;
@@ -109,7 +109,6 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
   % Determine the best lambda value
   [~, bestLambdaIdx] = min(errorAccum);
   bestLambda = lambdaCands(bestLambdaIdx);
-  fprintf('Best lambda: %0.4f\n', bestLambda);
 
   % Perform Optimisation over all data points now
   [~, allKs] = kernelFunc(X, X);
@@ -131,6 +130,11 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
   % Before returning
   optStats.normBetaVals = normBetaVals;
   optStats.cvResults = [lambdaCands errorAccum/params.numTrialsCV];
+
+  % print some summary statistics
+  numSparseTerms = sum(sum(abs(optAlpha)) == 0);
+  fprintf('Chosen lambda: %0.ef (%.ef, %.ef), sparsity: %d/%d\n\n', ...
+    bestLambda, lambdaCands(1), lambdaCands(end), numSparseTerms, M);
 
 end
 

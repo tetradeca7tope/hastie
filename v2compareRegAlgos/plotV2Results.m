@@ -1,7 +1,8 @@
 % Plots results out
 
-plotColours = {'r', 'g', 'b', 'k', 'c'};
-plotMarkers = {'-x', '-o', '-*', '-s', '-^'};
+plotColours = {'b', 'g', 'r', 'k', 'c', 'y', 'm', [255 128 0]/255, ...
+  [76, 0, 153]/253, [102 102 0]/255};
+plotMarkers = {'o', '+', '*', 'x', 's', 'd', '^', 'p', '>', 'v'};
 plotFunc = @semilogy;
 
 errMeans = zeros(numRegAlgos, numCandidates);
