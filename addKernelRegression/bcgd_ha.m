@@ -1,4 +1,4 @@
-function [optBeta, optStats] = bcgd_ha_old(Ls, Y, lambda, params)
+function [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params)
     [n, ~, m] = size(Ls);
     y = Y/sqrt(n);
     L_all = Ls/sqrt(n);

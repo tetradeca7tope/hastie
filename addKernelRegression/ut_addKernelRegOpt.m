@@ -10,7 +10,7 @@ rng('default');
 
 numDims = 10; n = 200; numRandGroups = 200; 
 % numDims = 10; n = 12; numRandGroups = 5; % Debug setting
-lambda = 0.1;
+lambda = 1;
 
 % Generate Toy Data
 f = @(X) 0.1*(sum(X.^2, 2) + sum(X, 2).^2 + X(:,1) );
@@ -26,11 +26,12 @@ decomposition.numRandGroups = numRandGroups;
 decomposition.maxGroupSize = 3;
 decomposition.groupSize = 4;
 decomposition.addAll1DComps = false;
-% params.optMethod = 'proxGradient';
-% params.optMethod = 'proxGradientAccn';
+%params.optMethod = 'proxGradient';
+%params.optMethod = 'proxGradientAccn';
 % params.optMethod = 'subGradient';
 % params.optMethod = 'bcdExact';
 params.optMethod = 'bcgdDiagHessian';
+params.backtracking = 1;
 params.maxNumIters = 1000;
 params.optVerbose = true;
 [predFunc, optAlpha, optBeta, optStats, decomposition] = ...
