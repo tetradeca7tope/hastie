@@ -9,7 +9,8 @@ rng('default');
 % method = 'NW';
 % method = 'localLinear';
 % method = 'localQuadratic';
-method = 'KRR';
+% method = 'KRR';
+method = 'KRR-Poly';
 % method = 'epsSVR';
 
 % Set up
@@ -43,7 +44,11 @@ switch method
 
   case 'KRR'
     predFunc = kernelRidgeReg(Xtr, Ytr, struct());
-
+  case 'KRR-Poly'
+    params.kernel = 'Polynomial';
+    params.bias = 1;
+    params.degree = 2;
+    predFunc = kernelRidgeReg(Xtr, Ytr, params);
   case 'nuSVR'
     predFunc = svmRegWrap(Xtr, Ytr, 'nu');
 

@@ -14,6 +14,15 @@ function predFunc = kernelRidgeReg(X, Y, params)
   decomposition.setting = 'groups';
   decomposition.groups = {[1:D]};
   kernelFunc = kernelSetup(X, Y, decomposition);
+  if isfield(params, 'kernel') && isequal(params.kernel,'Polynomial')     if ~isfield(params, 'bias')
+      params.bias = 1;
+    end
+    if ~isfield(params, 'degree')
+      params.degree = 2;
+    end
+    kernelFunc = kernelSetupPoly(X, Y, decomposition, params);
+    'hey'
+  end
 
   % Params for cross validation
   if ~isfield(params, 'numPartsKFoldCV')
