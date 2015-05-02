@@ -21,7 +21,7 @@ Yte = f(Xte);
 decomposition.setting = 'randomGroups';
 % decomposition.setting = 'maxGroupSize';
 decomposition.numRandGroups = numRandGroups;
-decomposition.groupSize = 6;
+decomposition.groupSize = 8;
 decomposition.addAll1DComps = false;
 lambdaRange = [1e-12 1];
 % params.optMethod = 'proxGradient';
@@ -44,3 +44,7 @@ nwPred = localPolyKRegressionCV(Xtr, Ytr, [], 0);
 YNW = nwPred(Xte);
 nwErr = norm(YNW - Yte),
 
+% Locally Quadratic Regression
+lqPred = localPolyKRegressionCV(Xtr, Ytr, [], 2);
+Ylq = nwPred(Xte);
+lqErr = norm(Ylq - Yte),
