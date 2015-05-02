@@ -13,7 +13,7 @@ regressionAlgorithms = {'add-KR', 'KR', 'NW'};
 
 % Problem Set up
 numExperiments = 2;
-numDims = 20; nTotal = 500; M = 50; maxNumIters = 2000;
+numDims = 20; nTotal = 500; M = 50; maxNumIters = 500;
 % numDims = 6; nTotal = 150; M = 10; maxNumIters = 100;  % For debugging
 nCands = (60:60:nTotal)';
 [func, funcProps] = getAdditiveFunction(numDims, numDims);
@@ -27,10 +27,10 @@ numCandidates = numel(nCands);
 decomposition.setting = 'randomGroups';
 decomposition.numRandGroups = M;
 decomposition.groupSize = 4;
-decomposition.maxGroupSize = 3;
 % Parameters for Optimisation
 optParams.maxNumIters = maxNumIters;
-optParams.optMethod = 'proxGradientAccn';
+% optParams.optMethod = 'proxGradientAccn';
+optParams.optMethod = 'bcgdDiagHessian';
 % Decomposition for plain Kernel Ridge Regression
 krDecomposition.setting = 'groups';
 krDecomposition.groups = { 1:numDims };
@@ -67,8 +67,7 @@ for expIter = 1:numExperiments
     Y = Ytr(1:n, :);
 
     % Method 1: add-KR
-    [addKRPredFunc] = addKernelRidgeRegression(X, Y, decomposition, ...
-      lambda1, lambda2, optParams);
+    addKernelPredFunc = addKernelRegCV(Xtr, Ytr, decomposition, [], optParams);
     YPred = addKRPredFunc(Xte);
     results{1}(expIter, candIter) = norm(YPred - Yte);
     
