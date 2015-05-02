@@ -4,6 +4,7 @@ clear all;
 close all;
 addpath ../utils/
 addpath ~/libs/libsvm/matlab/  % add libsvm path here
+addpath ~/libs/gpml/, startup; % add gpml path.
 rng('default');
 
 % method = 'NW';
@@ -11,6 +12,8 @@ rng('default');
 % method = 'localQuadratic';
 % method = 'KRR';
 method = 'KRR-Poly';
+%method = 'GP';
+%method = 'addGP';
 % method = 'epsSVR';
 
 % Set up
@@ -35,30 +38,45 @@ switch method
 
   case 'NW'
     predFunc = localPolyKRegressionCV(Xtr, Ytr, [], 0);
+    Ypred = predFunc(Xte);
 
   case 'localLinear'
     predFunc = localPolyKRegressionCV(Xtr, Ytr, [], 1);
+    Ypred = predFunc(Xte);
 
   case 'localQuadratic'
     predFunc = localPolyKRegressionCV(Xtr, Ytr, [], 2);
+    Ypred = predFunc(Xte);
 
   case 'KRR'
     predFunc = kernelRidgeReg(Xtr, Ytr, struct());
+<<<<<<< HEAD
   case 'KRR-Poly'
     params.kernel = 'Polynomial';
     params.bias = 1;
     params.degree = 2;
     predFunc = kernelRidgeReg(Xtr, Ytr, params);
+=======
+    Ypred = predFunc(Xte);
+
+>>>>>>> 95416e9ee5d744f76abaab3a63958218271da5e6
   case 'nuSVR'
     predFunc = svmRegWrap(Xtr, Ytr, 'nu');
+    Ypred = predFunc(Xte);
 
   case 'epsSVR'
     predFunc = svmRegWrap(Xtr, Ytr, 'eps');
+    Ypred = predFunc(Xte);
+
+  case 'GP'
+    Ypred = gpRegWrap(Xtr, Ytr, Xte);
+
+  case 'addGP'
+    Ypred = addGPRegWrap(Xtr, Ytr, Xte);
 
 end
 
 % Print results out
-Ypred = predFunc(Xte);
 predErr = sqrt( norm(Ypred - Yte).^2 /nTest );
 fprintf('Method : %s, predErr: %.4f, Ystd: %0.4f\n', method, predErr, std(Yte));
 
