@@ -22,9 +22,9 @@ decomposition.setting = 'randomGroups';
 % decomposition.setting = 'maxGroupSize';
 decomposition.numRandGroups = numRandGroups;
 decomposition.maxGroupSize = 3;
-decomposition.groupSize = 4;
+decomposition.groupSize = 8;
 decomposition.addAll1DComps = false;
-lambdaRange = [1e-16 1];
+lambdaRange = [1e-12 1];
 % params.optMethod = 'proxGradient';
 % params.optMethod = 'proxGradientAccn';
 % params.optMethod = 'subGradient';
@@ -41,6 +41,7 @@ Ypred = predFunc(Xte);
 addErr = norm(Ypred - Yte),
 
 % Nadaraya Watson Regression
-YNW = localPolyKRegressionCV(Xte, Xtr, Ytr, [], 0);
+nwPred = localPolyKRegressionCV(Xtr, Ytr, [], 0);
+YNW = nwPred(Xte);
 nwErr = norm(YNW - Yte),
 

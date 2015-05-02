@@ -32,7 +32,7 @@ function [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params)
 
     % Use backtracking ?
     useBackTracking = strcmp(params.stepSizeCriterion, 'backTracking');
-    useBackTracking = false;
+%     useBackTracking = false;
     
     for iter=1:params.maxNumIters
         for g=randperm(m)

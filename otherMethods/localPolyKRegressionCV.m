@@ -1,5 +1,5 @@
-function [pred, opt_h, opt_poly_order] = localPolyKRegressionCV( ...
-  Xte, Xtr, Ytr, h_cands, polyOrder_cands)
+function [predFunc, opt_h, opt_poly_order] = localPolyKRegressionCV( ...
+  Xtr, Ytr, h_cands, polyOrder_cands)
 % This function implements locally Polynomial Kernel regression and searches for
 % the optimal hyper-params (bandwidth and poly order)
 % if h_cands is empty, picks 10 values based on the std of X. If polyOrder_cands
@@ -43,7 +43,7 @@ function [pred, opt_h, opt_poly_order] = localPolyKRegressionCV( ...
   end
 
   % Finally use the optimal parameters and all the data to fit a function
-  pred = localPolyKRegression(Xte, Xtr, Ytr, opt_h, opt_poly_order);
+  predFunc = @(arg) localPolyKRegression(arg, Xtr, Ytr, opt_h, opt_poly_order);
 
 end
 

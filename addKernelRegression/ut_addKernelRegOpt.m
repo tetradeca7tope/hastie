@@ -31,7 +31,6 @@ decomposition.addAll1DComps = false;
 % params.optMethod = 'subGradient';
 % params.optMethod = 'bcdExact';
 params.optMethod = 'bcgdDiagHessian';
-params.backtracking = 1;
 params.maxNumIters = 1000;
 params.optVerbose = true;
 [predFunc, optAlpha, optBeta, optStats, decomposition] = ...
@@ -42,6 +41,6 @@ Ypred = predFunc(Xte);
 addErr = norm(Ypred - Yte),
 
 % Nadaraya Watson Regression
-YNW = localPolyKRegressionCV(Xte, Xtr, Ytr, [], 0);
+nwPred = localPolyKRegressionCV(Xtr, Ytr, [], 0);
+YNW = nwPred(Xte);
 nwErr = norm(YNW - Yte),
-
