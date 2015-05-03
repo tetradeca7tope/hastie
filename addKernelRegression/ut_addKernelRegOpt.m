@@ -11,7 +11,7 @@ addpath ../otherMethods/
 % numDims = 20; n = 200; numRandGroups = 200; 
 numDims = 40; n = 400; numRandGroups = 200; 
 % numDims = 20; n = 12; numRandGroups = 5; % Debug setting
-lambda = 1;
+lambda = 10;
 
 % Generate Toy Data
 f = @(X) 0.1*(sum(X.^2, 2) + sum(X, 2).^2 + X(:,1) );

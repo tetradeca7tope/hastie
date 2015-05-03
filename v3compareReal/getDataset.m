@@ -29,6 +29,25 @@ function [Xtr, Ytr, Xte, Yte] = ...
   Ytr = L(trainIdxs, label);
   Xte = L(testIdxs, attrs);
   Yte = L(testIdxs, label);
+
+  % Now normalize the dataset to have unit variance in input axis
+  meanXtr = mean(Xtr);
+  stdXtr = std(Xtr);
+  meanYtr = mean(Ytr);
+  stdYtr = std(Ytr);
+
+  % process files
+  function X = normalizeX(X)
+    X = bsxfun(@rdivide, bsxfun(@minus, X, meanXtr), stdXtr); 
+  end
+  function Y = normalizeY(Y)
+    Y = (Y - meanYtr)/stdYtr;
+  end
+
+  Xtr = normalizeData(Xtr);
+  Xte = normalizeData(Xte);
+  Ytr = normalizeData(Ytr);
+  Yte = normalizeData(Yte);
 end
 
 

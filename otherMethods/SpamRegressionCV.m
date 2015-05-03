@@ -36,7 +36,10 @@ function [predFunc, opt_lambda] = SpamRegressionCV( ...
 
   % Finally use the optimal parameters and all the data to fit a function
   fprintf('opt_lambda:%e\n', opt_lambda);
-  predFunc = @(arg) SpamRegression(arg, Xtr, Ytr, opt_lambda);
+  function Ypred = spamPredict(arg);
+    [~, Ypred] = spamRegression(arg, Xtr, Ytr, opt_lambda);
+  end
+  predFunc = @spamPredict;
 
 end
 

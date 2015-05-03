@@ -36,7 +36,10 @@ function [predFunc, opt_k] = KnnRegressionCV( ...
 
   % Finally use the optimal parameters and all the data to fit a function
   fprintf('opt_k:%f\n', opt_k);
-  predFunc = @(arg) KnnRegression(arg, Xtr, Ytr, opt_k);
+  function Ypred = KnnPredicts(arg)
+    [~, Ypred] = KnnRegression(arg, Xtr, Ytr, opt_k);
+  end
+  predFunc = @KnnPredicts;
 
 end
 
