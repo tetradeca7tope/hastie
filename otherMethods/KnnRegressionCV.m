@@ -16,7 +16,6 @@ function [predFunc, opt_k] = KnnRegressionCV( ...
   if ~exist('k_cands', 'var') | isempty(k_cands)
     k_cands = [1 2 3 4 6 8 10 20 30 40 50 100];
   end
-  k_cands = k_cands
   num_k_cands = length(k_cands);
 
   % Shuffle the data
@@ -28,7 +27,7 @@ function [predFunc, opt_k] = KnnRegressionCV( ...
   best_cv_error = inf;
   for k_iter = 1:num_k_cands
       curr_cv_error = KFoldExperiment(Xtr, Ytr, ...
-            num_kfoldcv_partitions, k_cands(k_iter))     
+            num_kfoldcv_partitions, k_cands(k_iter));     
       if best_cv_error >= curr_cv_error
         best_cv_error = curr_cv_error;
         opt_k = k_cands(k_iter);
