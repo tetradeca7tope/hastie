@@ -1,4 +1,4 @@
-function [Predtr, Predte] = Spam(Xte, Xtr, Ytr, lambda)
+function [Predtr, Predte] = SpamRegression(Xte, Xtr, Ytr, lambda)
     max_iters = 100;
     [n, p] = size(Xtr);
     nte = size(Xte,1);
@@ -26,7 +26,7 @@ function [Predtr, Predte] = Spam(Xte, Xtr, Ytr, lambda)
             fhat(:,j) = fhat(:,j) - mean(fhat(:,j));
         end
         Predtr = alpha + sum(fhat,2);
-        if norm(Predtr-oldPredtr,2)/norm(oldPredtr,2) < 0.001
+        if norm(Predtr-oldPredtr,2)/norm(oldPredtr,2) < 1.0e-6
             break;
         end
         oldPredtr = Predtr;
@@ -36,6 +36,5 @@ function [Predtr, Predte] = Spam(Xte, Xtr, Ytr, lambda)
         fhatte(:,j) = spline(Xtr(:,j),fhat(:,j),Xte(:,j));
     end
     Predte = alpha + sum(fhatte,2);
-    %Predte = spline(Xtr,Predtr,Xte);
 end
 
