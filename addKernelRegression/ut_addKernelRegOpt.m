@@ -8,9 +8,9 @@ addpath ../utils/
 addpath ../otherMethods/
 rng('default');
 
-numDims = 20; n = 200; numRandGroups = 200; 
+% numDims = 20; n = 200; numRandGroups = 200; 
 % numDims = 40; n = 400; numRandGroups = 200; 
-% numDims = 20; n = 12; numRandGroups = 5; % Debug setting
+numDims = 20; n = 12; numRandGroups = 5; % Debug setting
 lambda = 0.01;
 
 % Generate Toy Data

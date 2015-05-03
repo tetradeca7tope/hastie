@@ -16,9 +16,9 @@ function params = processOptParamsCommon(params, n, M)
 %     fprintf('Using Backtracking Line Search\n');
   end
 
-  if ~isfield(params, 'tolerance'), params.tolerance = 1e-5;
+  if ~isfield(params, 'tolerance'), params.tolerance = 1e-6;
   end
-  if ~isfield(params, 'maxNumIters'), params.maxNumIters = 1e5;
+  if ~isfield(params, 'maxNumIters'), params.maxNumIters = 50;
   end
   if ~isfield(params, 'verbose'), params.verbose = true;
   end

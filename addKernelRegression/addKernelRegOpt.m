@@ -11,8 +11,6 @@ function [optBeta, optStats] = ...
 
   % prelims
   n = size(Y, 1);
-  groups = decomposition.groups;
-  M = numel(groups);
 
   % Determine which method to use for optimisation
   switch params.optMethod

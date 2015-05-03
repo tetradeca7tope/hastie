@@ -80,6 +80,11 @@ function decomposition = obtainGroups(numDims, decomposition)
     % In this case, the groups are given and there is nothing to do.
       groups = decomposition.groups;
 
+    otherwise
+      errStr = sprintf('Unknown Decomposition setting: %s\n', ...
+        decomposition.setting);
+      error(errStr);
+
   end
 
   decomposition.groups = groups;
