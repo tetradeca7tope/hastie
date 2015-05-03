@@ -9,35 +9,34 @@ addpath ../utils/
 addpath ~/libs/kky-matlab/utils/
 rng('default');
 
-regressionAlgorithms = {'add-KR', 'KR', 'NW'};
+regressionAlgorithms = ...
+  {'add-KR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'addGP', 'SVR', 'kNN', 'spam'};
 
-% Load the dataset
-Data = load('train_data.txt'); N = size(Data, 1);
-Data = Data(randperm(N), 2:27);
-attrs = [1:14, 20:26]; label = 15;
-n = round(N/2);
-trainIdxs = 1:n; testIdxs = (n+1):N;
-Xtr = Data(trainIdxs, attrs);
-Ytr = Data(trainIdxs, label);
-Xte = Data(testIdxs, attrs);
-Yte = Data(testIdxs, label);
-numDims = size(Xtr, 2);
+% Determine dataset
+dataset = 'parkinson21';
 
-% Problem Set up
-M = 50; maxNumIters = 2000;
-lambda1 = 1;
-lambda2 = 5;
+% Load data
+[Xtr, Ytr, Xte, Yte] = genDataset(dataset);
+[nTr, numDims] = size(Xtr);
+nTe = size(Xte, 1);
+
 % For the Decomposition
-decomposition.setting = 'randomGroups';
-decomposition.numRandGroups = M;
-decomposition.groupSize = 4;
-decomposition.maxGroupSize = 3;
+decomposition.numRandGroups = 200;
+decomposition.groupSize = 5;
+decomposition.setting = 'espKernel';
+% decomposition.setting = 'randomGroups';
+
 % Parameters for Optimisation
 optParams.maxNumIters = maxNumIters;
-optParams.optMethod = 'proxGradientAccn';
+% optParams.optMethod = 'proxGradientAccn';
+optParams.optMethod = 'bcgdDiagHessian';
 % Decomposition for plain Kernel Ridge Regression
 krDecomposition.setting = 'groups';
 krDecomposition.groups = { 1:numDims };
+
+% Save file name
+saveFileName = sprintf('results/%s-%s.mat', dataset, ...
+  datestr(now, 'mmdd-HHMMSS') );
 
 % Now run each method
 

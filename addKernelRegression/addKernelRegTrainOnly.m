@@ -15,8 +15,7 @@ function [predFunc, optAlpha, optBeta, optStats, decomposition] = ...
 
   % Obtain the Kernels
   [kernelFunc, decomposition] = kernelSetup(X, Y, decomposition);
-  groups = decomposition.groups;
-  M = numel(groups);
+  M = decomposition.M;
   [~, allKs] = kernelFunc(X, X); % Compute the kernel
   % Now obtain the cholesky Decompositions
   allLs = zeros(size(allKs));

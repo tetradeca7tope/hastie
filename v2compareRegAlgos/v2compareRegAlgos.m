@@ -9,7 +9,7 @@ addpath ../utils/
 addpath ../otherMethods/
 addpath ~/libs/libsvm/matlab/  % add libsvm path here
 addpath ~/libs/gpml/, startup;
-rng('default');
+% rng('default');
 
 % regressionAlgorithms = ...
 %   {'add-KR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'addGP', 'SVR', 'kNN', 'spam'};
@@ -57,6 +57,8 @@ for j = 1:numRegAlgos
   results{j} = zeros(numExperiments, numCandidates);
 end
 
+% SAve results
+saveFileName = sprintf('results/v2-%s.mat', datestr(now, 'mmdd-HHMMSS'));
 
 for expIter = 1:numExperiments
 
@@ -130,7 +132,7 @@ for expIter = 1:numExperiments
  
     % Method 8: SVR 
     cnt = cnt + 1;
-    svPredFunc = svmRegWrap(Xtr, Ytr, 'eps');
+    svPredFunc = svmRegWrap(X, Y, 'eps');
     YPred = svPredFunc(Xte);
     results{cnt}(expIter, candIter) = norm(YPred - Yte);
     fprintf('Method: %s, Err: %0.4f\n', ...
@@ -138,7 +140,7 @@ for expIter = 1:numExperiments
 
     % Method 9: KNN
     cnt = cnt + 1;
-    kNNPredFunc = KnnRegressionCV(Xtr, Ytr);
+    kNNPredFunc = KnnRegressionCV(X, Y);
     [~, YPred] = kNNPredFunc(Xte);
     results{cnt}(expIter, candIter) = norm(YPred - Yte);
     fprintf('Method: %s, Err: %0.4f\n', ...
@@ -153,6 +155,10 @@ for expIter = 1:numExperiments
 %       regressionAlgorithms{cnt}, norm(YPred-Yte));
 
   end
+
+  % Save results
+  save(saveFileName, 'results', 'numRegAlgos', 'numCandidates', ...
+    'regressionAlgorithms', 'nCands', 'numExperiments');
 
 end
 
