@@ -12,7 +12,7 @@ legStrs = cell(numDMCandidates, 1);
 for j = 1:numDMCandidates
   errMeans(j,:) = mean( results{j}, 1 );
   errStds(j,:) = std( results{j}, 1 );
-  legStrs{j} = sprintf('(%d, %d)', dMVals(1), dMVals(2));
+  legStrs{j} = sprintf('(%d, %d)', dMVals(j, 1), dMVals(j,2));
 end
 
 figure;
