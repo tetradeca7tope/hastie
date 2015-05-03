@@ -10,10 +10,12 @@ rng('default');
 % method = 'localLinear';
 % method = 'localQuadratic';
 % method = 'KRR';
-method = 'KRR-Poly';
+%method = 'KRR-Poly';
 %method = 'GP';
 %method = 'addGP';
 % method = 'epsSVR';
+%method = 'Spam';
+method = 'KNN';
 
 if isequal(method, 'GP') || isequal(method, 'addGP')
   addpath ~/libs/gpml/, startup; % add gpml path.
@@ -61,6 +63,9 @@ switch method
     params.degree = 2;
     predFunc = kernelRidgeReg(Xtr, Ytr, params);
     Ypred = predFunc(Xte);
+  case 'Spam'
+    predFunc = SpamRegressionCV(Xtr, Ytr);
+    [~, Ypred] = predFunc(Xte);
   case 'nuSVR'
     predFunc = svmRegWrap(Xtr, Ytr, 'nu');
     Ypred = predFunc(Xte);
@@ -74,6 +79,9 @@ switch method
 
   case 'addGP'
     Ypred = addGPRegWrap(Xtr, Ytr, Xte);
+  case 'KNN'
+    predFunc = KnnRegressionCV(Xtr, Ytr);
+    [~, Ypred] = predFunc(Xte);
 
 end
 

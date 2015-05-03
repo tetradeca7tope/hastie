@@ -26,7 +26,7 @@ function [Predtr, Predte] = SpamRegression(Xte, Xtr, Ytr, lambda)
             fhat(:,j) = fhat(:,j) - mean(fhat(:,j));
         end
         Predtr = alpha + sum(fhat,2);
-        if norm(Predtr-oldPredtr,2)/norm(oldPredtr,2) < 1.0e-6
+        if norm(Predtr-oldPredtr,2)/norm(oldPredtr,2) < 1.0e-4
             break;
         end
         oldPredtr = Predtr;

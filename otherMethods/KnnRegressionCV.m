@@ -1,5 +1,5 @@
-function [predFunc, opt_lambda] = SpamRegressionCV( ...
-  Xtr, Ytr, lambda_cands)
+function [predFunc, opt_k] = KnnRegressionCV( ...
+  Xtr, Ytr, k_cands)
 % This function implements locally Polynomial Kernel regression and searches for
 % the optimal hyper-params (bandwidth and poly order)
 % if h_cands is empty, picks 10 values based on the std of X. If polyOrder_cands
@@ -13,10 +13,11 @@ function [predFunc, opt_lambda] = SpamRegressionCV( ...
   num_kfoldcv_partitions = min(10, num_train_pts);;
 
   % specify default values for candidats and poly order if not specified
-  if ~exist('lambda_cands', 'var') | isempty(lambda_cands)
-    lambda_cands = logspace(-6, 3, 30)';
+  if ~exist('k_cands', 'var') | isempty(k_cands)
+    k_cands = [1 2 3 4 6 8 10 20 30 40 50 100];
   end
-  num_lambda_cands = size(lambda_cands, 1);
+  k_cands = k_cands
+  num_k_cands = length(k_cands);
 
   % Shuffle the data
   shuffle_order = randperm(num_train_pts);
@@ -25,23 +26,23 @@ function [predFunc, opt_lambda] = SpamRegressionCV( ...
 
   % Now iterate through these combinations and obtain the optimal value
   best_cv_error = inf;
-  for lambda_iter = 1:num_lambda_cands
+  for k_iter = 1:num_k_cands
       curr_cv_error = KFoldExperiment(Xtr, Ytr, ...
-            num_kfoldcv_partitions, lambda_cands(lambda_iter));      
+            num_kfoldcv_partitions, k_cands(k_iter))     
       if best_cv_error >= curr_cv_error
         best_cv_error = curr_cv_error;
-        opt_lambda = lambda_cands(lambda_iter);
+        opt_k = k_cands(k_iter);
       end
   end
 
   % Finally use the optimal parameters and all the data to fit a function
-  fprintf('opt_lambda:%e\n', opt_lambda);
-  predFunc = @(arg) SpamRegression(arg, Xtr, Ytr, opt_lambda);
+  fprintf('opt_k:%f\n', opt_k);
+  predFunc = @(arg) KnnRegression(arg, Xtr, Ytr, opt_k);
 
 end
 
-function kfold_error = KFoldExperiment(X, y, num_partitions, lambda)
-% This function computes the cross validation error for the current lambda
+function kfold_error = KFoldExperiment(X, y, num_partitions, k)
+% This function computes the cross validation error for the current k
 
   m = size(X, 1);
   kfold_error = 0;
@@ -57,7 +58,7 @@ function kfold_error = KFoldExperiment(X, y, num_partitions, lambda)
     yte = y(test_indices);
 
     % obtain the predictions
-    [~, pred] = SpamRegression(Xte, Xtr, ytr, lambda);
+    [~, pred] = KnnRegression(Xte, Xtr, ytr, k);
     % accumulate the errors
     kfold_error = kfold_error + sum( (yte - pred).^2 );
   end
