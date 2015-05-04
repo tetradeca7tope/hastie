@@ -4,22 +4,40 @@
 \centering
 \begin{tabular}{l|c|c|c|c|c|c|c|c}
 Dataset ($D$, $n$) & \addkrr & \krr & \knn & \nw & \locallin & \localquad & \gp  & \svr \\
+\hline \\[-0.16in]
+\hline 
+Speech ($21$, $520$) & $\bf{0.02269}$ & $0.02777$ & $0.09348$ 
+  & $0.11207$ & $0.03373$ 
+        & $0.02407$ & $0.02531$ & $0.22431$  \\
 \hline
-Music ($90$, $400$) & $0.31285$ & $0.35947$ & $0.43619$ & $0.42087$ & $0.31219$ 
-        & $0.35061$ & $0.67566$ & $1.15272$ \\
+Music ($90$, $1000$) & $\bf{0.91627}$ & $0.91922$ & $1.00001$ 
+      & $1.05745$ & $1.25805$ 
+        & $1.06482$ & $0.94329$ & $1.07009$ \\
 \hline
-Housing ($12$, $256$) & $0.31285$ & $0.35947$ & $0.43619$ & $0.42087$ & $0.31219$ 
-        & $0.35061$ & $0.67566$ & $1.15272$ \\
+Tele-motor ($19$, $300$) & $\bf{0.06059}$ & $0.06488$ & 
+  $0.13957$ & $0.20119$ 
+  & $0.09455$ & $0.08774$ & $0.06678$ & $0.38038$ \\
 \hline
-Blog ($91$, $700$) & $1.43288$ & $1.53227$ & $1.73545$ & $1.49305$ & $1.69234$ 
+Housing ($12$, $256$) & $\bf{0.31285}$ & $0.35947$ & $0.43619$ & $0.42087$ 
+  & $\bf{0.31219}$ & $0.35061$ & $0.67566$ & $1.15272$ \\
+\hline
+Blog ($91$, $700$) & $\bf{1.43288}$ & $1.53227$ & $1.73545$ & $1.49305$ & $1.69234$ 
      & $1.71321$ & $1.64429$ & $1.66705$ \\
 \hline
+Forest Fires ($10$, $210$) & $0.30675$ & $0.32618$ & $0.40565$ & $0.37199$ 
+   & $0.35462$ & $0.33881$ & $\bf{0.29038}$ & $0.70154$ \\
+\hline
 Propulsion ($15$, $400$) & $0.04167$ & $0.01396$ & $0.15760$ & $0.11237$ & $0.182345$ &
-             $0.19212$ & $0.00355$ & $0.74511$ \\
+             $0.19212$ & $\bf{0.00355}$ & $0.74511$ \\
 \hline
 \end{tabular}
 \caption{
-The test set errors of all on 8 real datasets from the UCI repository.
+The test set errors of all methods on 7 datasets from the UCI repository.
+The dimensionality and number of training points is indicated with the dataset.
+The best method(s) for each dataset are in bold font. \addkrr gives the best
+results in most of the datasets and is within the top 3 in all of the datasets.
+In the Forest Fires dataset it is only slightly worse than \gp. In the
+Propulsion dataset, \gp seems to significantly outperform all other methods.
 }
 \label{tb:realData}
 \end{table*}

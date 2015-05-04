@@ -191,7 +191,7 @@ experiments.
 In fact, we tried several other methods including subgradient method, proximal
 gradient method and ADMM and found that BCGD performed best.
 
-The penalty term $\lambda$ was chosen using cross validation. Our implementation
+The penalty term $\lambda$ was chosen using $5$-fold cross validation. Our implementation
 first solves for the largest $\lambda$ value. For successive $\lambda$
 values, we initialise BCGD at the solution of the previous $\lambda$ value. This
 warm starts procedure significantly speeds up the running time of the entire
