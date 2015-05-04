@@ -4,95 +4,79 @@
 close all;
 clear all;
 clc;
-addpath ../addRKHSRegression/
+addpath ../addKernelRegression/
 addpath ../utils/
-addpath ~/libs/kky-matlab/utils/
+addpath ../otherMethods/
+addpath ~/libs/libsvm/matlab/
+addpath ~/libs/gpml/, startup;
 rng('default');
 
 % Determine dataset
+% dataset = 'debug';
 dataset = 'parkinson21';
+% dataset = 'parkinson21-small';
+% dataset = 'housing';
+% dataset = 'propulsion';
+% dataset = 'forestfires';
 
 % Load data
-[Xtr, Ytr, Xte, Yte] = genDataset(dataset);
+[Xtr, Ytr, Xte, Yte] = getDataset(dataset);
 [nTr, numDims] = size(Xtr);
 nTe = size(Xte, 1);
 
-% For the Decomposition
-decomposition.numRandGroups = 200;
-decomposition.groupSize = 5;
-decomposition.setting = 'espKernel';
-% decomposition.setting = 'randomGroups';
+% Set the following two
+decompRand.setting = 'randomGroups';
+decompRand.groupSize = min(10, ceil(numDims/4));
+decompRand.numRandGroups = min(200, 10*numDims);
+optParamsRand.maxNumIters = 50;
+optParamsRand.optMethod = 'bcgdDiagHessian';
 
-% Parameters for Optimisation
-optParams.maxNumIters = maxNumIters;
-% optParams.optMethod = 'proxGradientAccn';
-optParams.optMethod = 'bcgdDiagHessian';
-% Decomposition for plain Kernel Ridge Regression
-krDecomposition.setting = 'groups';
-krDecomposition.groups = { 1:numDims };
-lambdaRange = [1e-7 100];
+decompEsp.setting = 'espKernel';
+optParamsEsp.maxNumIters = 400;
+optParamsEsp.optMethod = 'bcgdDiagHessian';
 
 % Save file name
 saveFileName = sprintf('results/%s-%s.mat', dataset, ...
   datestr(now, 'mmdd-HHMMSS') );
 
-regressionAlgorithms = ...
-  {'add-KR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'addGP', 'SVR', 'kNN', 'spam'};
 regressionAlgorithms = { ...
+%   {'addKrrRand',   @(X,Y,Xte) addKernelRegCV(X,Y,decompRand, [], optParamsRand)},...
+  {'addKrrEsp',   @(X,Y,Xte) addKernelRegCV(X,Y,decompEsp, [], optParamsEsp)}, ...
   {'KRR',      @(X,Y,Xte) kernelRidgeReg(X, Y, struct())}, ...
+  {'KNN',      @(X,Y,Xte) KnnRegressionCV(X, Y, [])}, ...
   {'NW',       @(X,Y,Xte) localPolyKRegressionCV(X,Y,[],0)}, ...
   {'LL',       @(X,Y,Xte) localPolyKRegressionCV(X,Y,[],1)}, ...
   {'LQ',       @(X,Y,Xte) localPolyKRegressionCV(X,Y,[],2)}, ...
   {'GP',       @(X,Y,Xte) gpRegWrap(X,Y,Xte)}, ...
-  {'addGP',    @(X,Y,Xte) addGPWrap(X,Y,Xte)}, ...
+  {'SVR',      @(X,Y,Xte) svmRegWrap(X, Y, 'eps')}, ...
+%   {'addGP',    @(X,Y,Xte) addGPRegWrap(X,Y,Xte)}, ...
+%   {'spam',     @(X,Y,Xte) SpamRegression(X, Y, [])}, ...
+  };
 
 numRegAlgos = numel(regressionAlgorithms);
 
 
 results = zeros(numRegAlgos, 1);
 
+fprintf('Dataset: %s\n============================================\n', dataset);
 % Now run each method
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-cnt = 0;
+for i = 1:numRegAlgos
+  predFunc = regressionAlgorithms{i}{2}(Xtr, Ytr, Xte);
+  if strcmp(class(predFunc), 'double')
+    YPred = predFunc;
+  else
+    YPred = predFunc(Xte);
+  end
+  predError = norm(YPred-Yte).^2/nTe;
+  results(i) = predError;
+  fprintf('Method: %s, err: %.4f\n', regressionAlgorithms{i}{1}, predError);
+end
 
-% Method 1: add-KR
-cnt = cnt + 1;
-predFunc = addKernelRegCV(Xtr, Ytr, decomposition, lambdaRange, optParams);
-YPred = predFunc(Xte);
-predError = norm(YPred-Yte).^2/nTe;
-results(cnt) = predError;
-fprintf('Method: %s, err: %.4f\n', regressionAlgorithms{cnt}, predError);
+% Save results
+saveFileName = sprintf('results/real-%s-%s.mat', dataset, ...
+  datestr(now, 'mmdd-HHMMSS'));
+save(saveFileName, 'regressionAlgorithms', 'results', 'numRegAlgos');
 
-% Method 2: KR
-cnt = cnt + 1;
-predFunc = kernelRidgeReg(Xtr, Ytr, struct());
-YPred = predFunc(Xte);
-predError = norm(YPred-Yte).^2/nTe;
-results(cnt) = predError;
-fprintf('Method: %s, err: %.4f\n', regressionAlgorithms{cnt}, predError);
-
-% Method 2: KR
-cnt = cnt + 1;
-predFunc = localPolyKRegressionCV(Xtr, Ytr, [], 0);
-YPred = predFunc(Xte);
-predError = norm(YPred-Yte).^2/nTe;
-results(cnt) = predError;
-fprintf('Method: %s, err: %.4f\n', regressionAlgorithms{cnt}, predError);
-
-results
-[addKRPredFunc] = addKernelRidgeRegression(Xtr, Ytr, decomposition, ...
-  lambda1, lambda2, optParams);
-YPred = addKRPredFunc(Xte);
-fprintf('addKR: %0.4f\n', norm(YPred-Yte));
-
-% Method 2: KR
-[krPredFunc] = addKernelRidgeRegression(Xtr, Ytr, krDecomposition, ...
-  lambda1, lambda2, optParams);
-YPred = krPredFunc(Xte);
-fprintf('KR: %0.4f\n', norm(YPred-Yte));
-
-% Method 3: NW
-YPred = localPolyKRegressionCV(Xte, Xtr, Ytr, [], 0);
-fprintf('NW: %0.4f\n', norm(YPred-Yte));
-
+printV3Results;
 

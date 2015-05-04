@@ -1,10 +1,14 @@
-function [K, allKs] = espKernels(X, Y, bws)
+function [K, allKs] = espKernels(X, Y, bws, order)
 % Computes Kernels using elementary symmetric polynomials.
 % Each "base" kernel acts on one dimension and has bandwidth bws(i).
 
   % prelims
   [n, D] = size(X);
   m = size(Y, 1);
+
+  if nargin < 4
+    order = D;
+  end
 
   % create base kernels
   baseKernels = zeros(n, m, D);
@@ -14,10 +18,10 @@ function [K, allKs] = espKernels(X, Y, bws)
   end
 
   % Now construct the ESP kernels
-  allKs = elemSymPoly(baseKernels, D);
+  allKs = elemSymPoly(baseKernels, order);
   allKs = allKs(:,:,2:end);
   % Now normalise them
-  for k = 1:D
+  for k = 1:order
     allKs(:,:,k) = allKs(:,:,k) / nchoosek(D, k);
   end
   K = []; % just pass this for now.

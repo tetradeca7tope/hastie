@@ -34,7 +34,7 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
   decomp.setting = 'groups';
 
   % Set things up for cross validation
-  if isempty(lambdaRange), lambdaRange = [1e-12 1]; end
+  if isempty(lambdaRange), lambdaRange = [1e-7 100]; end
   lambdaCands = fliplr( ...
     logspace(log10(lambdaRange(1)), log10(lambdaRange(2)), numLambdaCands) )';
   errorAccum = zeros(numLambdaCands, 1);
@@ -118,7 +118,7 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
     allLs(:,:,j) = stableCholesky(allKs(:,:,j));
   end
   params.initBeta = zeros(n, M);
-  params.maxNumIters = 15*params.maxNumIters;
+  params.maxNumIters = 10*params.maxNumIters;
   [optBeta, optStats] = addKernelRegOpt(allLs, Y, decomp, bestLambda, params);
 
   % Obtain the function handle

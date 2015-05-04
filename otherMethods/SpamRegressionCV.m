@@ -10,7 +10,7 @@ function [predFunc, opt_lambda] = SpamRegressionCV( ...
   % prelims
   num_train_pts = size(Xtr, 1);
   num_dims = size(Xtr, 2);
-  num_kfoldcv_partitions = min(10, num_train_pts);;
+  num_kfoldcv_partitions = min(5, num_train_pts);;
 
   % specify default values for candidats and poly order if not specified
   if ~exist('lambda_cands', 'var') | isempty(lambda_cands)
@@ -49,7 +49,7 @@ function kfold_error = KFoldExperiment(X, y, num_partitions, lambda)
   m = size(X, 1);
   kfold_error = 0;
 
-  for kfold_iter = 1:num_partitions
+  for kfold_iter = 1:2
     test_start_idx = round( (kfold_iter-1)*m/num_partitions + 1 );
     test_end_idx   = round( kfold_iter*m/num_partitions );
     train_indices = [1:test_start_idx-1, test_end_idx+1:m];

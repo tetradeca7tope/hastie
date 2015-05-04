@@ -1,22 +1,18 @@
 function [predFunc, opt_k] = KnnRegressionCV( ...
   Xtr, Ytr, k_cands)
-% This function implements locally Polynomial Kernel regression and searches for
-% the optimal hyper-params (bandwidth and poly order)
-% if h_cands is empty, picks 10 values based on the std of X. If polyOrder_cands
-% is empty uses poly order 2.
-% Picks the hyper parametsr using Kfold CV. Outputs predictions and the optimal
-% parameters. For meanings of other variables read localPolyKRegression.m
 
   % prelims
   num_train_pts = size(Xtr, 1);
   num_dims = size(Xtr, 2);
-  num_kfoldcv_partitions = min(10, num_train_pts);;
+  num_kfoldcv_partitions = min(5, num_train_pts);;
 
   % specify default values for candidats and poly order if not specified
   if ~exist('k_cands', 'var') | isempty(k_cands)
     k_cands = [1 2 3 4 6 8 10 20 30 40 50 100];
+    k_cands = k_cands( (k_cands < num_train_pts/2) );
   end
   num_k_cands = length(k_cands);
+  opt_k = 1; %initialize to 1.
 
   % Shuffle the data
   shuffle_order = randperm(num_train_pts);
@@ -49,7 +45,7 @@ function kfold_error = KFoldExperiment(X, y, num_partitions, k)
   m = size(X, 1);
   kfold_error = 0;
 
-  for kfold_iter = 1:num_partitions
+  for kfold_iter = 1:2
     test_start_idx = round( (kfold_iter-1)*m/num_partitions + 1 );
     test_end_idx   = round( kfold_iter*m/num_partitions );
     train_indices = [1:test_start_idx-1, test_end_idx+1:m];

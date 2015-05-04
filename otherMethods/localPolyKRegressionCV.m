@@ -22,6 +22,8 @@ function [predFunc, opt_h, opt_poly_order] = localPolyKRegressionCV( ...
   end
   num_po_cands = size(polyOrder_cands, 1);
   num_h_cands = size(h_cands, 1);
+  opt_h = h_cands(1);
+  opt_poly_order = polyOrder_cands(1);
 
   % Shuffle the data
   shuffle_order = randperm(num_train_pts);
