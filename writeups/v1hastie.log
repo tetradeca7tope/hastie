@@ -1,0 +1,738 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  4 MAY 2015 17:08
+entering extended mode
+ %&-line parsing enabled.
+**v1hastie.tex
+(./v1hastie.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, farsi, arabic, croatian, bulgarian, ukrainian, russian, czech, slov
+ak, danish, dutch, finnish, french, basque, ngerman, german, german-x-2009-06-1
+9, ngerman-x-2009-06-19, ibycus, monogreek, greek, ancientgreek, hungarian, san
+skrit, italian, latin, latvian, lithuanian, mongolian2a, mongolian, bokmal, nyn
+orsk, romanian, irish, coptic, serbian, turkish, welsh, esperanto, uppersorbian
+, estonian, indonesian, interlingua, icelandic, kurmanji, slovenian, polish, po
+rtuguese, spanish, galician, catalan, swedish, ukenglish, pinyin, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-texlive/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texmf-texlive/tex/latex/subfigure/subfigure.sty
+Package: subfigure 2002/03/15 v2.1.5 subfigure package
+\subfigtopskip=\skip43
+\subfigcapskip=\skip44
+\subfigcaptopadj=\dimen105
+\subfigbottomskip=\skip45
+\subfigcapmargin=\dimen106
+\subfiglabelskip=\skip46
+\c@subfigure=\count88
+\c@lofdepth=\count89
+\c@subtable=\count90
+\c@lotdepth=\count91
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(/usr/share/texmf-texlive/tex/latex/subfigure/subfigure.cfg)
+\subfig@top=\skip47
+\subfig@bottom=\skip48
+)
+(/usr/share/texmf-texlive/tex/latex/natbib/natbib.sty
+Package: natbib 2009/07/16 8.31 (PWD, AO)
+\bibhang=\skip49
+\bibsep=\skip50
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count92
+)
+(/usr/share/texmf-texlive/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+(/usr/share/texmf-texlive/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count93
+\float@exts=\toks15
+\float@box=\box26
+\@float@everytoks=\toks16
+\@floatcapt=\box27
+)
+(/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks17
+\c@algorithm=\count94
+)
+(/usr/share/texmf-texlive/tex/latex/algorithms/algorithmic.sty
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+\c@ALC@unique=\count95
+\c@ALC@line=\count96
+\c@ALC@rem=\count97
+\c@ALC@depth=\count98
+\ALC@tlm=\skip51
+\algorithmicindent=\skip52
+)
+(/usr/share/texmf-texlive/tex/latex/tools/calc.sty
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count99
+\calc@Bcount=\count100
+\calc@Adimen=\dimen107
+\calc@Bdimen=\dimen108
+\calc@Askip=\skip53
+\calc@Bskip=\skip54
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count101
+\calc@Cskip=\skip55
+)
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip56
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks18
+\ex@=\dimen109
+))
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen110
+)
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count102
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count103
+\leftroot@=\count104
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count105
+\DOTSCASE@=\count106
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box28
+\strutbox@=\box29
+\big@size=\dimen111
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count107
+\c@MaxMatrixCols=\count108
+\dotsspace@=\muskip10
+\c@parentequation=\count109
+\dspbrk@lvl=\count110
+\tag@help=\toks19
+\row@=\count111
+\column@=\count112
+\maxfields@=\count113
+\andhelp@=\toks20
+\eqnshift@=\dimen112
+\alignsep@=\dimen113
+\tagshift@=\dimen114
+\tagwidth@=\dimen115
+\totwidth@=\dimen116
+\lineht@=\dimen117
+\@envbody=\toks21
+\multlinegap=\skip57
+\multlinetaggap=\skip58
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2009/06/22 v3.00
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+))
+(/usr/share/texmf-texlive/tex/latex/amscls/amsthm.sty
+Package: amsthm 2004/08/06 v2.20
+\thm@style=\toks23
+\thm@bodyfont=\toks24
+\thm@headfont=\toks25
+\thm@notefont=\toks26
+\thm@headpunct=\toks27
+\thm@preskip=\skip59
+\thm@postskip=\skip60
+\thm@headsep=\skip61
+\dth@everypar=\toks28
+)
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/parskip.sty
+Package: parskip 2001/04/09 non-zero parskip adjustments
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/hycolor.sty
+Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
+O)
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
+Package: xcolor-patch 2009/10/02 xcolor patch
+))
+\@linkdim=\dimen118
+\Hy@linkcounter=\count114
+\Hy@pagecounter=\count115
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)
+(/usr/share/texmf-texlive/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+))
+Package hyperref Info: Hyper figures OFF on input line 2975.
+Package hyperref Info: Link nesting OFF on input line 2980.
+Package hyperref Info: Hyper index ON on input line 2983.
+Package hyperref Info: Plain pages OFF on input line 2990.
+Package hyperref Info: Backreferencing OFF on input line 2995.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3191.
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip11
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 3428.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bitset.sty
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/intcalc.sty
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bigintcalc.sty
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)))
+\Fld@menulength=\count116
+\Field@Width=\dimen119
+\Fld@charsize=\dimen120
+\Field@toks=\toks29
+Package hyperref Info: Hyper figures OFF on input line 4377.
+Package hyperref Info: Link nesting OFF on input line 4382.
+Package hyperref Info: Hyper index ON on input line 4385.
+Package hyperref Info: backreferencing OFF on input line 4392.
+Package hyperref Info: Link coloring OFF on input line 4397.
+Package hyperref Info: Link coloring with OCG OFF on input line 4402.
+Package hyperref Info: PDF/A mode OFF on input line 4407.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+)
+\Hy@abspage=\count117
+\c@Item=\count118
+\c@Hfootnote=\count119
+)
+*hyperref using default driver hpdftex*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
+\Fld@listcount=\count120
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+\epsfxsize=\dimen121
+\epsfysize=\dimen122
+)
+(/usr/share/texmf-texlive/tex/latex/tools/verbatim.sty
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks30
+\verbatim@line=\toks31
+\verbatim@in@stream=\read1
+)
+(/usr/share/texmf-texlive/tex/latex/rotating/rotating.sty
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+\c@r@tfl@t=\count121
+\rotFPtop=\skip62
+\rotFPbot=\skip63
+\rot@float@box=\box30
+\rot@mess@toks=\toks32
+) (./kky.sty
+(/usr/share/texmf-texlive/tex/latex/mh/mathtools.sty
+Package: mathtools 2008/08/01 v1.06 mathematical typesetting tools (MH)
+
+(/usr/share/texmf-texlive/tex/latex/mh/mhsetup.sty
+Package: mhsetup 2007/12/03 v1.2 programming setup (MH)
+)
+\g_MT_multlinerow_int=\count122
+\l_MT_multwidth_dim=\dimen123
+)
+(/usr/share/texmf-texlive/tex/latex/tools/bm.sty
+Package: bm 2004/02/26 v1.1c Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup6
+\symboldletters=\mathgroup7
+\symboldsymbols=\mathgroup8
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 138.
+LaTeX Info: Redefining \bm on input line 204.
+)
+\c@theorem=\count123
+\c@example=\count124
+\c@property=\count125
+Package hyperref Info: Option `colorlinks' set `true' on input line 335.
+Package hyperref Info: Option `breaklinks' set `true' on input line 335.
+) (./hastieDefns.sty)
+(/usr/share/texmf-texlive/tex/latex/tools/multicol.sty
+Package: multicol 2008/12/05 v1.6h multicolumn formatting (FMi)
+\c@tracingmulticols=\count126
+\mult@box=\box31
+\multicol@leftmargin=\dimen124
+\c@unbalance=\count127
+\c@collectmore=\count128
+\doublecol@number=\count129
+\multicoltolerance=\count130
+\multicolpretolerance=\count131
+\full@width=\dimen125
+\page@free=\dimen126
+\premulticols=\dimen127
+\postmulticols=\dimen128
+\multicolsep=\skip64
+\multicolbaselineskip=\skip65
+\partial@page=\box32
+\last@line=\box33
+\mult@rightbox=\box34
+\mult@grightbox=\box35
+\mult@gfirstbox=\box36
+\mult@firstbox=\box37
+\@tempa=\box38
+\@tempa=\box39
+\@tempa=\box40
+\@tempa=\box41
+\@tempa=\box42
+\@tempa=\box43
+\@tempa=\box44
+\@tempa=\box45
+\@tempa=\box46
+\@tempa=\box47
+\@tempa=\box48
+\@tempa=\box49
+\@tempa=\box50
+\@tempa=\box51
+\@tempa=\box52
+\@tempa=\box53
+\@tempa=\box54
+\c@columnbadness=\count132
+\c@finalcolumnbadness=\count133
+\last@try=\dimen129
+\multicolovershoot=\dimen130
+\multicolundershoot=\dimen131
+\mult@nat@firstbox=\box55
+\colbreak@box=\box56
+)
+(/usr/share/texmf-texlive/tex/latex/bbm-macros/bbm.sty
+Package: bbm 1999/03/15 V 1.2 provides fonts for set symbols - TH
+LaTeX Font Info:    Overwriting math alphabet `\mathbbm' in version `bold'
+(Font)                  U/bbm/m/n --> U/bbm/bx/n on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathbbmss' in version `bold'
+(Font)                  U/bbmss/m/n --> U/bbmss/bx/n on input line 35.
+)
+(/usr/share/texmf-texlive/tex/latex/siunitx/siunitx.sty
+Package: siunitx 2009/09/21 v1.3a A comprehensive (SI) units package
+
+(/usr/share/texmf-texlive/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+(/usr/share/texmf-texlive/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks33
+\XKV@tempa@toks=\toks34
+\XKV@depth=\count134
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+))
+(/usr/share/texmf-texlive/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen132
+\extrarowheight=\dimen133
+\NC@list=\toks35
+\extratabsurround=\skip66
+\backup@length=\skip67
+)
+(/usr/share/texmf-texlive/tex/latex/tools/xspace.sty
+Package: xspace 2006/05/08 v1.12 Space after command names (DPC,MH)
+)
+\si@tempboxa=\box57
+\si@tempboxb=\box58
+\si@tempboxc=\box59
+\si@tempboxd=\box60
+\si@temptoks=\toks36
+\si@tab@mantprecnt=\count135
+\si@tab@mantpostcnt=\count136
+\si@tab@expprecnt=\count137
+\si@tab@exppostcnt=\count138
+\si@num@dp=\count139
+\si@num@sf=\count140
+\si@eVcorra=\skip68
+\si@eVcorrb=\skip69
+\si@frc@displen=\skip70
+\si@frc@textlen=\skip71
+\si@frc@suplen=\skip72
+\si@frc@ssuplen=\skip73
+\si@num@rndtarget=\count141
+\si@tab@toks=\toks37
+\si@tab@pretoks=\toks38
+\si@tab@posttoks=\toks39
+\si@tempcnta=\count142
+\si@tempcntb=\count143
+\si@tab@prebox=\box61
+\si@tab@midbox=\box62
+\si@tab@postbox=\box63
+\si@tab@expbox=\box64
+\si@tab@predim=\dimen134
+\si@tab@postdim=\dimen135
+\si@tab@expdim=\dimen136
+\si@tempdima=\dimen137
+\si@tempdimb=\dimen138
+\si@unt@unitcnta=\count144
+\si@unt@unitcntb=\count145
+\si@unt@depthcnt=\count146
+\si@unt@prefixcnt=\count147
+\si@unt@powerdim=\dimen139
+
+(/usr/share/texmf-texlive/tex/latex/siunitx/config/si-prefix.cfg
+File: si-prefix.cfg 2009/09/21 v1.3a siunitx: SI Multiple prefixes
+Package siunitx Info: Redefining unit \kilogram on input line 46.
+)
+(/usr/share/texmf-texlive/tex/latex/siunitx/config/si-named.cfg
+File: si-named.cfg 2009/09/21 v1.3a siunitx: SI Named units
+)
+(/usr/share/texmf-texlive/tex/latex/siunitx/config/si-addn.cfg
+File: si-addn.cfg 2009/09/21 v1.3a siunitx: SI Additional units
+)
+(/usr/share/texmf-texlive/tex/latex/siunitx/config/si-prefixed.cfg
+File: si-prefixed.cfg 2009/09/21 v1.3a siunitx: SI Prefixed units
+
+(/usr/share/texmf-texlive/tex/latex/siunitx/config/si-accepted.cfg
+File: si-accepted.cfg 2009/09/21 v1.3a siunitx: SI Accepted units
+)
+(/usr/share/texmf-texlive/tex/latex/siunitx/config/si-physical.cfg
+File: si-physical.cfg 2009/09/21 v1.3a siunitx: SI Physically-measured units
+))
+(/usr/share/texmf-texlive/tex/latex/siunitx/config/si-abbr.cfg
+File: si-abbr.cfg 2009/09/21 v1.3a siunitx: Abbreviated units
+))
+(./icml2015.sty
+Package: icml2015 2015/01/01 v2.0 ICML Conference Style File
+ (/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip74
+\f@ncyO@elh=\skip75
+\f@ncyO@erh=\skip76
+\f@ncyO@olh=\skip77
+\f@ncyO@orh=\skip78
+\f@ncyO@elf=\skip79
+\f@ncyO@erf=\skip80
+\f@ncyO@olf=\skip81
+\f@ncyO@orf=\skip82
+)
+(/usr/share/texmf-texlive/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2006/07/14 v1.1d eso-pic (RN)
+
+(/usr/share/texmf-texlive/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+Package hyperref Info: Option `colorlinks' set `true' on input line 98.
+\titrun=\box65
+\captionbox=\box66
+\captionboxwid=\dimen140
+\icmlrulerbox=\box67
+\icmlrulercount=\count148
+\icmlruleroffset=\dimen141
+\cv@lineheight=\dimen142
+\cv@boxheight=\dimen143
+\cv@tmpbox=\box68
+\cv@refno=\count149
+\cv@tot=\count150
+\cv@tmpc@=\count151
+\cv@tmpc=\count152
+) (./v1hastie.aux)
+\openout1 = `v1hastie.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 81.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 81.
+
+(/usr/share/texmf-texlive/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 81.
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count153
+\scratchdimen=\dimen144
+\scratchbox=\box69
+\nofMPsegments=\count154
+\nofMParguments=\count155
+\everyMPshowfont=\toks40
+\MPscratchCnt=\count156
+\MPscratchDim=\dimen145
+\MPnumerator=\count157
+\everyMPtoPDFconversion=\toks41
+)
+Package hyperref Info: Link coloring ON on input line 81.
+ (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+\c@section@level=\count158
+)
+LaTeX Info: Redefining \ref on input line 81.
+LaTeX Info: Redefining \pageref on input line 81.
+ (./v1hastie.out)
+(./v1hastie.out)
+\@outlinefile=\write3
+\openout3 = `v1hastie.out'.
+
+\AtBeginShipoutBox=\box70
+Package siunitx Info: xfrac package unavailable
+(siunitx)             using `fraction=sfrac' will fall back on
+(siunitx)             nicefrac-like method on input line 81.
+ ABD: EveryShipout initializing macros
+LaTeX Font Info:    Try loading font information for U+msa on input line 81.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 81.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 106.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 106.
+ (./figureHash.tex)
+(./tableHash.tex) (./abstract.tex
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
+LaTeX Font Info:    Try loading font information for OT1+lmss on input line 3.
+ (/usr/share/texmf/tex/latex/lm/ot1lmss.fd
+File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
+))
+(./introduction.tex
+Underfull \vbox (badness 5490) has occurred while \output is active []
+
+
+Underfull \hbox (badness 3302) in paragraph at lines 50--59
+[]\OT1/ptm/m/n/10 Our work ex-tends Sparse Ad-di-tive Mod-els (SpAM)
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+
+]) (./method.tex
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 5.
+
+Overfull \hbox (16.73482pt too wide) detected at line 103
+[][]\OML/cmm/m/it/10 F[]\OT1/cmr/m/n/10 (\OML/cmm/b/it/10 \OT1/cmr/m/n/10 ) = 
+[][]\OML/cmm/m/it/10 Y \OMS/cmsy/m/n/10 ^^@ [] [][][][] \OT1/cmr/m/n/10 + \OML/
+cmm/m/it/10 ^^U [] [][] :
+ []
+
+
+Underfull \vbox (badness 4913) has occurred while \output is active []
+
+ [2]
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 139.
+
+) (./experiments2.tex <figs/compToy.pdf, id=114, 449.68pt x 338.26375pt>
+File: figs/compToy.pdf Graphic file (type pdf)
+
+<use figs/compToy.pdf>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3]
+(./functionsel.tex)) (./v1hastie.bbl
+Underfull \hbox (badness 2189) in paragraph at lines 9--14
+\OT1/ptm/m/n/10 thresholding al-go-rithm for lin-ear in-verse prob-lems.
+ []
+
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 19.
+(/usr/share/texmf-texlive/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 16--20
+[]\OT1/ptm/m/n/10 Chang, Chih-Chung and Lin, Chih-Jen.  LIB-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--20
+\OT1/ptm/m/n/10 SVM: A li-brary for sup-port vec-tor ma-chines.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--20
+\OT1/ptm/m/it/10 ACM Trans-ac-tions on In-tel-li-gent Sys-tems and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--20
+\OT1/ptm/m/it/10 Tech-nol-ogy\OT1/ptm/m/n/10 , 2011.  Soft-ware avail-able at
+ []
+
+
+Overfull \hbox (17.62251pt too wide) in paragraph at lines 16--20
+[][]\OT1/pcr/m/n/10 http://www.csie.ntu.edu.tw/ cjlin/libsvm[][]\OT1/ptm/m/n/10
+ . 
+ []
+
+[4 <./figs/compToy.pdf>]) [5
+
+] (./v1hastie.aux) ) 
+Here is how much of TeX's memory you used:
+ 9317 strings out of 493848
+ 129531 string characters out of 1152822
+ 261752 words of memory out of 3000000
+ 12292 multiletter control sequences out of 15000+50000
+ 34735 words of font info for 83 fonts, out of 3000000 for 9000
+ 714 hyphenation exceptions out of 8191
+ 38i,12n,55p,272b,437s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}{/usr
+/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf-texlive/fonts/type1
+/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
+fonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
+mi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi5.pfb></u
+sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/tex
+mf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-texlive/fonts/type1
+/public/amsfonts/cmextra/cmmib7.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/tex
+mf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/l
+m/lmss10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm
+10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+</usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-
+texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/
+urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb
+></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on v1hastie.pdf (5 pages, 281109 bytes).
+PDF statistics:
+ 233 PDF objects out of 1000 (max. 8388607)
+ 40 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+

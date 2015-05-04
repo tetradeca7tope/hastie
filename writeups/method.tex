@@ -1,0 +1,199 @@
+
+\section{Problem Set up \& Algorithm}
+\label{sec:additiveKR}
+
+\subsection{Problem Statement \& Notation}
+\label{sec:setup}
+
+Let $\func : \Xcal \rightarrow \RR$ be the function of interest. 
+Here $\Xcal \ni x = [x_1, \dots, x_D] \in \RR^D$ and $\Xcal \subset \RR^D$.
+We have data $\XYn$ and wish to obtain an estimate
+$\funchat$ of $\func$.
+In this work, we seek an additive approximation to the
+function. That is, $\funchat$ can be expressed as,
+\begin{align*}
+\funchat(x) = \funchatii{1}(x) + \funchatii{2}(x) + \dots +
+\funchatii{M}(x)
+\numberthis
+\label{eqn:addAssumption}
+\end{align*}
+where each $\funchatii{j}:\Xcal \rightarrow \RR$.
+% where $\xii{j} \in \Xcalj \subset \RR^{d_j}$ and $\funchatj:\Xcalj \rightarrow
+% \RR$. We shall refer to the $\Xcalj$'s as \emph{groups} and the collection of all
+% groups $\bigcup_{j=1}^M \Xcalj$ as the \emph{decomposition}.
+% We are particularly  interested in the case
+% where $D$ is very large and the group dimensionality is bounded-- i.e. $d_j \leq
+% d \ll D$. 
+
+The work in \citet{hastie90gam} treats $\funchat$ as a sum of one
+dimensional components. 
+In Equation~\eqref{eqn:addAssumption}
+this corresponds to setting $M=D$ and have each $\funchatii{j}$ act on only the
+$j$\superscript{th} coordinate.
+% The decomposition here corresponds to
+% $\xii{j} = x_j$, $d_j = d =1\; \forall j$ and $M = D$. 
+In this work, we would like to be more expressive than this model. We will
+consider additive models on more than just one dimension and more importantly allows for
+overlap between the groups. For e.g. $\funchat(x_1, x_2,
+x_3) = \funchatii{1}(x_1) + \funchatii{2}(x_1, x_2) + \funchatii{3}(x_2, x_3)$.
+\citet{ravikumar09spam} treat $\funchat$ as a sparse combination of one
+dimensional functions. While this is seemingly restrictive than
+\citep{hastie90gam}, the sparse approximation may provide favourable
+bias-variance tradeoffs in high dimensions. Drawing inspiration from this, we
+will also consider models where $M$ is very large and seek a sparse collection of
+groups to approximate the function - i.e. $\funchatj = \zero$ for several $j$.
+
+
+\subsection{Additive Least Squares Regression via Kernels}
+\label{sec:addKR}
+
+One of several ways to formulate a nonparametric regression problem is to 
+minimise an
+objective of the form $J(f) = \sum_{i=1}^n \ell(f(X_i), Y_i) + \lambda P(f)$ 
+over a nonparametric class of functions $\Fcal$.
+Here $\ell$ is a loss function and $P$ is a term that penalises the complexity
+of the function $f$. Several nonparametric regression problems such as Gaussian
+processes, smoothing splines and natural splinescan be formulated this way.
+Or particular interest to us is Kernel Ridge Regression (\krr)
+which uses a positive semidefinite kernel 
+$\kernel: \Xcal \times \Xcal \rightarrow \RR$ \citep{scholkopf01kernels}
+and takes $\Fcal$ is taken to be the reproducing kernel Hilbert
+space (RKHS) $\Hcal_\kernel$ corresponding to $\kernel$. $P$ is taken to be 
+the squared RKHS norm of $f$ and $\ell$ the squared error loss. 
+Accordingly, \krrs is characterised via the optimisation objective,
+\[
+\funchat = \argmin_{f \in \Hcal_\kernel} \sum_{i=1}^n (Y_i - f(X_i))^2 +
+\lambda \|f\|^2_\Hcalk
+\]
+However, like most nonparametric regression models, \krrs suffers from the curse of
+dimensionality. To obtain an additive approximation we consider $M$ kernels
+$\kernelj$ and their associated RKHSs $\Hcalkj$. In
+equation~\eqref{eqn:addAssumption}, we will aim for $\funchatj \in \Hcalkj$.
+Accordinly we consider an optimisation problem of the following form where
+we jointly optimise over $\funchatii{1}, \dots, \funchatii{M}$,
+\begin{align*}
+& \{\funchatj\}_{j=1}^M
+\argmin_{\funcj \in \Hcalkj, j = 1,\dots, M} 
+  F\left( \{\funcj\}_{j=1}^M \right) \\
+& \textrm{where, } 
+  \numberthis \label{eqn:rkhsObjective}
+\\
+& F\left( \{\funcj\}_{j=1}^M \right)  \;=  \\
+&\hspace{0.2in}  
+  \frac{1}{2}\sum_{i=1}^n \left(Y_i - \sum_{j=1}^M \funcj (\xj) \right)^2 
+ + \lambda \sum_{j=1}^M \|\funcj\|^q_\Hcalkj 
+\end{align*}
+Our estimate for $\func$ is then $\funchat(\cdot) = \sum_j \funchatj(\cdot)$.
+
+Via a representer theorem like argument it is straightforward to show
+that $\funcj$ will be in the linear span of the reprodcing kernel maps of the
+training points $\Xn$ -- i.e. $\funcj(\cdot) = 
+\sum_j \alphaj_i \kernelj(\cdot, X_i) $.
+Then, the $j$\superscript{th} term in the second summation can be written as
+${\alphaj}^\top \KKj \alphaj$,
+where $\KKj \in \RR^{n\times n}\; \forall
+j$ such that $\KKj_{rc} = \kernelj(X_r, X_c)$.
+After further simplification, the objective can be written as,
+$\aalpha = \argmin_{\aalpha \in \RR^{nM}} F(\aalpha)$ where,
+\begin{equation}
+\Falpha(\aalpha) = \frac{1}{2}\Big\|Y - \sum_{j=1}^m \KKj \alphaj\Big\|_2^2 + 
+  \lambda \sum_{j=1}^M \left({\alphaj}^\top \KKj \alphaj\right)^{q/2}.
+%   \lambda \sum_{j=1}^M \sqrt{{\alphaj}^\top \KKj \alphaj}^{q/2}.
+\label{eqn:optObjective}
+\end{equation}
+Here $\alphaj \in \RR^n \; \forall j$, $\aalpha = [{\alphaii{1}}^\top, \dots, 
+{\alphaii{M}}^\top]^\top  \in\RR^{nM}$ and $Y = [Y_1, \dots, Y_n]^\top \in
+\RR^n$. Given the solution to the above, our
+estimate is obtained via $\funchat(\cdot) = \sum_{j=1}^M \sum_{i=1}^n \alphaj_i
+\kernelj(\cdot, \Xj_i)$.
+Equation~\eqref{eqn:optObjective} will the (convex) optimisation problem in our
+algorithm.
+We call this algorithm Additive Kernel Regression (\addkrr).
+A natural choice for $q$ in the objective~\eqref{eqn:rkhsObjective} is $q=2$. 
+However in
+this work we use $q=1$ since it encourages a sparse subset of functions as the
+solution which provides interpretability of the learned models. 
+
+
+\subsection{Choice of Kernels}
+
+All that is left to do to complete the specification of our algorithm is to
+describe the construction of the kernels $\kernelj$. We consider two settings
+in this regard.
+
+The first is when we wish to reduce the statistical complexity of the function
+we wish to learn in high dimension. A kernel directly defined on $D$ dimensions
+is complex since it allows for interactions of all $D$ variables. We may reduce
+the complexity of the kernel by constraining how these variables interact.
+In particular we consider kernels of the form, 
+\begin{align*}
+\kernelii{1}(x,x') &= \sum_{1\leq i \leq D} \kerni(x_i, x'_i) 
+\numberthis \label{eqn:espKernel} \\
+\kernelii{2}(x,x') &= \sum_{1\leq i_1 < i_2 \leq D} 
+\kernel_{i_1}(x_{i_1},x'_{i_1})  \kernel_{i_2}(x_{i_2},x'_{i_2})\\
+\kernelii{M}(x,x') &= \sum_{1\leq i_1 < i_2 < \dots < i_M \leq D} 
+  \prod_{d=1}^M \kernel_{i_d}(x_{i_d}, x'_{i_d}) 
+\end{align*}
+Here $\kerni:\RR\times\RR \rightarrow \RR$ 
+is a base kernel acting on one dimension. 
+$\kernelj$ has ${D \choose j}$ terms and exhaustively computing all of them is
+computationally intractable.
+Fortunately, by observing that the $j$\superscript{th} kernel is just the
+$j$\superscript{th} elementary symmetric polynomial on the base kernel values we
+may use the Newton Girard formula to efficiently compute them recursively.
+Precisely, by denoting $\kappa_s = \sum_{i=1}^D (\kernel_i(x_i, x'_i))^s$ 
+we have, 
+\[
+\kernelii{j}(x,x') = \frac{1}{j} \sum_{d=1}^j (-1)^{d-1} 
+  \;\kappa_j \; \kernelii{j-d}(x, x')
+\]
+Computing the $M$ kernels this way only requires $O(DM)$ computation.
+We call this choice of kernels the ESP Kernels.
+A similar kernel using a similar trick for computing it was used in
+\citet{duvenaud11additivegps}.
+
+% \textbf{Setting 2 (Function Selection): }
+The second setting is when we are explicitly searching for a sparse subset of
+functions to explain the data. For instance, in neurological models, while the
+function of interest has several variables the interactions are sparse and of
+lower order. For example, a function of $4$ variables may take the form
+\[
+f(x) = \funcii{1}(x_1) + \funcii{2}(x_2,x_3) + \funcii{3}(x_1, x_4)
+\]
+That is, the function decomposes as a sum of functions acting on small groups of
+variables. Given a large set of candidate groups, the task at hand is to
+recover the groups and the individual functions acting on those groups.
+In this setting, $M$ and our RKHSs are determined by the problem.  
+Precisely, $\Hcalkj$ contains functions on the variables
+belonging to the $j$\superscript{th} candidate group. 
+
+
+\subsection{Implementation}
+
+We now describe the implementation and other detials of the above algorithm.
+Let the Cholesky decomposition of $\KKj$ be $\KKj = \LLj \LLj^\top$. 
+Denote $\betaj = \LLj^\top \alphaj$.
+Then, our objective can be written in terms of $\bbeta = [{\betaii{1}}^\top,
+\dots, {\betaii{M}}^\top]$ as,
+\begin{equation}
+\Fbeta(\bbeta) =  \frac{1}{2}\Big\|Y - \sum_{j=1}^m \LLj \alphaj\Big\|_2^2 + 
+  \lambda \sum_{j=1}^M \|\betaj\|_2
+\end{equation}
+The objective, in the above form is well studied in optimisation literature as the group
+LASSO. 
+When the number of parameters for each group are small, which is
+typically the case in group LASSO problems, block coordinate descent (BCD) is believed
+to be the state of the art solver. However, in our case the number of parameters
+is large--growing linearly with $n$. In this regime BCD is slow since it
+requires a matrix inversion at each step. In particular, we found that Block
+Coordinate Gradient Descent (BCGD) significantly outperformed BCD in our
+experiments. 
+In fact, we tried several other methods including subgradient method, proximal
+gradient method and ADMM and found that BCGD performed best.
+
+The penalty term $\lambda$ was chosen using cross validation. Our implementation
+first solves for the largest $\lambda$ value. For successive $\lambda$
+values, we initialise BCGD at the solution of the previous $\lambda$ value. This
+warm starts procedure significantly speeds up the running time of the entire
+training procedure.
+

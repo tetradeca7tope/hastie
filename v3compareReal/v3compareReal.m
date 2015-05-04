@@ -82,7 +82,7 @@ end
 % Save results
 saveFileName = sprintf('results/real-%s-%s.mat', dataset, ...
   datestr(now, 'mmdd-HHMMSS'));
-save(saveFileName, 'regressionAlgorithms', 'results', 'numRegAlgos');
+save(saveFileName, 'regressionAlgorithms', 'results', 'numRegAlgos', 'dataset');
 
 printV3Results;
 
