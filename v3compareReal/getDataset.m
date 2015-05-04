@@ -28,11 +28,10 @@ function [Xtr, Ytr, Xte, Yte] = getDataset(dataset)
 
     case 'propulsion'
       L = load('datasets/propulsion.txt');
-%         L = L(1:2000, :); L = shuffleData(L);
-%         trIdxs = (1:1000)'; teIdxs = (1001:2000)';
-        L = L(1:400, :); L = shuffleData(L);
-        trIdxs = (1:200)'; teIdxs = (201:400)';
-      attrs = [1 3:8 10:18]; label = 2;
+        L = shuffleData(L); L(:,2) = log(L(:,2));
+%         L = L(1:2000, :); trIdxs = (1:1000)'; teIdxs = (1001:2000)';
+        L = L(1:400, :); trIdxs = (1:200)'; teIdxs = (201:400)';
+      attrs = [3:8 10:18]; label = 2;
       [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
 
     case 'housing'
@@ -42,14 +41,61 @@ function [Xtr, Ytr, Xte, Yte] = getDataset(dataset)
       trIdxs = (1:256)'; teIdxs = (257:506)';
       [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
 
+    case 'music'
+      L = load('datasets/music.txt');
+      L = shuffleData(L);
+      attrs = (2:91)'; label = 1;
+      trIdxs = (1:1000)'; teIdxs = (1001:2000)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+
+    case 'music-small'
+      L = load('datasets/music.txt');
+      L = shuffleData(L);
+      attrs = (2:91)'; label = 1;
+      trIdxs = (1:400)'; teIdxs = (401:800)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+
+    case 'telemonitoring-total'
+      L = load('datasets/telemonitoring.txt');
+      L = L( L(:,3) == 0, :); % only select female candidates
+      L = shuffleData(L);
+      attrs = [2 4:5 7:22]; label = 6;
+      trIdxs = (1:1000)'; teIdxs = (1001:1867)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+
+    case 'telemonitoring-total-small'
+      L = load('datasets/telemonitoring.txt');
+      L = L( L(:,3) == 0, :); % only select female candidates
+      L = shuffleData(L);
+      attrs = [2 4:5 7:22]; label = 6;
+      trIdxs = (1:300)'; teIdxs = (301:600)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+
+    case 'telemonitoring-motor-small'
+      L = load('datasets/telemonitoring.txt');
+      L = L( L(:,3) == 0, :); % only select female candidates
+      L = shuffleData(L);
+      attrs = [2 4 5 7:22]; label = 6;
+      trIdxs = (1:300)'; teIdxs = (301:600)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+
     case 'forestfires'
       L = load('datasets/forestfires.txt');
       L = shuffleData(L);
+      L(:,11) = log(L(:,11) + 1);
       trIdxs = (140:350)';
-      teIdxs = (1:517)';
-      attrs = [1:10]; label = 11;
+      teIdxs = (351:517)';
+      label = 7; attrs = setdiff([1:11], label);
       [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
       
+    case 'blog'
+      L = load('datasets/blog.txt');
+      L = shuffleData(L);
+      rmIdxs = (mean(abs(L)) < .11)';
+      L = L(:, ~rmIdxs);
+      trIdxs = (1:700)'; teIdxs = (701:1388)';
+      label = 92; attrs = (1:91)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
     
 
     otherwise
