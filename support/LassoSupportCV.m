@@ -18,7 +18,8 @@ function LassoSupportCV();
         fpr_curr = [];
         precision_curr = [];
         for rep=1:num_reps
-            load('support-n%i-rep%i.mat', 'X', 'Y');
+            fname = sprintf('support-n%i-rep%i.mat', n, rep);
+            load(fname, 'X', 'Y');
             st = LassoCV(X, Y, foldCV);
             f1_curr = [f1_curr st.f1];
             tpr_curr = [tpr_curr st.tpr];

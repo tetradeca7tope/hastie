@@ -7,7 +7,8 @@ function createData()
         for n_ix=1:num_n
             n = n_list(n_ix);
             [X, Y] = create(n,p);
-            save('support-n%i-rep%i.mat', 'X', 'Y');
+            fname = sprintf('support-n%i-rep%i.mat', n, rep);
+            save(fname, 'X', 'Y');
         end
     end
 end
