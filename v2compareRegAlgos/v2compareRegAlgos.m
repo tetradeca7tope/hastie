@@ -16,15 +16,15 @@ addpath ~/libs/gpml/, startup;
 % regressionAlgorithms = ...
 %   {'add-KR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'SVR', 'kNN', 'spam'};
 regressionAlgorithms = ...
-  {'add-KR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'SVR', 'kNN'};
+  {'addKR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'kNN'};
 
 % Problem Set up
 numExperiments = 2;
-% numDims = 20; nTotal = 500; M = 200; maxNumIters = 300;
-numDims = 20; nTotal = 1100; M = 200; maxNumIters = 400;
-% numDims = 6; nTotal = 300; M = 10; maxNumIters = 20;  % For debugging
+% numDims = 20; nTotal = 1100; maxNumIters = 400;
+numDims = 6; nTotal = 300; maxNumIters = 10;
 % nCands = (60:60:nTotal)';
 nCands = (120:120:nTotal)';
+
 [func, funcProps] = getAdditiveFunction(numDims, round(numDims/2)-1);
 bounds = funcProps.bounds;
 nTest = 500;
@@ -33,14 +33,9 @@ numCandidates = numel(nCands);
 
 % For the Decomposition
 decomposition.setting = 'espKernel';
-% decomposition.setting = 'randomGroups';
-% decomposition.numRandGroups = M;
-% decomposition.groupSize = 8;
-
-% Parameters for Optimisation
 optParams.maxNumIters = maxNumIters;
-% optParams.optMethod = 'proxGradientAccn';
 optParams.optMethod = 'bcgdDiagHessian';
+
 
 % Sample test data
 Xte = bsxfun(@plus, ...
@@ -130,18 +125,18 @@ for expIter = 1:numExperiments
 %     fprintf('Method: %s, Err: %0.4f\n', ...
 %       regressionAlgorithms{cnt}, norm(YPred-Yte));
  
-    % Method 8: SVR 
-    cnt = cnt + 1;
-    svPredFunc = svmRegWrap(X, Y, 'eps');
-    YPred = svPredFunc(Xte);
-    results{cnt}(expIter, candIter) = norm(YPred - Yte);
-    fprintf('Method: %s, Err: %0.4f\n', ...
-      regressionAlgorithms{cnt}, norm(YPred-Yte));
+%     % Method 8: SVR 
+%     cnt = cnt + 1;
+%     svPredFunc = svmRegWrap(X, Y, 'eps');
+%     YPred = svPredFunc(Xte);
+%     results{cnt}(expIter, candIter) = norm(YPred - Yte);
+%     fprintf('Method: %s, Err: %0.4f\n', ...
+%       regressionAlgorithms{cnt}, norm(YPred-Yte));
 
     % Method 9: KNN
     cnt = cnt + 1;
     kNNPredFunc = KnnRegressionCV(X, Y);
-    [~, YPred] = kNNPredFunc(Xte);
+    YPred = kNNPredFunc(Xte);
     results{cnt}(expIter, candIter) = norm(YPred - Yte);
     fprintf('Method: %s, Err: %0.4f\n', ...
       regressionAlgorithms{cnt}, norm(YPred-Yte));

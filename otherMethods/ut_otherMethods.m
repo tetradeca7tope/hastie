@@ -14,8 +14,8 @@ rng('default');
 %method = 'GP';
 %method = 'addGP';
 % method = 'epsSVR';
-%method = 'Spam';
-method = 'KNN';
+method = 'Spam';
+% method = 'KNN';
 
 if isequal(method, 'GP') || isequal(method, 'addGP')
   addpath ~/libs/gpml/, startup; % add gpml path.
@@ -65,7 +65,8 @@ switch method
     Ypred = predFunc(Xte);
   case 'Spam'
     predFunc = SpamRegressionCV(Xtr, Ytr);
-    [~, Ypred] = predFunc(Xte);
+    Ypred = predFunc(Xte);
+
   case 'nuSVR'
     predFunc = svmRegWrap(Xtr, Ytr, 'nu');
     Ypred = predFunc(Xte);
@@ -79,9 +80,10 @@ switch method
 
   case 'addGP'
     Ypred = addGPRegWrap(Xtr, Ytr, Xte);
+
   case 'KNN'
     predFunc = KnnRegressionCV(Xtr, Ytr);
-    [~, Ypred] = predFunc(Xte);
+    Ypred = predFunc(Xte);
 
 end
 
