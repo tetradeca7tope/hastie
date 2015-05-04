@@ -11,8 +11,6 @@ function [optBeta, optStats] = ...
 
   % prelims
   n = size(Y, 1);
-  groups = decomposition.groups;
-  M = numel(groups);
 
   % Determine which method to use for optimisation
   switch params.optMethod
@@ -35,7 +33,7 @@ function [optBeta, optStats] = ...
       [optBeta, optStats] = bcgd_ha(Ls, Y, lambda, params);
 
     case 'admm'
-
+        [optBeta, optStats] = admm(Ls, Y, lambda, params);
     case 'proxNewton'
     
     otherwise

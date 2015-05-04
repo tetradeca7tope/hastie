@@ -15,8 +15,7 @@ function [predFunc, optAlpha, optBeta, optStats, decomposition] = ...
 
   % Obtain the Kernels
   [kernelFunc, decomposition] = kernelSetup(X, Y, decomposition);
-  groups = decomposition.groups;
-  M = numel(groups);
+  M = decomposition.M;
   [~, allKs] = kernelFunc(X, X); % Compute the kernel
   % Now obtain the cholesky Decompositions
   allLs = zeros(size(allKs));
@@ -26,6 +25,10 @@ function [predFunc, optAlpha, optBeta, optStats, decomposition] = ...
 
   % Set initialisation
   params.initBeta = zeros(n, M);
+  if isequal(params.optMethod, 'admm')
+      params.initZ = zeros(n, M);
+      params.initU = zeros(n, M);
+  end
 
   % Now call addKernelRegOpt
   [optBeta, optStats] = addKernelRegOpt(allLs, Y, decomposition, ...

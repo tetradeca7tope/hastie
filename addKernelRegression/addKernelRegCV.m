@@ -30,11 +30,11 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
   % Obtain the kernel Function and the decomposition
   [kernelFunc, decomposition] = kernelSetup(X, Y, decomposition);
   decomp = decomposition;
-  M = numel(decomp.groups);
+  M = decomp.M;
   decomp.setting = 'groups';
 
   % Set things up for cross validation
-  if isempty(lambdaRange), lambdaRange = [1e-4 10]; end
+  if isempty(lambdaRange), lambdaRange = [1e-7 100]; end
   lambdaCands = fliplr( ...
     logspace(log10(lambdaRange(1)), log10(lambdaRange(2)), numLambdaCands) )';
   errorAccum = zeros(numLambdaCands, 1);
@@ -80,7 +80,8 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
     for candIter = 1:numLambdaCands
 
       lambda = lambdaCands(candIter);
-      fprintf('lambda = %0.4f\n', lambda);
+      fprintf('CViter: %d/%d, lambda = %0.5e\n', cvIter, params.numTrialsCV, ...
+        lambda);
 
       % Call the optimisation routine
       params.initBeta = Beta;
@@ -117,6 +118,7 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
     allLs(:,:,j) = stableCholesky(allKs(:,:,j));
   end
   params.initBeta = zeros(n, M);
+  params.maxNumIters = 10*params.maxNumIters;
   [optBeta, optStats] = addKernelRegOpt(allLs, Y, decomp, bestLambda, params);
 
   % Obtain the function handle
@@ -129,6 +131,11 @@ function [predFunc, optAlpha, optBeta, decomposition, bestLambda, optStats] =...
   % Before returning
   optStats.normBetaVals = normBetaVals;
   optStats.cvResults = [lambdaCands errorAccum/params.numTrialsCV];
+
+  % print some summary statistics
+  numSparseTerms = sum(sum(abs(optAlpha)) == 0);
+  fprintf('Chosen lambda: %.5ef (%.5ef, %.5ef), sparsity: %d/%d\n\n', ...
+    bestLambda, lambdaCands(1), lambdaCands(end), numSparseTerms, M);
 
 end
 

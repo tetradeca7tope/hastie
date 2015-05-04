@@ -9,22 +9,16 @@ addpath ../utils/
 addpath ../otherMethods/
 addpath ~/libs/libsvm/matlab/  % add libsvm path here
 addpath ~/libs/gpml/, startup;
-% rng('default');
+rng('default');
 
-% regressionAlgorithms = ...
-%   {'add-KR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'addGP', 'SVR', 'kNN', 'spam'};
-% regressionAlgorithms = ...
-%   {'add-KR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'SVR', 'kNN', 'spam'};
 regressionAlgorithms = ...
-  {'addKR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'kNN'};
+  {'add-KR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'kNN'};
 
 % Problem Set up
 numExperiments = 2;
-% numDims = 20; nTotal = 1100; maxNumIters = 400;
-numDims = 6; nTotal = 300; maxNumIters = 10;
-% nCands = (60:60:nTotal)';
-nCands = (120:120:nTotal)';
-
+numDims = 20; nTotal = 600; M = 200; maxNumIters = 50;
+% numDims = 6; nTotal = 300; M = 10; maxNumIters = 20;  % For debugging
+nCands = (60:60:nTotal)';
 [func, funcProps] = getAdditiveFunction(numDims, round(numDims/2)-1);
 bounds = funcProps.bounds;
 nTest = 500;
@@ -32,10 +26,15 @@ lambdaRange = [1e-3 1];
 numCandidates = numel(nCands);
 
 % For the Decomposition
-decomposition.setting = 'espKernel';
-optParams.maxNumIters = maxNumIters;
-optParams.optMethod = 'bcgdDiagHessian';
+% decomposition.setting = 'espKernel';
+decomposition.setting = 'randomGroups';
+decomposition.numRandGroups = M;
+decomposition.groupSize = 8;
 
+% Parameters for Optimisation
+optParams.maxNumIters = maxNumIters;
+% optParams.optMethod = 'proxGradientAccn';
+optParams.optMethod = 'bcgdDiagHessian';
 
 % Sample test data
 Xte = bsxfun(@plus, ...
@@ -52,8 +51,6 @@ for j = 1:numRegAlgos
   results{j} = zeros(numExperiments, numCandidates);
 end
 
-% SAve results
-saveFileName = sprintf('results/v2-%s.mat', datestr(now, 'mmdd-HHMMSS'));
 
 for expIter = 1:numExperiments
 
@@ -125,18 +122,18 @@ for expIter = 1:numExperiments
 %     fprintf('Method: %s, Err: %0.4f\n', ...
 %       regressionAlgorithms{cnt}, norm(YPred-Yte));
  
-%     % Method 8: SVR 
-%     cnt = cnt + 1;
-%     svPredFunc = svmRegWrap(X, Y, 'eps');
-%     YPred = svPredFunc(Xte);
-%     results{cnt}(expIter, candIter) = norm(YPred - Yte);
-%     fprintf('Method: %s, Err: %0.4f\n', ...
-%       regressionAlgorithms{cnt}, norm(YPred-Yte));
+    % Method 8: SVR 
+    cnt = cnt + 1;
+    svPredFunc = svmRegWrap(Xtr, Ytr, 'eps');
+    YPred = svPredFunc(Xte);
+    results{cnt}(expIter, candIter) = norm(YPred - Yte);
+    fprintf('Method: %s, Err: %0.4f\n', ...
+      regressionAlgorithms{cnt}, norm(YPred-Yte));
 
     % Method 9: KNN
     cnt = cnt + 1;
-    kNNPredFunc = KnnRegressionCV(X, Y);
-    YPred = kNNPredFunc(Xte);
+    kNNPredFunc = KnnRegressionCV(Xtr, Ytr);
+    [~, YPred] = kNNPredFunc(Xte);
     results{cnt}(expIter, candIter) = norm(YPred - Yte);
     fprintf('Method: %s, Err: %0.4f\n', ...
       regressionAlgorithms{cnt}, norm(YPred-Yte));
@@ -150,10 +147,6 @@ for expIter = 1:numExperiments
 %       regressionAlgorithms{cnt}, norm(YPred-Yte));
 
   end
-
-  % Save results
-  save(saveFileName, 'results', 'numRegAlgos', 'numCandidates', ...
-    'regressionAlgorithms', 'nCands', 'numExperiments');
 
 end
 
