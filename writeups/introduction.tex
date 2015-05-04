@@ -5,29 +5,36 @@
 Nonparametric regression in high dimensions is an inherently difficult problem with known
 lower bounds depending exponentially in dimension
 \citep{gyorfi02distributionfree}. 
-Nonparametric methods typically work well only under at most $4-6$ dimensions.
+With rare exceptions,
+nonparametric methods typically work well only under at most $4-6$ dimensions.
 In this project we intend to make progress in this problem by treating the
 \emph{estimate} of the function as
 an additive function of lower dimensional components.
 
 Using additive models is fairly standard in high dimensional regression
-literature \cite{hastie90gam,ravikumar09spam,lafferty05rodeo}. 
+literature
+\cite{hastie90gam,ravikumar09spam,lafferty05rodeo}. 
 However, we wish to consider additive models which are more expressive than
 previous work.
 When the true underlying function $\func$ exhibits additive structure, using an additive
 model for estimation is understandably reasonable. However, even when $\func$ is
 not additive, using an additive model has its advantages. 
 It is a well understoon notion in Statistics that when we only have a few samples, using a
-simpler model to fit our data may give us a better tradeoff for variance 
-against bias. This is because additive functions are \emph{statistically simpler}
+simpler model to fit our data may give us a better tradeoff for estimation error  
+against approximation error. 
+This is because additive functions are \emph{statistically simpler}
 than more general (non-additive) functions.
 Typically, in most nonparametric regression methods using kernels such as the
 Nadaraya-Watson
 (\nw) estimator and Kernel Ridge Regression (\krr), the bias-variance tradeoff
-is managed via the bandwidth of the kernel. However, this is only one way to
-manage the tradeoff. In this work we demonstrate that using an additive model
+is managed via the bandwidth of the kernel. 
+% However, this is only one way to
+% manage the tradeoff. In this work we demonstrate that 
+Using an additive model
 provides another ``knob" to control this tradeoff and provides significant gains
-in high dimensional regression.
+in high dimensional regression. In fact, \citet{duvenaud11additivegps}
+demonstrate that using additive models in the Gaussian Process (\gp) framework
+improves prediction performance.
 
 Our methods are based on \krr, where
 we choose to model the low-order interaction implicitly using kernels acting on

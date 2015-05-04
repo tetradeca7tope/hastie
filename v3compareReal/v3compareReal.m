@@ -13,11 +13,17 @@ rng('default');
 
 % Determine dataset
 % dataset = 'debug';
-dataset = 'parkinson21';
+% dataset = 'parkinson21';              % **
 % dataset = 'parkinson21-small';
-% dataset = 'housing';
-% dataset = 'propulsion';
-% dataset = 'forestfires';
+% dataset = 'housing';                  % **
+% dataset = 'music';                    % **
+% dataset = 'music-small';                % **
+% dataset = 'telemonitoring-total';
+% dataset = 'telemonitoring-total-small';  %**
+% dataset = 'telemonitoring-motor-small';  %**
+% dataset = 'forestfires';       % **
+% dataset = 'propulsion';       % xx
+dataset = 'blog';       % 
 
 % Load data
 [Xtr, Ytr, Xte, Yte] = getDataset(dataset);

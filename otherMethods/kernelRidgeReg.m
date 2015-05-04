@@ -36,7 +36,7 @@ function predFunc = kernelRidgeReg(X, Y, params)
     params.numLambdaCands = 10;
   end
   if ~isfield(params, 'lambdaRange')
-    params.lambdaRange = [1e-3 10] * norm(std(X));
+    params.lambdaRange = [1e-4 100] * norm(std(X));
   end
 
   % Determine candidates for lambda
