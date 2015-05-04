@@ -1,18 +1,18 @@
 
 \section{Conclusion}
 \label{sec:conclusion}
-\vspace{-0.1in}
 
-Our initial results using the proposed method is fairly promising.
-Going forward we wish to perform comparisons with other nonparametric regression
-methods such as Gaussian process regression, locally polynomial regression and
-other additive models \citep{hastie90gam, ravikumar09spam,
-duvenaud11additivegps} on other synthetic and real datasets.
+We proposed a framework for additive least squares regression. We design our
+estimate to be a sum of functions where the functions are obtained by jointly
+optimising over several RKHSs.
+The proposed framework is useful for high dimensional nonparametric regression
+since it provides favourable bias variance tradeoffs in high dimensions.
+Further, it can also be used for the recovery of sparse functions when the
+underlying function is additive.
+Our initial experimental results indicate that our methods are superior or
+competitive with existing methods in both fronts.
 
-Because we hope to apply the proposed method to high-dimensional problems,
-we are especially interested in making the proposed method scalable for large $M$. 
-A safe screening method \citep{group-lasso-screening:2013} was recently developed 
-for the group lasso problem. We hope to adapt this method to our problem, which
-could potentially lead to large speedup since for high-dimensional problems
-only a small fraction of the $M$ groups will be chosen as non-zero.
+Going forward, we wish to study the theoretical properties of such penalized
+additive models especially focusing on rate of convergence and sparsistency.
+
 

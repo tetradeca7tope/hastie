@@ -16,7 +16,8 @@ it to $h = c\sigma n^{-0.2}$. This follows other literature
 bandwidths. The constant $c$ was hand tuned -- we found that the performance of
 our methods was robust to choices of $c$ between $5$ and $40$.
 The value of $M$ was also hand tuned and set to $M = \min(D/4, 10)$.
-In this setting we compare \addkrrs against kernel kidge regression(\krr),
+
+We compare \addkrrs against kernel kidge regression(\krr),
 Nadaraya Watson regression (\nw), locally linear regression (\locallin), locally
 quadratic regression (\localquad), Gaussian process regression (\gp), $k$
 nearest neighbors regression (\knn) and support vector regression (\svr).
@@ -24,17 +25,18 @@ For \gps and \svrs we use the implementations in
 \citet{rasmussen10gpml,chang11libsvm} respectively.
 For the other methods, we chose hyper parameters using $5$-fold cross
 validation.
-The Additive Gaussian process model of \citep{duvenaud11additivegps} is also a
+The Additive Gaussian process model of \citet{duvenaud11additivegps} is also a
 candidate but we found that inference was extremely slow beyond a few hundred
-training points.
+training points (For e.g. it took $> 50$ minutes with $600$ points whereas
+\addkrrs ran in under $4$ minutes).
 
 First, we construct a smooth synthetic 20 dimensional function. We train all methods on
 $n$ training points where $n$ varies from $100$ to $1100$ and test on $1000$
 points sampled independently. The results are shown in Figure~\ref{fig:compToy}.
-\addkrrs outperforms all other methods. We suspect that \nw, \locallin and \knn perform
+\addkrrs outperforms all other methods. We suspect that \nw, \locallins and \knns perform
 very poorly since they make very weak smoothness assumptions about the function.
 
-Next, we compare all methods on $7$ high dimensional datasets from the UCI
+Next, we compare all methods on $7$ moderate to high dimensional datasets from the UCI
 repository. All inputs and labels were preprocessed to have zero mean and unit
 standard deviation. We split the datasets into roughly two halves for training
 and testing. The results are given in Table~\ref{tb:realData}. Our proposed
@@ -42,5 +44,53 @@ method outperforms alternatives in most cases.
 
 \insertFigCompToy
 
-\input{functionsel}
+\insertFigSolnPath
+
+% \input{functionsel}
+
+\subsection{Setting 2: Function Selection}
+
+In this section, we study the ability of our method to recover the true function.
+We use RBF kernels on each group by setting kernel bandwidths
+for each dimension as same as explained above.
+% Extending the generative model in \cite{ravikumar09spam}, 
+We generate $600$ observations from the following
+50-dimensional additive model:
+\begingroup
+\allowdisplaybreaks
+\begin{align*}
+	y_i =& f_1(x_{i1}) + f_2(x_{i2}) + f_3(x_{i3}) + f_4(x_{i4}) + \\
+&f_1(x_{i5}x_{i6}) + f_2(x_{i7}x_{i8}) + \\
+&f_3(x_{i9}x_{i10}) + f_4(x_{i11}x_{i12}) + \epsilon_i 
+\end{align*}
+\endgroup
+where,
+\begin{align*}
+f_1(x) =& -2\sin(2x), f_2(x) = x^2 - \frac{1}{3}, \\
+f_3(x)=& x-\frac{1}{2}, f_4(x) = e^{-x} + e^{-1} - 1
+\end{align*}
+% \begingroup
+% \allowdisplaybreaks
+% \begin{align*}
+% 	y_i =& f_1(x_{i1}) + f_2(x_{i2}) + f_3(x_{i3}) + f_4(x_{i4}) + \\
+% &f_1(x_{i5}x_{i6}) + f_2(x_{i7}x_{i8}) + \\
+% &f_3(x_{i9}x_{i10}) + f_4(x_{i11}x_{i12}) + \epsilon_i \\
+% f_1(x) =& -2\sin(2x), f_2(x) = x^2 - \frac{1}{3}, \\
+% f_3(x)=& x-\frac{1}{2}, f_4(x) = e^{-x} + e^{-1} - 1
+% \end{align*}
+% \endgroup
+with noise $\epsilon_i \sim \mathcal{N}(0,1)$.
+Thus, 46 out of 50 individual features are irrelevant, and
+1221 out of 1225 pairwise features are irrelevant.
+As candidates, we use all functions of first and second order interactions --
+i.e the kernels charactersing our RKHSs are of the form
+$k(x_i, x'_i)$ for $i=1,\dots,50$ and $k(x_i,x_i)k(x_j,x_j)$ for
+$1\leq i < j \leq 50$. Therefore, in this experiment $M = 1275$.
+
+We plot the solution path for two independent datasets. The plots give the RKHS
+norm of the function on each kernel $\|\funchatj\|_{\Hcalkj} = \|\betaj\|_2$
+for all kernels against the value of the regularization parameter $\lambda$.
+The results are shown in Figure \ref{fig:n200}. 
+At $\lambda=200$ we recover all true nonzero functions for a true positive rate
+of $100\%$ and have 47 false negatives for a false positive rate of $3.7\%$
 

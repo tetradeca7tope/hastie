@@ -53,7 +53,7 @@ objective of the form $J(f) = \sum_{i=1}^n \ell(f(X_i), Y_i) + \lambda P(f)$
 over a nonparametric class of functions $\Fcal$.
 Here $\ell$ is a loss function and $P$ is a term that penalises the complexity
 of the function $f$. Several nonparametric regression problems such as Gaussian
-processes, smoothing splines and natural splinescan be formulated this way.
+processes, smoothing splines and natural splines can be formulated this way.
 Or particular interest to us is Kernel Ridge Regression (\krr)
 which uses a positive semidefinite kernel 
 $\kernel: \Xcal \times \Xcal \rightarrow \RR$ \citep{scholkopf01kernels}
@@ -122,7 +122,7 @@ describe the construction of the kernels $\kernelj$. We consider two settings
 in this regard.
 
 The first is when we wish to reduce the statistical complexity of the function
-we wish to learn in high dimension. A kernel directly defined on $D$ dimensions
+we to be learned in high dimension. A kernel directly defined on $D$ dimensions
 is complex since it allows for interactions of all $D$ variables. We may reduce
 the complexity of the kernel by constraining how these variables interact.
 In particular we consider kernels of the form, 
@@ -139,7 +139,7 @@ is a base kernel acting on one dimension.
 $\kernelj$ has ${D \choose j}$ terms and exhaustively computing all of them is
 computationally intractable.
 Fortunately, by observing that the $j$\superscript{th} kernel is just the
-$j$\superscript{th} elementary symmetric polynomial on the base kernel values we
+$j$\superscript{th} elementary symmetric polynomial (ESP) on the base kernel values we
 may use the Newton Girard formula to efficiently compute them recursively.
 Precisely, by denoting $\kappa_s = \sum_{i=1}^D (\kernel_i(x_i, x'_i))^s$ 
 we have, 
@@ -148,7 +148,7 @@ we have,
   \;\kappa_j \; \kernelii{j-d}(x, x')
 \]
 Computing the $M$ kernels this way only requires $O(DM)$ computation.
-We call this choice of kernels the ESP Kernels.
+We call this choice of kernels the \emph{ESP Kernels}.
 A similar kernel using a similar trick for computing it was used in
 \citet{duvenaud11additivegps}.
 
@@ -163,8 +163,8 @@ f(x) = \funcii{1}(x_1) + \funcii{2}(x_2,x_3) + \funcii{3}(x_1, x_4)
 That is, the function decomposes as a sum of functions acting on small groups of
 variables. Given a large set of candidate groups, the task at hand is to
 recover the groups and the individual functions acting on those groups.
-In this setting, $M$ and our RKHSs are determined by the problem.  
-Precisely, $\Hcalkj$ contains functions on the variables
+In this setting, $M$ and our RKHSs are determined by the problem
+-- $\Hcalkj$ contains functions on the variables
 belonging to the $j$\superscript{th} candidate group. 
 
 
@@ -184,7 +184,7 @@ LASSO.
 When the number of parameters for each group are small, which is
 typically the case in group LASSO problems, block coordinate descent (BCD) is believed
 to be the state of the art solver. However, in our case the number of parameters
-is large--growing linearly with $n$. In this regime BCD is slow since it
+is large -- growing linearly with $n$. In this regime BCD is slow since it
 requires a matrix inversion at each step. In particular, we found that Block
 Coordinate Gradient Descent (BCGD) significantly outperformed BCD in our
 experiments. 

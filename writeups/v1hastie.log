@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  4 MAY 2015 17:54
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  4 MAY 2015 19:08
 entering extended mode
  %&-line parsing enabled.
 **v1hastie.tex
@@ -643,29 +643,38 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 5.
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 Overfull \hbox (16.73482pt too wide) detected at line 103
 [][]\OML/cmm/m/it/10 F[]\OT1/cmr/m/n/10 (\OML/cmm/b/it/10 \OT1/cmr/m/n/10 ) = 
 [][]\OML/cmm/m/it/10 Y \OMS/cmsy/m/n/10 ^^@ [] [][][][] \OT1/cmr/m/n/10 + \OML/
 cmm/m/it/10 ^^U [] [][] :
  []
 
-
-Underfull \vbox (badness 4913) has occurred while \output is active []
-
- [2]
+[2]
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
 (amsmath)                 on input line 139.
 
 ) (./experiments2.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 5592) in paragraph at lines 20--32
+[]\OT1/ptm/m/n/10 We com-pare \OT1/lmss/m/n/10 Add-KR \OT1/ptm/m/n/10 against k
+er-nel kidge re-gres-
+ []
 
- [3]
-<figs/compToy.pdf, id=129, 449.68pt x 338.26375pt>
+[3] <figs/compToy.pdf, id=128, 449.68pt x 338.26375pt>
 File: figs/compToy.pdf Graphic file (type pdf)
  <use figs/compToy.pdf>
-(./functionsel.tex)) (./v1hastie.bbl
+<figs/solnpath600.pdf, id=129, 565.16228pt x 408.85959pt>
+File: figs/solnpath600.pdf Graphic file (type pdf)
+
+<use figs/solnpath600.pdf>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4 <./figs/compToy.pdf> <./figs/solnpath600.pdf>]) (./conclusion.tex) (./v1has
+tie.bbl
 Underfull \hbox (badness 2189) in paragraph at lines 9--14
 \OT1/ptm/m/n/10 thresholding al-go-rithm for lin-ear in-verse prob-lems.
  []
@@ -699,41 +708,42 @@ Overfull \hbox (17.62251pt too wide) in paragraph at lines 16--20
  . 
  []
 
-[4 <./figs/compToy.pdf>]) [5
-
-] (./v1hastie.aux) ) 
+) [5] (./v1hastie.aux) ) 
 Here is how much of TeX's memory you used:
- 9319 strings out of 493848
- 129553 string characters out of 1152822
- 261752 words of memory out of 3000000
- 12293 multiletter control sequences out of 15000+50000
+ 9330 strings out of 493848
+ 129733 string characters out of 1152822
+ 259769 words of memory out of 3000000
+ 12301 multiletter control sequences out of 15000+50000
  37462 words of font info for 84 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,12n,55p,557b,429s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}{/usr
-/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
-fonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
-mi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi5.pfb></u
-sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cmextra/cmmib7.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></
-usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/
-fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/l
-m/lmss10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texm
-f-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texl
-ive/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texmf-texlive/fon
-ts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times
-/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/sh
-are/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fo
-nts/type1/urw/times/utmri8a.pfb>
-Output written on v1hastie.pdf (5 pages, 300193 bytes).
+ 38i,12n,55p,560b,340s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}{
+/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf-texlive/fonts/t
+ype1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi5.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share
+/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cmextra/cmmib7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.p
+fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/shar
+e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/am
+sfonts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
+sy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></us
+r/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols
+/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm7
+.pfb></usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/t
+exmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/t
+ype1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8
+a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on v1hastie.pdf (5 pages, 381246 bytes).
 PDF statistics:
- 238 PDF objects out of 1000 (max. 8388607)
- 40 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 279 PDF objects out of 1000 (max. 8388607)
+ 42 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
