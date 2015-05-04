@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  4 MAY 2015 17:08
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  4 MAY 2015 17:54
 entering extended mode
  %&-line parsing enabled.
 **v1hastie.tex
@@ -658,13 +658,13 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
 (amsmath)                 on input line 139.
 
-) (./experiments2.tex <figs/compToy.pdf, id=114, 449.68pt x 338.26375pt>
-File: figs/compToy.pdf Graphic file (type pdf)
-
-<use figs/compToy.pdf>
+) (./experiments2.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
+<figs/compToy.pdf, id=129, 449.68pt x 338.26375pt>
+File: figs/compToy.pdf Graphic file (type pdf)
+ <use figs/compToy.pdf>
 (./functionsel.tex)) (./v1hastie.bbl
 Underfull \hbox (badness 2189) in paragraph at lines 9--14
 \OT1/ptm/m/n/10 thresholding al-go-rithm for lin-ear in-verse prob-lems.
@@ -703,13 +703,13 @@ Overfull \hbox (17.62251pt too wide) in paragraph at lines 16--20
 
 ] (./v1hastie.aux) ) 
 Here is how much of TeX's memory you used:
- 9317 strings out of 493848
- 129531 string characters out of 1152822
+ 9319 strings out of 493848
+ 129553 string characters out of 1152822
  261752 words of memory out of 3000000
- 12292 multiletter control sequences out of 15000+50000
- 34735 words of font info for 83 fonts, out of 3000000 for 9000
+ 12293 multiletter control sequences out of 15000+50000
+ 37462 words of font info for 84 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,12n,55p,272b,437s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,12n,55p,557b,429s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}{/usr
 /share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf-texlive/fonts/type1
 /public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
@@ -724,15 +724,16 @@ m/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></
 usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/tex
 mf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/
 fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/l
-m/lmss10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm
-10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-</usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-
-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/
-urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb
-></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on v1hastie.pdf (5 pages, 281109 bytes).
+m/lmss10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texm
+f-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texl
+ive/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texmf-texlive/fon
+ts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times
+/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/sh
+are/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fo
+nts/type1/urw/times/utmri8a.pfb>
+Output written on v1hastie.pdf (5 pages, 300193 bytes).
 PDF statistics:
- 233 PDF objects out of 1000 (max. 8388607)
+ 238 PDF objects out of 1000 (max. 8388607)
  40 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

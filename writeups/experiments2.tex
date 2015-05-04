@@ -22,6 +22,8 @@ quadratic regression (\localquad), Gaussian process regression (\gp), $k$
 nearest neighbors regression (\knn) and support vector regression (\svr).
 For \gps and \svrs we use the implementations in
 \citet{rasmussen10gpml,chang11libsvm} respectively.
+For the other methods, we chose hyper parameters using $5$-fold cross
+validation.
 The Additive Gaussian process model of \citep{duvenaud11additivegps} is also a
 candidate but we found that inference was extremely slow beyond a few hundred
 training points.
@@ -31,7 +33,12 @@ $n$ training points where $n$ varies from $100$ to $1100$ and test on $1000$
 points sampled independently. The results are shown in Figure~\ref{fig:compToy}.
 \addkrrs outperforms all other methods. We suspect that \nw, \locallin and \knn perform
 very poorly since they make very weak smoothness assumptions about the function.
-Next, we compare all methods 
+
+Next, we compare all methods on $7$ high dimensional datasets from the UCI
+repository. All inputs and labels were preprocessed to have zero mean and unit
+standard deviation. We split the datasets into roughly two halves for training
+and testing. The results are given in Table~\ref{tb:realData}. Our proposed
+method outperforms alternatives in most cases.
 
 \insertFigCompToy
 
