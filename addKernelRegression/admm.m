@@ -15,8 +15,9 @@ function [optBeta, optStats] = admm(Ls, Y, lambda, params)
     p = n*ones(m,1);
     [x, z, history] = group_lasso_admm(A, b, lambda/m, p, params, objective);
     optBeta = reshape(x, [n m]);
-    optStats.objective = history.objval;
+    optStats.objective = history.objval';
     optStats.time = history.time;
+
 end
 
 function [x, z, history] = group_lasso_admm(A, b, lambda, p, params, objFunc)
@@ -78,6 +79,7 @@ u = zeros(n,1);
 
 % pre-factor
 [L U] = factor(A, rho);
+history.objval = objFunc(x);
 
 for k = 1:MAX_ITER
 
@@ -101,7 +103,7 @@ for k = 1:MAX_ITER
     u = u + (x_hat - z);
     
     % diagnostics, reporting, termination checks
-    history.objval(k)  = objFunc(x);
+    history.objval(k+1)  = objFunc(x);
     
     history.r_norm(k)  = norm(x - z);
     history.s_norm(k)  = norm(-rho*(z - zold));
@@ -115,6 +117,10 @@ for k = 1:MAX_ITER
     end
     currTime = cputime - startTime;
     timeHistory = [timeHistory; currTime];
+    if params.optVerbose & mod(k, params.optVerbosePerIter) == 0
+      fprintf('ADMM #%d (%0.3f): currObj: %.4e\n', ...
+        k, currTime, history.objval(k+1));
+    end
 end
     history.time = timeHistory;
 

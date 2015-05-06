@@ -25,6 +25,8 @@ xlim([0 maxTimeVal*1.05]);
 ylim([minObjVal maxObjVal]);
 legend(compareMethods);
 title('Objective vs Time (seconds)');
+xlabel('Time (Seconds)');
+ylabel('Objective');
 
 set(0,'defaultAxesFontName', 'Dejavu Sans')
   set(findall(gca, '-property', 'FontSize'), 'FontSize', 18, ...
@@ -43,6 +45,8 @@ xlim([0 optParams.maxNumIters*1.1]);
 ylim([minObjVal maxObjVal]);
 legend(compareMethods);
 title('Objective vs Iteration');
+xlabel('Iteration');
+ylabel('Objective');
 
 set(0,'defaultAxesFontName', 'Dejavu Sans')
   set(findall(gca, '-property', 'FontSize'), 'FontSize', 18, ...

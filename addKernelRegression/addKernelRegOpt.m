@@ -34,6 +34,7 @@ function [optBeta, optStats] = ...
 
     case 'admm'
         [optBeta, optStats] = admm(Ls, Y, lambda, params);
+
     case 'proxNewton'
     
     otherwise

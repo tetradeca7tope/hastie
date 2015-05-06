@@ -27,7 +27,12 @@ function [optBeta, optStats] = subGradMethod(Ls, Y, lambda, params)
     G = G1 + (lambda/M) * G2;
     
     % perform update
-    stepSize = 1/ceil(iter/10);
+    normG2 = norm(G2, 'fro');
+    if normG2 == 0
+      stepSize = 1/iter;
+    else
+      stepSize = (1/iter)/normG2;
+    end
     Beta = Beta - stepSize * G;
 
     % evaluate objective

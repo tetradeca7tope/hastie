@@ -13,6 +13,8 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
 
     % Set up book keeping
     prevObj = objective(Beta);
+    currBestObj = prevObj;
+    optBeta = Beta;
     objHistory = prevObj;
     timeHistory = 0;
     startTime = cputime;
@@ -57,13 +59,17 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
         end
 
         currObj = objective(Beta);
+        if currObj < currBestObj
+          currBestObj = currObj;
+          optBeta = Beta;
+        end
         currTime = cputime - startTime;
-        objHistory = [objHistory; currObj];
+        objHistory = [objHistory; currBestObj];
         timeHistory = [timeHistory; currTime];
 
         if params.optVerbose && mod(iter, params.optVerbosePerIter) == 0
-            fprintf('bcdExact #%d (%.4f): currObj: %0.4e\n', ...
-                iter, currTime, currObj);
+            fprintf('bcdExact #%d (%.4f): currObj: %0.4e, currBest: %.4e\n', ...
+                iter, currTime, currObj, currBestObj);
         end
         
         if abs( (currObj - prevObj) / currObj ) < params.tolerance
@@ -78,9 +84,9 @@ function [optBeta, optStats] = bcdExact(Ls, Y, lambda, params)
     % statistics
     optStats.objective = objHistory;
     optStats.time = timeHistory;
-    optBeta = Beta;
 
 end
+
 
 function [Delta] = newton_trust(p_g, evectors, evalues, lambda)
     max_trust_iters = 10;
