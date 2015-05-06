@@ -1,7 +1,7 @@
 function [optBeta, optStats] = admm(Ls, Y, lambda, params)
     [n, ~, m] = size(Ls);
     % Create a function handle for the objective
-    objective = @(arg) computeObjBeta(arg, Ls, Y, lambda);
+    objective = @(arg) computeObjBeta(reshape(arg, [n m]), Ls, Y, lambda);
     % Obtain optimisation params
     params = processOptParamsCommon(params, n, m);
     rho = params.rho;
@@ -13,15 +13,13 @@ function [optBeta, optStats] = admm(Ls, Y, lambda, params)
         A(:,j*n+1:(j+1)*n) = Ls(:,:,j+1)/sqrt(n);
     end
     p = n*ones(m,1);
-    [x, z, history] = group_lasso_admm(A, b, lambda/m, p, params);
-    size(x)
-    size(z)
+    [x, z, history] = group_lasso_admm(A, b, lambda/m, p, params, objective);
     optBeta = reshape(x, [n m]);
     optStats.objective = history.objval;
     optStats.time = history.time;
 end
 
-function [x, z, history] = group_lasso_admm(A, b, lambda, p, params)
+function [x, z, history] = group_lasso_admm(A, b, lambda, p, params, objFunc)
 % group_lasso  Solve group lasso problem via ADMM
 %
 % [x, history] = group_lasso(A, b, p, lambda, rho, alpha);
@@ -103,7 +101,7 @@ for k = 1:MAX_ITER
     u = u + (x_hat - z);
     
     % diagnostics, reporting, termination checks
-    history.objval(k)  = objective(A, b, lambda, cum_part, x, z);
+    history.objval(k)  = objFunc(x);
     
     history.r_norm(k)  = norm(x - z);
     history.s_norm(k)  = norm(-rho*(z - zold));
