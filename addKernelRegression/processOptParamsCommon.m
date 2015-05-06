@@ -31,6 +31,7 @@ function params = processOptParamsCommon(params, n, M)
   if isequal(params.optMethod, 'admm')
       params.rho = 1;
       params.alpha = 1;
+      params.maxNumIters = 500;
   end
 
 end
