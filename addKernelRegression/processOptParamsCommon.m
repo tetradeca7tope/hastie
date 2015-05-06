@@ -18,7 +18,7 @@ function params = processOptParamsCommon(params, n, M)
 
   if ~isfield(params, 'tolerance'), params.tolerance = 1e-6;
   end
-  if ~isfield(params, 'maxNumIters'), params.maxNumIters = 50;
+  if ~isfield(params, 'maxNumIters'), params.maxNumIters = 1000;
   end
   if ~isfield(params, 'verbose'), params.verbose = true;
   end
