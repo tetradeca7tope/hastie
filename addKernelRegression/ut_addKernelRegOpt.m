@@ -35,6 +35,7 @@ decomposition.addAll1DComps = false;
 % params.optMethod = 'bcdExact';
 % params.optMethod = 'bcgdDiagHessian';
 params.optMethod = 'admm';
+params.optMethod = 'subGradientAlpha';
 params.maxNumIters = maxNumIters;
 params.optVerbose = true;
 [predFunc, optAlpha, optBeta, optStats, decomposition] = ...
