@@ -1,4 +1,18 @@
-\begin{frame}{Optimization}
+\begin{frame}{Function Selection}
+Important genomics task: Identify interdependent effect of mutations. \\
+\vspace{0.1in}
+$\func$ has $50$ variables, but true interactions are pairwise (or
+low order) and sparse.
+\[
+f(x_1^{50}) = f(x_2,x_7) + f(x_{21},x_{34}) + \dots + f(x_{12},x_{49})
+\]
+4/50 individual effects and 4/1225 pairwise effects \\
+\centering
+\includegraphics[width=0.5\textwidth]{figs/solnpath600.pdf} \\
+Recovers all true nonzero functions with FPR=3.7\%
+\end{frame}
+
+\begin{frame}{Optimization Problem}
 Recall objective:  $\alphaj \in \RR^n$, $\aalpha \in \RR^{nM}$
 \begin{equation*}
 \min_\aalpha \frac{1}{2}\Big\|Y - \sum_{j=1}^m \KKj \alphaj\Big\|_2^2 + 
@@ -26,6 +40,7 @@ Let $\betaj = \LLj^\top \alphaj$
 
 \begin{frame}{Optimization methods}
 \begin{itemize}
+\item Subgradient / Proximal gradient: iteration cost $O(n^2M)$
 \item ADMM: medium convergence, iteration cost $O(n^2M^2)$ \\
 Main cost: solve triangular $nM \times nM$ system in primal update
 \item Exact BCD: fast convergence, iteration cost $O(n^3 M)$ \\
@@ -44,3 +59,6 @@ with diagonal Hessian approximation
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Optimization results}
+\includegraphics[width=\textwidth]{figs/time1000v2.eps}
+\end{frame}
