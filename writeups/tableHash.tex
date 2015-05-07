@@ -42,3 +42,39 @@ Propulsion dataset, \gp seems to significantly outperform all other methods.
 \label{tb:realData}
 \end{table*}
 }
+
+\newcommand{\insertTableRealDataPres}{
+\begin{table}
+{\footnotesize
+\centering
+\begin{tabular}{l|c|c|c|c|c}
+Dataset ($D$, $n$) & \addkrr & \krr & \nw & \gp  & \svr \\
+\hline \\[-0.14in]
+\hline 
+Speech ($21$, $520$) & $\bf{0.02269}$ & $0.02777$ 
+  & $0.11207$  & $0.02531$ & $0.22431$  \\
+\hline
+Music ($90$, $1000$) & $\bf{0.91627}$ & $0.91922$ 
+      & $1.05745$ & $0.94329$ & $1.07009$ \\
+\hline
+Tele-motor ($19$, $300$) & $\bf{0.06059}$ & $0.06488$ & 
+  $0.20119$ & $0.06678$ & $0.38038$ \\
+\hline
+Housing ($12$, $256$) & $\bf{0.31285}$ & $0.35947$ & $0.42087$ &
+  $0.67566$ & $1.15272$ \\
+\hline
+Blog ($91$, $700$) & $\bf{1.43288}$ & $1.53227$ & $1.49305$  
+  & $1.64429$ & $1.66705$ \\
+\hline
+Forest Fires ($10$, $210$) & $0.30675$ & $0.32618$ & $0.37199$ 
+   & $\bf{0.29038}$ & $0.70154$ \\
+\hline
+Propulsion ($15$, $400$) & $0.04167$ & $0.01396$ & $0.11237$ & 
+              $\bf{0.00355}$ & $0.74511$ \\
+\hline
+\end{tabular}
+\label{tb:realDataPres}
+}
+\end{table}
+}
+

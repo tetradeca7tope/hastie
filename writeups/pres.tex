@@ -1,7 +1,30 @@
 \documentclass{beamer}
 % \usetheme{madrid}
 
-\usepackage{amssymb, amsfonts}
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{calc}
+\usepackage{amsmath, amssymb, amsthm} 
+\usepackage{parskip}
+\usepackage{color,hyperref}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{rotating}
+% Add my definitions file
+\usepackage{kky}
+\usepackage{hastieDefns}
+\usepackage{multicol}
+\usepackage{ifthen}
+\usepackage{bbm}
+\usepackage{siunitx}
+\newenvironment{packed_enum}{
+\begin{enumerate}
+\setlength{\itemsep}{1pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+}{\end{enumerate}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 % \newcommand{\simul}{\Phi}
 % \newcommand{\simdata}{\mathbf{\tilde{X}}}
@@ -25,8 +48,14 @@
 \hfill\usebeamertemplate***{navigation symbols}
 \hspace{1cm}\insertframenumber{}/\inserttotalframenumber}
 
+\newcommand{\toworkon}[1]{\textcolor{magenta}{[#1]}}
+% \newcommand{\toworkon}[1]{}
+
 %% Begin Content
 %% =============
+
+\input{tableHash}
+\input{figureHash}
 
 \title{Regularised Additive Least Squares Regression}
 \author{Calvin \& Kirthevasan}

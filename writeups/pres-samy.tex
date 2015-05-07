@@ -1,14 +1,185 @@
 
-\begin{frame}{Problem}
-  Classical Bayesian Problem
+\begin{frame}{Nonparametric Regression}
 
-  Except, ...
+  Given data: $(X_i, Y_i)_{i=1}^n$ \hspace{0.1in} where $(X_i,Y_i)\sim P_{XY}$ \\ 
+  Estimate $\func(x) = \EE[Y| X=x]$.
+  \vspace{0.1in}
+  \pause
+
+  Nonparametric Regression
   \begin{itemize}
-    \item \textbf{These queries are expensive}.
+    \item Assume only smoothness of $\func$. No parametric form assumed.
+    \item E.g.: Nadaraya-Watson, Support Vector Regression, Locally Polynomial
+          Regression, Splines etc.
+    \vspace{0.15in}
+    \pause
+    \item \textbf{Kernel Ridge Regression} \\
+      Use a kernel $\kernel$ and its associated RKHS $\Hcalk$,
+      \[ \funchat = \argmin_{f\in \Hcalk} \sum_{i=1}^n (Y_i - f(X_i))^2 
+          + \lambda \|f\|^2_{\Hcalk}
+      \]
   \end{itemize}
+
 \end{frame}
 
-\begin{frame}{We've seen this in class before}
-  Also, other applications in comp-biology, neuroscience, etc ..
+\begin{frame}{The Bane of Nonparametric Methods}
+
+  \begin{itemize}
+    \item The curse of dimensionality: Sample complexity is exponential in $D$.
+          Typically under $4-6$ dimensions.
+    \item Difficult to identify/ exploit  structure in the problem.
+  \end{itemize}
+  \pause
+  \vspace{0.4in}
+
+  This work: Address above via additive estimate for $f$,
+  \[
+    \funchat(\cdot) \;=\; \funchatii{1}(\cdot)\; +\;  
+      \funchatii{2}(\cdot)\;+\;\dots \;+\; \funchatii{M}(\cdot)
+  \]
 \end{frame}
 
+
+\begin{frame}{Outline}
+
+  \begin{itemize}
+    \item Additive Least Squares Regression
+      \begin{itemize}
+        \item A framework and procedures for optimisation.
+      \end{itemize}
+    \vspace{0.1in}
+    \item High dimensional nonparametric regression
+      \begin{itemize}
+        \item ``Statistically" simpler structures.
+      \end{itemize}
+    \vspace{0.1in}
+    \item Function selection
+    \vspace{0.1in}
+    \item Comparison of optimisation procedures.
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Additive Kernel Regression}
+Recall,
+  \[
+    \funchat(\cdot) \;=\; \funchatii{1}(\cdot)\; +\;  
+      \funchatii{2}(\cdot)\;+\;\dots \;+\; \funchatii{M}(\cdot)
+  \]
+\pause
+\vspace{0.1in}
+
+Given: kernels $\kernelj$ and the RKHS $\Hcalkj$ for each $\funchatj$. \\
+Optimise over $\funcj \in \Hcalkj$, $j = 1,\dots,M$
+\vspace{0.1in}
+\pause
+  \begin{align*}
+  & \{\funchatj\}_{j=1}^M =
+  \argmin_{\funcj \in \Hcalkj, j = 1,\dots, M} 
+    F\left( \{\funcj\}_{j=1}^M \right) \\
+%   & \textrm{where, } 
+%     \numberthis \label{eqn:rkhsObjective}
+%   \\
+  & F\left( \{\funcj\}_{j=1}^M \right)  \;=  
+    \frac{1}{2}\sum_{i=1}^n \bigg(Y_i - \sum_{j=1}^M \funcj (\xj) \bigg)^2 
+   + \lambda \sum_{j=1}^M \|\funcj\|_\Hcalkj 
+  \end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Additive Kernel Regression}
+
+Representer Theorem: $\funchatj(\cdot) = \sum_{i=1}^n \alphaj
+\kernelj(\cdot,X_i)$. \\[0.2in]
+\pause
+Write $\alphaj \in \RR^n$, $\aalpha \in \RR^{nM}$. The objective reduces to
+% Can write $\aalpha = \argmin_{\aalpha \in \RR^{nM}} F(\aalpha)$ where,
+\begin{equation*}
+\Falpha(\aalpha) = \frac{1}{2}\Big\|Y - \sum_{j=1}^m \KKj \alphaj\Big\|_2^2 + 
+  \lambda \sum_{j=1}^M \sqrt{{\alphaj}^\top \KKj \alphaj}.
+%   \lambda \sum_{j=1}^M \sqrt{{\alphaj}^\top \KKj \alphaj}^{q/2}.
+\end{equation*} \\
+\pause
+\vspace{0.2in}
+Cholesky Decomposition: $\KKj = \LLj \LLj^\top$. \\ 
+Let $\betaj = \LLj^\top \alphaj \in \RR^n$, $\bbeta \in \RR^{nM}$
+\begin{equation*}
+\Fbeta(\bbeta) =  \frac{1}{2}\Big\|Y - \sum_{j=1}^m \LLj \alphaj\Big\|_2^2 + 
+  \lambda \sum_{j=1}^M \|\betaj\|_2
+\end{equation*}
+
+\end{frame}
+
+
+
+\begin{frame}{Higher Dimensional Regression}
+  \[
+    \funchat(\cdot) \;=\; \funchatii{1}(\cdot)\; +\;  
+      \funchatii{2}(\cdot)\;+\;\dots \;+\; \funchatii{M}(\cdot)
+  \] \\
+\vspace{0.2in}
+\pause
+\textbf{Idea:} Choose $\kernelj$ to be ``simple".  \\
+The sum $\funchat$ will still be
+``simpler" than estimating on a full Kernel.\\
+\pause
+\vspace{0.2in}
+Full Kernel
+\[
+\kernel(x,x') = \exp\left( \frac{\|x-x'\|^2}{2h^2} \right)
+= \prod_{j=d}^D \exp\left( \frac{(x_d-x_d')^2}{2h^2} \right)
+= \prod_{d=1}^D \kernel_d(x_d, x'_d)
+\]\\
+\vspace{0.2in}
+\pause
+
+\textbf{Why ?} Simpler kernels $\implies$ More bias, but better variance 
+
+
+\end{frame}
+
+
+
+\begin{frame}{Higher Dimensional Regression - ESP Kernels}
+
+\begin{align*}
+\kernelii{1}(x,x') &= \sum_{1\leq i \leq D} \kerni(x_i, x'_i) \\
+\kernelii{2}(x,x') &= \sum_{1\leq i_1 < i_2 \leq D} 
+\kernel_{i_1}(x_{i_1},x'_{i_1})  \kernel_{i_2}(x_{i_2},x'_{i_2})\\
+\kernelii{M}(x,x') &= \sum_{1\leq i_1 < i_2 < \dots < i_M \leq D} 
+  \prod_{d=1}^M \kernel_{i_d}(x_{i_d}, x'_{i_d}) 
+\end{align*}
+\pause
+\vspace{0.1in}
+\begin{itemize}
+\item Combinatorially large number of terms.
+\item Observation: $\kernelj$ is the $j$\superscript{th} elementary symmetric
+polynomial of base kernels $k_i$.
+\item Computable in $O(DM)$ time using Newton-Girard Formulae.
+\end{itemize}
+ 
+\end{frame}
+
+
+\begin{frame}{Higher Dimensional Regression}
+\textbf{Results}
+\vspace{0.1in}
+\insertTableRealDataPres 
+\vspace{0.2in}
+Also comparisons with $k$-NN, Locally Linear/Quadratic
+regression.
+\end{frame}
+
+
+\begin{frame}{Function Selection}
+A typical problem in Comp-Bio: Identify pairwise interactions of proteins. \\
+\vspace{0.1in}
+$\func$ has $100$ variables, but in reality the interactions are pairwise (or
+low order) and sparse.
+\[
+f(x_1^{100}) = f(x_2,x_7) + f(x_{21},x_{34}) + \dots + f(x_{12},x_{99})
+\]
+
+\end{frame}
