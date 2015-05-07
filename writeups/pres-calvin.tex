@@ -41,24 +41,30 @@ Let $\betaj = \LLj^\top \alphaj$
 \begin{frame}{Optimization methods}
 \begin{itemize}
 \item Subgradient / Proximal gradient: iteration cost $O(n^2M)$
-\item ADMM: medium convergence, iteration cost $O(n^2M^2)$ \\
+\item ADMM: iteration cost $O(n^2M^2)$ \\
 Main cost: solve triangular $nM \times nM$ system in primal update
-\item Exact BCD: fast convergence, iteration cost $O(n^3 M)$ \\
+\item Exact BCD: iteration cost $O(n^3 M)$ \\
 \begin{itemize}
 \item Quickly solve 1d problem for $\Delta$
 $\|-(\Delta \LLjt\LLj + \lambda I)^{-1}(\LLjt (\sum_{i\neq j}\LLi \betai))\|=1$
 \item Then solve $n \times n$ system for 
 $\betaj \leftarrow -(\Delta \LLjt\LLj+\lambda I)^{-1}(\LLjt(\sum_{i\neq j}\LLi \betai))/\Delta$
 \end{itemize}
-\item BCGD: medium convergence, iteration cost $O((n^2+nM)M)$
+\item BCGD: iteration cost $O((n^2+nM)M)$
 \begin{itemize}
 \item Block coordinate gradient descent (Tseng \& Yun, 2007) 
-with diagonal Hessian approximation
-\item Backtracking is relatively expensive, so we skip
+\item Diagonal Hessian approximation - closed form update
+\item Skip backtracking since expensive
 \end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Optimization results}
 \includegraphics[width=\textwidth]{figs/time1000v2.eps}
+\end{frame}
+
+\begin{frame}{}
+\begin{center}
+Thanks!
+\end{center}
 \end{frame}
