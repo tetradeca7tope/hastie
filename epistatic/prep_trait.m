@@ -6,14 +6,13 @@ assert(isequal(traitIndividualIDs,markerIndividualIDs));
 
 geno_101 = geno - 1;
 geno_scores = PCAscores(geno_101, 0);
-plot(geno_scores);
 meta.insulin_name = 'Insulin_RBM_log_sex_W10';
 insulin_idx = find(strcmp(traitNames, meta.insulin_name));
 sorted_scores = sort(geno_scores,'descend');
-top100_scores = find(geno_scores >= sorted_scores(100));
+top100_scores = find(geno_scores >= sorted_scores(50));
 
 % Make sure all chromosomes represented in reduced set:
-assert(length(unique(markerChromosome(top100_scores))) == 20);
+%assert(length(unique(markerChromosome(top100_scores))) == 20);
 
 insulin_data = traitData(:,insulin_idx);
 snp_data = geno_101(:,top100_scores);
