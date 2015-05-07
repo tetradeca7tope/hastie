@@ -7,16 +7,16 @@ addpath ../addKernelRegression/
 addpath ../utils/
 rng('default');
 
-compareMethods = {'subGradient', 'proxGradient', 'proxGradientAccn', ...
-  'bcdExact', 'bcgdDiagHessian', 'admm'};
+compareMethods = {'subGradient', 'subGradientAlpha', 'proxGradient', ...
+  'proxGradientAccn', 'bcdExact', 'bcgdDiagHessian', 'admm'};
 plotColours = {'b', 'g', 'r', 'k', 'c', 'm', [255 128 0]/255, ...
   [76, 0, 153]/253, [102 102 0]/255, 'y'};
 plotMarkers = {'-o', '-+', '-*', '-x', '-s', '-d', '-^', '-p', '->', '-v'};
 plotFunc = @loglog;
 
 % Problem Set up
-numDims = 20; n = 500; M = 100; maxNumIters = 2000;
-numDims = 6; n = 100; M = 10; maxNumIters = 100;  % For debugging
+numDims = 20; n = 500; M = 100; maxNumIters = 1000;
+% numDims = 6; n = 100; M = 10; maxNumIters = 100;  % For debugging
 [func, funcProps] = getAdditiveFunction(numDims, numDims);
 bounds = funcProps.bounds;
 nTest = n;

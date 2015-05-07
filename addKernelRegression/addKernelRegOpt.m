@@ -34,10 +34,9 @@ function [optBeta, optStats] = ...
 
     case 'admm'
         [optBeta, optStats] = admm(Ls, Y, lambda, params);
-<<<<<<< HEAD
 
     case 'proxNewton'
-=======
+
     case 'subGradientAlpha'
         M = size(Ls,3);
         Ks = zeros(n,n,M);
@@ -49,7 +48,6 @@ function [optBeta, optStats] = ...
         for g=1:M
             optBeta(:,g) = (Ls(:,:,g)')*optAlpha(:,g);
         end    
->>>>>>> 09e2932e5d64a679e882f38b0438f1f9b84055f6
     
     otherwise
       error('Unknown Optimisation Method.');

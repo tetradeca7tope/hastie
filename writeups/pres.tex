@@ -1,0 +1,42 @@
+\documentclass{beamer}
+% \usetheme{madrid}
+
+\usepackage{amssymb, amsfonts}
+% 
+% \newcommand{\simul}{\Phi}
+% \newcommand{\simdata}{\mathbf{\tilde{X}}}
+% \newcommand{\obsdata}{\bf X_{obs}}
+% \newcommand{\likl}{\mathcal{L}}
+% \newcommand{\estlikl}{\mathcal{\hat{L}}}
+% \newcommand{\vari}{\sigma^2_\rho}
+% \newcommand{\QQ}{\mathcal{Q}}
+% \DeclareMathOperator*{\argmin}{arg\,min}
+
+\definecolor{darkblue}{rgb}{0.0,0.0,0.7}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+\usepackage{kky}
+\usepackage{hastieDefns}
+
+\setbeamertemplate{sidebar right}{}
+\setbeamertemplate{footline}{%
+\hfill\usebeamertemplate***{navigation symbols}
+\hspace{1cm}\insertframenumber{}/\inserttotalframenumber}
+
+%% Begin Content
+%% =============
+
+\title{Regularised Additive Least Squares Regression}
+\author{Calvin \& Kirthevasan}
+\date{May 7, 2015}
+
+\begin{document}
+\maketitle
+
+\input{pres-samy}
+\input{pres-calvin}
+
+
+\end{document}

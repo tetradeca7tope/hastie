@@ -111,7 +111,7 @@ for k = 1:MAX_ITER
     history.eps_pri(k) = sqrt(n)*ABSTOL + RELTOL*max(norm(x), norm(-z));
     history.eps_dual(k)= sqrt(n)*ABSTOL + RELTOL*norm(rho*u);
 
-    if (history.r_norm(k) < history.eps_pri(k) && ...
+    if params.tolerance ~= 0 && (history.r_norm(k) < history.eps_pri(k) && ...
        history.s_norm(k) < history.eps_dual(k))
          break;
     end
