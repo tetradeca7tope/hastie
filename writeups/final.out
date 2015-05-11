@@ -1,0 +1,10 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}
+\BOOKMARK [1][-]{section.2}{Problem Set up \046 Algorithm}{}
+\BOOKMARK [2][-]{subsection.2.1}{Problem Statement \046 Notation}{section.2}
+\BOOKMARK [2][-]{subsection.2.2}{Additive Least Squares Regression via Kernels}{section.2}
+\BOOKMARK [2][-]{subsection.2.3}{Choice of Kernels}{section.2}
+\BOOKMARK [1][-]{section.3}{Implementation}{}
+\BOOKMARK [1][-]{section.4}{Experiments}{}
+\BOOKMARK [2][-]{subsection.4.1}{Setting 1: ESP Kernels}{section.4}
+\BOOKMARK [2][-]{subsection.4.2}{Setting 2: Function Selection}{section.4}
+\BOOKMARK [1][-]{section.5}{Conclusion}{}

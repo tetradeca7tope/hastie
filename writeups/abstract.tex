@@ -2,8 +2,11 @@
 \begin{abstract}
 We describe additive kernel regression (\addkrr), 
 a generalisation of kernel least squares methods for nonparametric regression.
-Nonparametric regression is exponentially difficult in high dimensions. It is
-difficult to make progress without making strong assumptions about the function.
+Nonparametric methods typically allow us to consider a richer class of functions
+over their parametric counter parts. However, unlike their parametric
+counterparts they suffer from requiring exponentially many samples in high
+dimensions and further cannot be leveraged to identify structure in the
+function.
 A common assumption in high dimensional regression models is to assume that the
 function is additive. In this work, we leverage this assumption, but 
 considerably generalise existing additive models.
@@ -11,5 +14,6 @@ We propose a convex optimisation objective for our problem and optimise it using
 Block Coordinate Gradient Descent.
 We demonstrate
 that \addkrrs significantly outperforms other popular algorithms for nonparametric
-regression on moderate to high dimensional problems.
+regression on moderate to high dimensional problems and can be used to identify
+and exploit structure in the function.
 \end{abstract}

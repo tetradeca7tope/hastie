@@ -12,6 +12,57 @@ and the $y$-axis is the test error. }
 \end{figure}
 }
 
+\newcommand{\insertFigOpt}{
+\begin{figure}
+\centering
+\subfigure[]{
+  \includegraphics[width=\imarrwtwo]{figs/iteration1000v2} \hspace{\imhsptwo}
+  \vspace{\imlabelspace}
+  \label{fig:optCompIter}
+}
+\subfigure[]{
+  \includegraphics[width=\imarrwtwo]{figs/time1000v2} \hspace{\imhsptwo}
+  \vspace{\imlabelspace}
+  \label{fig:optCompTime}
+}
+\caption[]{\small
+\subref{fig:optCompIter}: Comparison of the different methods to optimise our
+objective. In~\subref{fig:optCompIter} The $x$-axis is the iteration and
+in~\subref{fig:optCompTime} the $x$-axis is time. In both figures
+ the $y$-axis is the objective. 
+Both figures are in log-log scale.
+}
+\end{figure}
+}
+
+\newcommand{\insertFigRegFSel}{
+\begin{figure}
+\centering
+\subfigure[]{
+  \includegraphics[width=\imarrwtwo]{figs/compToy} \hspace{\imhsptwo}
+  \vspace{\imlabelspace}
+  \label{fig:compToy}
+}
+\subfigure[]{
+  \includegraphics[width=\imarrwtwo]{figs/solnpath600} \hspace{\imhsptwo}
+  \vspace{\imlabelspace}
+  \label{fig:solnpath}
+}
+\caption[]{\small
+\subref{fig:compToy}: Comparison of \addkrrs using ESP Kernels against other 
+nonparametric methods
+on a $20$ dimensional toy problem. The $x$-axis denotes the number of training
+points and the $y$-axis is the error on a test set.
+\subref{fig:solnpath}: Solution path with $n=600$ samples for the synthetic
+problem. The $x$-axis shows the regularisation parameter while the $y$-axis
+plots $\|\funcj\|_{\Hcalkj} = \|\betaj\|$. The true nonzero functions are
+depicted in red. As the figure indicates several of the false functions are
+driven to $0$ fast whereas the true functions persist for longer.
+}
+\end{figure}
+}
+
+
 
 \newcommand{\insertFigSolnPath}{
 \begin{figure}

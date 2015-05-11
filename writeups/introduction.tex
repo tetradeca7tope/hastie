@@ -2,14 +2,33 @@
 
 \section{Introduction}
 
+Given data $(X_i,Y_i)_{i=1}^n$ where $X_i\in \RR^D$, $Y\in\RR$ and 
+$(X_i,Y_i)\sim P$, the goal of
+regression methods is to estimate the regression function $f(x) = \EE_P[Y|X=x]$.
+A popular method for regression is linear regression which models $f$ as a
+linear combination of the variables $x$, i.e. $f(x) = w^\top x$ for some $w \in
+\RR^D$. Such methods are computationally simple and have desirable
+statistical properties when the problem meets the assumption. However, they are generally
+too restrictive for many real problems.
+Nonparametric regression refers to a suite of regression methods that only
+assume smoothness of $f$.
+
+While nonparametric methods consider a richer class of functions, they suffer
+from severe drawbacks.
 Nonparametric regression in high dimensions is an inherently difficult problem with known
 lower bounds depending exponentially in dimension
 \citep{gyorfi02distributionfree}. 
 With rare exceptions,
 nonparametric methods typically work well only under at most $4-6$ dimensions.
+In addition they cannot be used to identify
+structure in the problem. For instance, in the parametric setting algorithms
+such as the LASSO and group LASSO can be used to identify a sparse subset of
+variables/groups to describe the function. To the best of our knowledge, no
+analogous methods exist in the nonparametric world.
 In this project we intend to make progress in this problem by treating the
 \emph{estimate} of the function as
-an additive function of lower dimensional components.
+an additive function-- $\funchat(\cdot) = \funcii{1}(\cdot) + \funcii{2}(\cdot) +
+\dots + \funcii{M}(\cdot)$.
 
 Using additive models is fairly standard in high dimensional regression
 literature
@@ -34,19 +53,14 @@ is managed via the bandwidth of the kernel.
 Using an additive model
 provides another ``knob" to control this tradeoff and provides significant gains
 in high dimensional regression. In fact, \citet{duvenaud11additivegps}
-demonstrate that using additive models in the Gaussian Process (\gp) framework
+show that using additive models in the Gaussian Processes (\gp)
 improves prediction performance.
 
-Our methods are based on \krr, where
-we choose to model the low-order interaction implicitly using kernels acting on
-subsets of the coordinates (groups).
+Our methods are based on \krr.
 We minimize the squared-error loss with 
-a squared RKHS norm penalty to enforce smoothness
-and a mixed $\ell_{1,2}$-norm (group lasso style) penalty 
-to enforce a sparse collection of functions.
+an RKHS norm penalty to enforce smoothness and identify structure.
 This leads to a convex objective function where the number of parameters is
 the product of the number of samples and the number of basis functions.
-
 Our work extends Sparse Additive Models (SpAM) \citep{ravikumar09spam} 
 to multidimensional nonparametric basis functions.
 Our proposed method also extends recent work on 

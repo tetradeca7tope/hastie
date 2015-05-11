@@ -25,6 +25,7 @@ Recall objective:  $\alphaj \in \RR^n$, $\aalpha \in \RR^{nM}$
 \text{ where } \KKj = {R^{(j)}}^\top {R^{(j)}}
 \end{equation*}
 \end{itemize}
+\pause
 Rewrite with Cholesky decomposition: $\KKj = \LLj \LLj^\top$. \\ 
 Let $\betaj = \LLj^\top \alphaj$
 \begin{equation*}
@@ -43,6 +44,7 @@ Let $\betaj = \LLj^\top \alphaj$
 \item Subgradient / Proximal gradient: iteration cost $O(n^2M)$
 \item ADMM: iteration cost $O(n^2M^2)$ \\
 Main cost: solve triangular $nM \times nM$ system in primal update
+\pause
 \item Exact BCD: iteration cost $O(n^3 M)$ \\
 \begin{itemize}
 \item Quickly solve 1d problem for $\Delta$
@@ -50,6 +52,7 @@ $\|-(\Delta \LLjt\LLj + \lambda I)^{-1}(\LLjt (\sum_{i\neq j}\LLi \betai))\|=1$
 \item Then solve $n \times n$ system for 
 $\betaj \leftarrow -(\Delta \LLjt\LLj+\lambda I)^{-1}(\LLjt(\sum_{i\neq j}\LLi \betai))/\Delta$
 \end{itemize}
+\pause
 \item BCGD: iteration cost $O((n^2+nM)M)$
 \begin{itemize}
 \item Block coordinate gradient descent (Tseng \& Yun, 2007) 
@@ -60,7 +63,7 @@ $\betaj \leftarrow -(\Delta \LLjt\LLj+\lambda I)^{-1}(\LLjt(\sum_{i\neq j}\LLi \
 \end{frame}
 
 \begin{frame}{Optimization results}
-\includegraphics[width=\textwidth]{figs/time1000v2.eps}
+\includegraphics[width=\textwidth]{figs/time1000v2}
 \end{frame}
 
 \begin{frame}{}
