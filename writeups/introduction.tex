@@ -11,7 +11,9 @@ linear combination of the variables $x$, i.e. $f(x) = w^\top x$ for some $w \in
 statistical properties when the problem meets the assumption. However, they are generally
 too restrictive for many real problems.
 Nonparametric regression refers to a suite of regression methods that only
-assume smoothness of $f$.
+assume smoothness of $f$. In particular, they do not assume any parametric form
+for $f$. As such, they present a more powerful and compelling framework for
+regression.
 
 While nonparametric methods consider a richer class of functions, they suffer
 from severe drawbacks.
@@ -30,6 +32,14 @@ In this project we intend to make progress in this problem by treating the
 an additive function-- $\funchat(\cdot) = \funcii{1}(\cdot) + \funcii{2}(\cdot) +
 \dots + \funcii{M}(\cdot)$.
 
+Our methods are based on Kernel Ridge Regression (\krr).
+We minimize the squared-error loss with 
+an RKHS norm penalty to enforce smoothness and identify structure.
+This leads to a convex objective function where the number of parameters is
+the product of the number of samples and the number of basis functions.
+
+We present two concrete applications for our framework.
+The first is on nonparametric regression in high dimensions.
 Using additive models is fairly standard in high dimensional regression
 literature
 \cite{hastie90gam,ravikumar09spam,lafferty05rodeo}. 
@@ -46,7 +56,7 @@ This is because additive functions are \emph{statistically simpler}
 than more general (non-additive) functions.
 Typically, in most nonparametric regression methods using kernels such as the
 Nadaraya-Watson
-(\nw) estimator and Kernel Ridge Regression (\krr), the bias-variance tradeoff
+ estimator and Kernel Ridge Regression, the bias-variance tradeoff
 is managed via the bandwidth of the kernel. 
 % However, this is only one way to
 % manage the tradeoff. In this work we demonstrate that 
@@ -55,13 +65,21 @@ provides another ``knob" to control this tradeoff and provides significant gains
 in high dimensional regression. In fact, \citet{duvenaud11additivegps}
 show that using additive models in the Gaussian Processes (\gp)
 improves prediction performance.
+In this work, we propose the \emph{ESP Kernels} which constrain the estimated
+function to be an addition of simpler functions and provide favourable
+bias-variance tradeoffs in high dimensions.
 
-Our methods are based on \krr.
-We minimize the squared-error loss with 
-an RKHS norm penalty to enforce smoothness and identify structure.
-This leads to a convex objective function where the number of parameters is
-the product of the number of samples and the number of basis functions.
-Our work extends Sparse Additive Models (SpAM) \citep{ravikumar09spam} 
+The second is on identifying structure in the true function $\func$.
+In some genomics applications, the function of interest depends on the states of
+possibly several proteins. However, the true dependence may be just an addition
+of sparse pairwise dependencies. For instance a function of $100$ variables may
+take the form $f(x_1^{100}) = \funcii{1}(x_1, x_2) + \funcii{2}(x_1, x_9) + 
+\funcii{3}(x_8,x_9)$. Identifying such structure from a set of candidate sets of
+variables and learning the relevant
+functions is an important problem in Genomics.
+We use the additive regression framework by optimising for the individual
+functions $\funchatii{j}$ over a space of functions on a subset of variables.
+In this context, our work extends Sparse Additive Models (SpAM) \citep{ravikumar09spam} 
 to multidimensional nonparametric basis functions.
 Our proposed method also extends recent work on 
 Generalized Additive Models plus Interactions \citep{intelligible:2013}.
@@ -94,3 +112,9 @@ In our work, we experiment with several optimisation methods for non-smooth
 objectives. In our experiments, Block Coordinate Gradient Descent provided the
 best performance.
 
+The remainder of this paper is organised as follows. 
+In Section~\ref{sec:additiveKR} we present the \addkrrs procedure and the
+associated optimisation objective.  In
+Section~\ref{sec:implementation} we present and compare several methods to
+optimise our objective. In Section~\ref{sec:experiments} we present experiments
+on synthetic and real datasets in both settings described above.

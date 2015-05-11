@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  10 MAY 2015 20:37
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  11 MAY 2015 14:22
 entering extended mode
  %&-line parsing enabled.
 **final.tex
@@ -474,34 +474,23 @@ File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 (./introduction.tex [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
-(./method.tex [2]
+(./method.tex [2] [3]
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
 (amsmath)                 on input line 140.
 
-[3]) (./implementation.tex [4]
-<figs/iteration1000v2.pdf, id=140, 449.68pt x 338.26375pt>
+) (./implementation.tex [4]
+<figs/iteration1000v2.pdf, id=142, 794.97pt x 614.295pt>
 File: figs/iteration1000v2.pdf Graphic file (type pdf)
 
 <use figs/iteration1000v2.pdf>
-<figs/time1000v2.pdf, id=141, 794.97pt x 614.295pt>
+<figs/time1000v2.pdf, id=143, 794.97pt x 614.295pt>
 File: figs/time1000v2.pdf Graphic file (type pdf)
- <use figs/time1000v2.pdf>)
-(./experiments2.tex
+ <use figs/time1000v2.pdf>
+[5]) (./experiments2.tex
 Overfull \hbox (73.24684pt too wide) in paragraph at lines 4--4
  [][] 
- []
-
-[5] <figs/compToy.pdf, id=163, 449.68pt x 338.26375pt>
-File: figs/compToy.pdf Graphic file (type pdf)
- <use figs/compToy.pdf>
-<figs/solnpath600.pdf, id=164, 565.16228pt x 408.85959pt>
-File: figs/solnpath600.pdf Graphic file (type pdf)
-
-<use figs/solnpath600.pdf>
-Overfull \hbox (32.07298pt too wide) in paragraph at lines 62--62
-[] 
  []
 
 [6pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
@@ -509,57 +498,69 @@ has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.62 \end{align*}
-                 pdfTeX warning (ext4): destination with the same identifier (n
-ame{table.1}) has been already used, duplicate ignored
+l.30 F
+      irst, we construct a smooth synthetic 20 dimensional function. We trai...
+pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
+ been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.62 \end{align*}
-                  <./figs/iteration1000v2.pdf> <./figs/time1000v2.pdf>])
-(./conclusion.tex) (./final.bbl [7pdfTeX warning (ext4): destination with the s
-ame identifier (name{figure.2}) has been already used, duplicate ignored
+l.30 F
+      irst, we construct a smooth synthetic 20 dimensional function. We trai...
+ <./figs/iteration1000v2.pdf> <./figs/time1000v2.pdf>]
+<figs/compToy.pdf, id=235, 449.68pt x 338.26375pt>
+File: figs/compToy.pdf Graphic file (type pdf)
+ <use figs/compToy.pdf>
+<figs/solnpath600.pdf, id=236, 565.16228pt x 408.85959pt>
+File: figs/solnpath600.pdf Graphic file (type pdf)
+
+<use figs/solnpath600.pdf>
+Overfull \hbox (32.07298pt too wide) in paragraph at lines 62--62
+[] 
+ []
+
+) (./conclusion.tex [7pdfTeX warning (ext4): destination with the same identifi
+er (name{figure.2}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.28   Tibshirani]{note-group-lasso:2010}
-                                          <./figs/compToy.pdf> <./figs/solnpath
-600.pdf>]) [8] (./final.aux) ) 
+l.14 
+      <./figs/compToy.pdf> <./figs/solnpath600.pdf>]) (./final.bbl) [8]
+(./final.aux) ) 
 Here is how much of TeX's memory you used:
- 7269 strings out of 493848
- 99437 string characters out of 1152822
- 190511 words of memory out of 3000000
+ 7270 strings out of 493848
+ 99448 string characters out of 1152822
+ 187506 words of memory out of 3000000
  10279 multiletter control sequences out of 15000+50000
  32395 words of font info for 71 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,12n,36p,704b,406s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/
-usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/
-public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmm
-i5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
-/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf
--texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fon
-ts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-texlive/fonts/type1/p
-ublic/amsfonts/cmextra/cmmib7.pfb></usr/share/texmf-texlive/fonts/type1/public/
-amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
-cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></us
-r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf
--texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/pub
-lic/amsfonts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
-/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pf
-b></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/s
-ymbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols
-/msbm7.pfb></usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/s
-hare/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/f
-onts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times
-/utmri8a.pfb>
-Output written on final.pdf (8 pages, 655462 bytes).
+ 38i,12n,36p,704b,316s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf
+-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texlive/fonts/type1/publ
+ic/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
+/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/sh
+are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmmib10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cmextra/cmmib7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr
+10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/t
+exmf/fonts/type1/public/lm/lmss10.pfb></usr/share/texmf/fonts/type1/public/lm/l
+mss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm10.p
+fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm7.pfb></us
+r/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texl
+ive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/
+times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on final.pdf (8 pages, 659730 bytes).
 PDF statistics:
- 364 PDF objects out of 1000 (max. 8388607)
- 54 named destinations out of 1000 (max. 500000)
+ 387 PDF objects out of 1000 (max. 8388607)
+ 55 named destinations out of 1000 (max. 500000)
  101 words of extra memory for PDF output out of 10000 (max. 10000000)
 
