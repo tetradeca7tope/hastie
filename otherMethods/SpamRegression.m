@@ -33,7 +33,8 @@ function [Predtr, Predte] = SpamRegression(Xte, Xtr, Ytr, lambda)
     end
     fhatte = zeros(nte,p);
     for j=1:p
-        fhatte(:,j) = spline(Xtr(:,j),fhat(:,j),Xte(:,j));
+        [~, unique_ix] = uniquetol(Xtr(:,j));
+        fhatte(:,j) = spline(Xtr(:,unique_ix),fhat(:,unique_ix),Xte(:,j));
     end
     Predte = alpha + sum(fhatte,2);
 end
