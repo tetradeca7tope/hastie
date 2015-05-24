@@ -29,14 +29,13 @@ legend(regressionAlgorithms);
 if numExperiments > 1
   stdErrs = errStds/sqrt(numExperiments);
   for j = 1:numRegAlgos
-    errorbar(nCands, errMeans(j,:), stdErrs(j,:), 'Color', plotColours{j}, ...
-      'LineWidth', LW);
+    errorbar(nCands, errMeans(j,:), stdErrs(j,:), 'Color', plotColours{j});
   end
 end
 
 minMean = min(min(errMeans));
 maxMean = max(max(errMeans));
-xlim( nCands(1)/2 + [0, nCands(end)]);
+xlim( 0.9 * nCands(1) + [0, nCands(end)]);
 ylim( [0.9*minMean 1.1*maxMean] );
 
 xlabel('Number of Data');

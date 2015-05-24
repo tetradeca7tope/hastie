@@ -37,7 +37,9 @@ numExperiments = 2;
 % ===========================
 nTotal = 1100; nCands = (120:120:nTotal)'; 
 % numDims = 20; numGroupDims = 9;
-numDims = 30; numGroupDims = 5;
+% numDims = 30; numGroupDims = 5;
+% numDims = 50; numGroupDims = 50;
+numDims = 40; numGroupDims = 20;
 
 [func, funcProps] = getAdditiveFunction(numDims, numGroupDims);
 bounds = funcProps.bounds;

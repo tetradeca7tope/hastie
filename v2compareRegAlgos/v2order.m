@@ -5,15 +5,14 @@ clear all;
 clc;
 addpath ../addKernelRegression/
 addpath ../utils/
-rng('default');
 
-numDims = 15;
-orderCands = [1 2 4 6 8 10 15];
+numDims = 20;
+orderCands = 1:10;
 numOrderCands = numel(orderCands);
 
 % Problem Set up
-numExperiments = 2;
-nTotal = 1100; nCands = (120:120:nTotal)';
+numExperiments = 5;
+nTotal = 2000; nCands = round(logspace(log10(50), log10(nTotal), 10));
 % nTotal = 300; nCands = (60:60:nTotal)'; % DEBUG
 numNCandidates = numel(nCands);
 
