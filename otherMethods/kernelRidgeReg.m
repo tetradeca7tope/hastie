@@ -22,7 +22,6 @@ function predFunc = kernelRidgeReg(X, Y, params)
       params.degree = 2;
     end
     kernelFunc = kernelSetupPoly(X, Y, decomposition, params);
-    'hey'
   end
 
   % Params for cross validation
@@ -33,10 +32,10 @@ function predFunc = kernelRidgeReg(X, Y, params)
     params.numTrialsCV = 2;
   end
   if ~isfield(params, 'numLambdaCands')
-    params.numLambdaCands = 10;
+    params.numLambdaCands = 20;
   end
   if ~isfield(params, 'lambdaRange')
-    params.lambdaRange = [1e-4 100] * norm(std(X));
+    params.lambdaRange = [1e-4 100] * n;
   end
 
   % Determine candidates for lambda

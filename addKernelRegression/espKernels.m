@@ -21,10 +21,10 @@ function [K, allKs] = espKernels(X, Y, bws, order)
   allKs = elemSymPoly(baseKernels, order);
   allKs = allKs(:,:,2:end);
   % Now normalise them
-  for k = 1:order
-    allKs(:,:,k) = allKs(:,:,k) / nchoosek(D, k);
-  end
-  K = []; % just pass this for now.
+%   for k = 1:order
+%     allKs(:,:,k) = allKs(:,:,k) / nchoosek(D, k);
+%   end
+  K = allKs(:,:,end); % just pass this for now.
 
 end
 

@@ -9,26 +9,28 @@ plotFunc = @semilogy;
 MS = 6;
 LW = 2;
 
-errMeans = zeros(numRegAlgos, numNCandidates);
-errStds = zeros(numRegAlgos, numNCandidates);
+errMeans = zeros(numOrderCands, numNCandidates);
+errStds = zeros(numOrderCands, numNCandidates);
 
-for j = 1:numRegAlgos
+for j = 1:numOrderCands
   errMeans(j,:) = mean( results{j}, 1 );
   errStds(j,:) = std( results{j}, 1 );
 end
 
 figure;
-for j = 1:numRegAlgos
+orderStrings = cell(1,numOrderCands);
+for j = 1:numOrderCands
   plotFunc(nCands, errMeans(j,:), plotMarkers{j}, 'Color', plotColours{j}, ...
   'MarkerSize', MS, 'LineWidth', LW); 
+  orderStrings{j} = sprintf('%d', orderCands(j));
   hold on,
 end
-legend(regressionAlgorithms);
+legend(orderStrings);
 
 % Now plot error bars
 if numExperiments > 1
   stdErrs = errStds/sqrt(numExperiments);
-  for j = 1:numRegAlgos
+  for j = 1:numOrderCands
     errorbar(nCands, errMeans(j,:), stdErrs(j,:), 'Color', plotColours{j}, ...
       'LineWidth', LW);
   end

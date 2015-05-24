@@ -10,11 +10,11 @@ rng('default');
 % method = 'localLinear';
 % method = 'localQuadratic';
 % method = 'KRR';
-%method = 'KRR-Poly';
-%method = 'GP';
-%method = 'addGP';
+% method = 'KRR-Poly';
+% method = 'GP';
+method = 'addGP';
 % method = 'epsSVR';
-method = 'Spam';
+% method = 'Spam';
 % method = 'KNN';
 
 if isequal(method, 'GP') || isequal(method, 'addGP')
