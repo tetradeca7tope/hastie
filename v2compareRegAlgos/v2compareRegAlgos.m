@@ -7,7 +7,11 @@ clc;
 addpath ../addKernelRegression/
 addpath ../utils/
 addpath ../otherMethods/
-addpath ~/libs/libsvm/matlab/  % add libsvm path here
+addpath ../otherMethods/cosso/
+addpath ../otherMethods/ARESLab/
+addpath ../otherMethods/RBF/
+addpath ../otherMethods/M5PrimeLab/
+addpath ~/libs/libsvm/matlab/
 addpath ~/libs/gpml/, startup;
 rng('default');
 
@@ -15,17 +19,18 @@ rng('default');
 %   {'addKRR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'addGP', 'SVR', 'kNN', 'SpAM'};
 % regressionAlgorithms = ...
 %   {'addKRR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'SVR', 'kNN', 'SpAM'};
+% regressionAlgorithms = ...
+%   {'Add-KRR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'SVR', 'kNN'};
 regressionAlgorithms = ...
-  {'addKRR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'SVR', 'kNN'};
+  {'Add-KRR', 'KRR', 'NW', 'LL', 'GP', 'kNN', 'RT'};
 % regressionAlgorithms = ...
 %   {'addKRR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'kNN'};
 
 % Problem Set up
-numExperiments = 2;
+numExperiments = 10;
 % numDims = 20; nTotal = 1100; nCands = (120:120:nTotal)';
 % numDims = 100; nTotal = 1100; nCands = (120:120:nTotal)';
 % numDims = 25; nTotal = 1100; nCands = (120:120:nTotal)';
-% numDims = 6; nTotal = 300; nCands = (60:60:nTotal)'; % DEBUG
 
 % numGroupDims = 5;
 % numGroupDims = 10;
@@ -35,11 +40,21 @@ numExperiments = 2;
 
 % Experiments
 % ===========================
-nTotal = 1100; nCands = (120:120:nTotal)'; 
+nTotal = 2000; nCands = (120:120:nTotal)'; 
 % numDims = 20; numGroupDims = 9;
 % numDims = 30; numGroupDims = 5;
 % numDims = 50; numGroupDims = 50;
-numDims = 40; numGroupDims = 20;
+% numDims = 40; numGroupDims = 20;
+% numDims = 24; numGroupDims = 7;
+% numDims = 25; numGroupDims = 8;
+% numDims = 60; numGroupDims = 13;
+% numDims = 80; numGroupDims = 30;
+% numDims = 100; numGroupDims = 30;
+% numDims = 100; numGroupDims = 5;
+
+% DEBUG
+% numExperiments = 2; numDims = 6; numGroupDims = 3; nTotal = 300;
+% nCands = (60:60:nTotal)'; % DEBUG
 
 [func, funcProps] = getAdditiveFunction(numDims, numGroupDims);
 bounds = funcProps.bounds;
@@ -53,7 +68,7 @@ Yte = func(Xte);
 
 % Book Keeping 
 numNCandidates = numel(nCands);
-saveFileName = sprintf('results/v2-%s.mat', datestr(now, 'mmdd-HHMMSS'));
+saveFileName = sprintf('results/v2new-%s.mat', datestr(now, 'mmdd-HHMMSS'));
 % Store the results here
 numRegAlgos = numel(regressionAlgorithms);
 results = cell(numRegAlgos, 1);
@@ -83,7 +98,7 @@ for expIter = 1:numExperiments
 
       switch regressionAlgorithms{algoIter}
 
-        case 'addKRR' 
+        case 'Add-KRR' 
           predFunc = addKRR(X, Y);
           YPred = predFunc(Xte);
 
@@ -120,6 +135,16 @@ for expIter = 1:numExperiments
         case 'SpAM'
           predFunc = SpamRegressionCV(Xtr, Ytr, []);
           YPred = predFunc(Xte);
+
+        case 'RT'
+          YPred = regTree(Xtr, Ytr, Xte);
+
+        case 'BF'
+          predFunc = backFitting(Xtr, Ytr);
+          YPred = predFunc(Xte);
+
+        case 'RBFI'
+          YPred = rbfInterpol(Xtr, Ytr, Xte);
 
         otherwise
           errorStr = sprintf('Unknown Method %s\n', regressionAlgorithms{algoIter});
