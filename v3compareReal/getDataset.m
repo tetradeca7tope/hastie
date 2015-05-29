@@ -75,7 +75,8 @@ function [Xtr, Ytr, Xte, Yte] = getDataset(dataset)
       L = load('datasets/telemonitoring.txt');
       L = L( L(:,3) == 0, :); % only select female candidates
       L = shuffleData(L);
-      attrs = [2 4 5 7:22]; label = 6;
+      attrs = [2 4 5 7:22]; label = 5;
+%       attrs = [2 4 7:22]; label = 5;
       trIdxs = (1:300)'; teIdxs = (301:600)';
       [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
 
@@ -97,6 +98,66 @@ function [Xtr, Ytr, Xte, Yte] = getDataset(dataset)
       label = 92; attrs = (1:91)';
       [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
     
+    case 'LRGs'
+      load('datasets/lrgReg.mat');
+      Y = Y / std(Y);
+      trLabels = 1:2000;
+      teLabels = 2001:4000;
+      Xtr = X(trLabels, :);
+      Ytr = Y(trLabels, :);
+      Xte = X(teLabels, :);
+      Yte = Y(teLabels, :);
+
+    case 'Skillcraft'
+      L = load('datasets/skillcraft.txt');
+      L = shuffleData(L);
+      attrs = [2:15 17:20]; label = 16;
+      trIdxs = (1:1700)'; teIdxs = (1701:3330)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+      
+    case 'Skillcraft-small'
+      L = load('datasets/skillcraft.txt');
+      L = shuffleData(L);
+%       attrs = [2:15 17:20]; label = 16;
+%       attrs = [2:16 18:20]; label = 17;
+%       attrs = [2:17 19:20]; label = 18; % **
+%       attrs = [2:18 20]; label = 19; 
+      attrs = [2:19]; label = 20; % **
+      trIdxs = (1:300)'; teIdxs = (1701:2000)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+
+    case 'Airfoil*'
+      L = load('datasets/airfoil.txt');
+      L = shuffleData(L);
+      attrs = [1:5]; label = 6;
+      trIdxs = (1:750)'; teIdxs = (751:1500)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+      numAddDims = 36; % *
+      Xtr = [Xtr, randn(size(Xtr,1), numAddDims)];
+      Xte = [Xte, randn(size(Xte,1), numAddDims)];
+
+    case 'CCPP*'
+      load('datasets/ccpp.mat');
+      L = [XTrain YTrain];
+      L = shuffleData(L);
+      attrs = [1:4]; label = 5;
+      trIdxs = (1:2000)'; teIdxs = (2001:4000)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+      numAddDims = 55; % *
+      Xtr = [Xtr, randn(size(Xtr,1), numAddDims)];
+      Xte = [Xte, randn(size(Xte,1), numAddDims)];
+
+   case 'CCPP*small'     
+      load('datasets/ccpp.mat');
+      L = [XTrain YTrain];
+      L = shuffleData(L);
+      attrs = [1:4]; label = 5;
+      trIdxs = (1:300)'; teIdxs = (2001:2300)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+      numAddDims = 55; % *
+      Xtr = [Xtr, randn(size(Xtr,1), numAddDims)];
+      Xte = [Xte, randn(size(Xte,1), numAddDims)];
+      
 
     otherwise
       error('Unknown Dataset');

@@ -6,13 +6,14 @@ clc;
 addpath ../addKernelRegression/
 addpath ../utils/
 
-numDims = 20;
+numDims = 12;
 orderCands = 1:10;
+% orderCands = [1 2 4 6 10];
 numOrderCands = numel(orderCands);
 
 % Problem Set up
 numExperiments = 5;
-nTotal = 2000; nCands = round(logspace(log10(50), log10(nTotal), 10));
+nTotal = 8000; nCands = round(logspace(log10(50), log10(nTotal), 15));
 % nTotal = 300; nCands = (60:60:nTotal)'; % DEBUG
 numNCandidates = numel(nCands);
 

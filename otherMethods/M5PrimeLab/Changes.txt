@@ -1,0 +1,14 @@
+ver. 1.0.2
+May 16, 2015
+* m5pbuild had a nested loop reusing an index variable used by the outer loop. This is essentially just a cosmetic change because this did not influence results in any way.
+* Some minor cosmetic changes to the source code according to the 'best practices'. Some additional comments.
+* Some minor modifications in function descriptions in code as well as in reference manual, hopefully making them more clear.
+* Some additional reference manual touch-ups.
+
+ver. 1.0.1
+September 3, 2010
+* A tiny change so that M5PrimeLab is fully compatible with Octave: "ttt=tic;" is replaced by "tic;" and "time = toc(ttt);" is replaced by "time = toc;" (Thanks to Dr. Julio J. Valdes for reminding me of Octave community.)
+
+ver. 1.0
+April 9, 2010
+* First public release.

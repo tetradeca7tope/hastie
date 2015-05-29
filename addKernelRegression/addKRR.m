@@ -1,4 +1,4 @@
-function [predFunc] = addKRR(X, Y, params)
+function [predFunc, bestOrder] = addKRR(X, Y, params)
 % Performs Kernel Ridge Regression.
 % Cross validates for the order and the penalty parameter lambda.
 

@@ -1,0 +1,59 @@
+Title:
+	M5PrimeLab: M5' regression tree and model tree toolbox for Matlab/Octave
+
+Version:
+	1.0.2
+
+Date:
+	First public release: April 9, 2010
+	Newest version: May 16, 2015
+
+Author:
+	Gints Jekabsons (gints.jekabsons@rtu.lv)
+	Institute of Applied Computer Systems
+	Riga Technical University
+	Meza str. 1/3, LV-1048, Riga, Latvia
+
+URL:
+	http://www.cs.rtu.lv/jekabsons/
+
+Description:
+	M5PrimeLab is a Matlab/Octave toolbox for building regression trees and
+	model trees using M5' method. The toolbox allows building trees, testing
+	them on separate test sets or using k-fold Cross-Validation, using them
+	for prediction, outputting them in a user-readable way etc. M5PrimeLab
+	accepts input variables to be continuous, binary, and categorical, as
+	well as manages missing values. 
+	The source code is tested under Matlab version 7.1 (R14SP3) and
+	Matlab version 8.5 (R2015a).
+
+Installation (for Matlab):
+	Copy the M5PrimeLab folder into the MATLAB_DIR/toolbox directory
+	(where MATLAB_DIR indicates your Matlab installation directory).
+	Start Matlab and select "Set path..." from the File menu. Click
+	"Add folder..." button and select the folder
+	MATLAB_DIR/toolbox/M5PrimeLab in the file dialog. Subsequently,
+	press the Save button in order to save your changes to the Matlab
+	search path. The toolbox is now installed. Have fun.
+
+Citing the toolbox:
+	Please give a reference to the web page in any publication
+	describing research performed using the toolbox, e.g. like this:
+	Jekabsons G., M5PrimeLab: M5' regression tree and model tree toolbox
+	for Matlab/Octave, 2015, available at http://www.cs.rtu.lv/jekabsons/
+
+License:
+	Copyright (C) 2010-2015  Gints Jekabsons
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program. If not, see <http://www.gnu.org/licenses/>.

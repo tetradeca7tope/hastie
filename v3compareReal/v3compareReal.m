@@ -7,13 +7,18 @@ clc;
 addpath ../addKernelRegression/
 addpath ../utils/
 addpath ../otherMethods/
+addpath ../otherMethods/cosso/
+addpath ../otherMethods/ARESLab/
+addpath ../otherMethods/RBF/
+addpath ../otherMethods/M5PrimeLab/
 addpath ~/libs/libsvm/matlab/
 addpath ~/libs/gpml/, startup;
 rng('default');
+warning off;
 
 % Determine dataset
 % dataset = 'debug';
-dataset = 'parkinson21';              % **
+% dataset = 'parkinson21';              % **
 % dataset = 'parkinson21-small';
 % dataset = 'housing';                  % **
 % dataset = 'music';                    % **
@@ -24,65 +29,91 @@ dataset = 'parkinson21';              % **
 % dataset = 'forestfires';       % **
 % dataset = 'propulsion';       % xx
 % dataset = 'blog';       % 
+% dataset = 'LRGs';       % 
+% dataset = 'Skillcraft';
+% dataset = 'Skillcraft-small';
+% dataset = 'Airfoil*';
+dataset = 'CCPP*';
+% dataset = 'CCPP*small';
+% dataset = 'diabetes'; %TODO
 
 % Load data
 [Xtr, Ytr, Xte, Yte] = getDataset(dataset);
 [nTr, numDims] = size(Xtr);
 nTe = size(Xte, 1);
 
-% Set the following two
-decompRand.setting = 'randomGroups';
-decompRand.groupSize = min(10, ceil(numDims/4));
-decompRand.numRandGroups = min(200, 10*numDims);
-optParamsRand.maxNumIters = 50;
-optParamsRand.optMethod = 'bcgdDiagHessian';
-
-decompEsp.setting = 'espKernel';
-optParamsEsp.maxNumIters = 400;
-optParamsEsp.optMethod = 'bcgdDiagHessian';
-
 % Save file name
 saveFileName = sprintf('results/%s-%s.mat', dataset, ...
   datestr(now, 'mmdd-HHMMSS') );
 
-regressionAlgorithms = { ...
-%   {'addKrrRand',   @(X,Y,Xte) addKernelRegCV(X,Y,decompRand, [], optParamsRand)},...
-%   {'addKrrEsp',   @(X,Y,Xte) addKernelRegCV(X,Y,decompEsp, [], optParamsEsp)}, ...
-%   {'KRR',      @(X,Y,Xte) kernelRidgeReg(X, Y, struct())}, ...
-%   {'KNN',      @(X,Y,Xte) KnnRegressionCV(X, Y, [])}, ...
-%   {'NW',       @(X,Y,Xte) localPolyKRegressionCV(X,Y,[],0)}, ...
-%   {'LL',       @(X,Y,Xte) localPolyKRegressionCV(X,Y,[],1)}, ...
-%   {'LQ',       @(X,Y,Xte) localPolyKRegressionCV(X,Y,[],2)}, ...
-%   {'GP',       @(X,Y,Xte) gpRegWrap(X,Y,Xte)}, ...
-%   {'SVR',      @(X,Y,Xte) svmRegWrap(X, Y, 'eps')}, ...
-%   {'spam',     @(X,Y,Xte) SpamRegressionCV(X, Y)}, ...
-  {'addGP',    @(X,Y,Xte) addGPRegWrap(X,Y,Xte)}, ...
-  };
+regAlgos = {}; cnt = 0;
+% % % Now add each method one by one
+% cnt=cnt+1; regAlgos{cnt}= {'addKRR',   @(X,Y,Xte) addKRR(X, Y)};
+% cnt=cnt+1; regAlgos{cnt}= {'KRR', @(X,Y,Xte) kernelRidgeReg(X, Y, struct())};
+% cnt=cnt+1; regAlgos{cnt}= {'KNN', @(X,Y,Xte) KnnRegressionCV(X, Y, [])};
+% cnt=cnt+1; regAlgos{cnt}= {'NW', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],0)};
+% cnt=cnt+1; regAlgos{cnt}= {'LL', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],1)};
+% cnt=cnt+1; regAlgos{cnt}= {'LQ', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],2)};
+% cnt=cnt+1; regAlgos{cnt}= {'LC', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],3)};
+% cnt=cnt+1; regAlgos{cnt}= {'SV-eps', @(X,Y,Xte) svmRegWrap(X, Y, 'eps')};
+% if numDims < 40
+%   cnt=cnt+1; regAlgos{cnt}= {'SV-nu', @(X,Y,Xte) svmRegWrap(X, Y, 'nu')};
+% end
+% cnt=cnt+1; regAlgos{cnt}= {'GP', @(X,Y,Xte) gpRegWrap(X,Y,Xte)};
+% cnt=cnt+1; regAlgos{cnt}= {'regTree', @(X,Y,Xte) regTree(X, Y, Xte)};
+% cnt=cnt+1; regAlgos{cnt}= {'RBFI',  @(X,Y,Xte) rbfInterpol(X,Y,Xte)};
+% cnt=cnt+1; regAlgos{cnt}= {'M5P',  @(X,Y,Xte) m5prime(X,Y,Xte)};
+% cnt=cnt+1; regAlgos{cnt}= {'Shepard', @(X,Y,Xte) shepard(X,Y,2,Xte)};
+% cnt=cnt+1; regAlgos{cnt}= {'BF', @(X,Y,Xte) backFitting(X,Y)};
+  cnt=cnt+1; regAlgos{cnt}= {'MARS', @(X,Y,Xte) mars(X,Y,Xte)};
+% if numDims <= 40
+%   cnt=cnt+1; regAlgos{cnt}= {'MARS', @(X,Y,Xte) mars(X,Y,Xte)};
+% end
+% cnt=cnt+1; regAlgos{cnt}= {'COSSO', @(X,Y,Xte) cossoWrap(X, Y, Xte)};
+% cnt=cnt+1; regAlgos{cnt}= {'spam', @(X,Y,Xte) SpamRegressionCV(X, Y)};
+% if numDims <= 15 & nTr < 300
+%   cnt=cnt+1; regAlgos{cnt}= {'addGP', @(X,Y,Xte) addGPRegWrap(X,Y,Xte)};
+% end
+% cnt=cnt+1; regAlgos{cnt}= {'LR',       @(X,Y,Xte) ridgeReg(X, Y)};
+% cnt=cnt+1; regAlgos{cnt}= {'LASSO',       @(X,Y,Xte) lassoWrap(X, Y)};
+% cnt=cnt+1; regAlgos{cnt}= {'LARS',       @(X,Y,Xte) larsWrap(X, Y)};
+% %   cnt=cnt+1; regAlgos{cnt}= {'addGP', @(X,Y,Xte) addGPRegWrap(X,Y,Xte)};
 
-numRegAlgos = numel(regressionAlgorithms);
 
+numRegAlgos = numel(regAlgos);
 
 results = zeros(numRegAlgos, 1);
+times = zeros(numRegAlgos, 1);
 
-fprintf('Dataset: %s\n============================================\n', dataset);
+fprintf('Dataset: %s (n, D) = (%d, %d)\n=====================================\n', ...
+dataset, nTr, numDims);
 % Now run each method
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 for i = 1:numRegAlgos
-  predFunc = regressionAlgorithms{i}{2}(Xtr, Ytr, Xte);
+
+  % Learn the algorithm
+  startTime = cputime;
+  if strcmp(regAlgos{i}{1}, 'addKRR')
+    [predFunc, addKrrOrder] = regAlgos{i}{2}(Xtr, Ytr, Xte);
+  else
+    predFunc = regAlgos{i}{2}(Xtr, Ytr, Xte);
+  end
+
   if strcmp(class(predFunc), 'double')
     YPred = predFunc;
   else
     YPred = predFunc(Xte);
   end
+  times(i) = cputime - startTime;
   predError = norm(YPred-Yte).^2/nTe;
   results(i) = predError;
-  fprintf('Method: %s, err: %.4f\n', regressionAlgorithms{i}{1}, predError);
+  fprintf('Method: %s, err: %.4f\n\n', regAlgos{i}{1}, predError);
 end
 
 % Save results
 saveFileName = sprintf('results/real-%s-%s.mat', dataset, ...
   datestr(now, 'mmdd-HHMMSS'));
-save(saveFileName, 'regressionAlgorithms', 'results', 'numRegAlgos', 'dataset');
+save(saveFileName, 'regAlgos', 'results', 'numRegAlgos', 'dataset');
 
 printV3Results;
 

@@ -1,11 +1,13 @@
 function [Predtr, Predte] = SpamRegression(Xte, Xtr, Ytr, lambda)
-    max_iters = 100;
     [n, p] = size(Xtr);
+    max_iters = min(round(1000/p), 50);
     nte = size(Xte,1);
     h = zeros(p,1);
     for j=1:p
         hx=median(abs(Xtr(:,j)-median(Xtr(:,j))))/0.6745*(4/3/n)^0.2;
+        if hx == 0, hx = 1; end
         hy=median(abs(Ytr-median(Ytr)))/0.6745*(4/3/n)^0.2;
+        if hy == 0, hy = 1; end
         h(j)=sqrt(hy*hx);
     end
     alpha = mean(Ytr);
@@ -33,8 +35,16 @@ function [Predtr, Predte] = SpamRegression(Xte, Xtr, Ytr, lambda)
     end
     fhatte = zeros(nte,p);
     for j=1:p
-        [~, unique_ix] = uniquetol(Xtr(:,j));
-        fhatte(:,j) = spline(Xtr(:,unique_ix),fhat(:,unique_ix),Xte(:,j));
+%         [~, unique_ix] = uniquetol(Xtr(:,j));
+%         [~, unique_ix] = unique(Xtr(:,j));
+%         fhatte(:,j) = spline(Xtr(:,unique_ix),fhat(:,unique_ix),Xte(:,j));
+%         fhatte(:,j) = spline(Xtr(:,j), fhat(:,j), Xte(:,j));
+%         predFunc = localPolyRegressionCV(Xtr(:,j), fhat(:,j));
+%         fhatte(:,j) = predFunc(Xte(:,j));
+        silvBw = 1.06 * std(Xtr(:,j)) * n^0.2;
+        fhatte(:,j) = localPolyRegression(Xte(:,j), Xtr(:,j), fhat(:,j), ...
+          silvBw, 0);
+%         fhatte(:,j) = spline(Xtr(:,j), fhat(:,j), Xte(:,j));
     end
     Predte = alpha + sum(fhatte,2);
 end

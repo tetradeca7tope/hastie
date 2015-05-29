@@ -12,10 +12,15 @@ rng('default');
 % method = 'KRR';
 % method = 'KRR-Poly';
 % method = 'GP';
-method = 'addGP';
+% method = 'addGP';
 % method = 'epsSVR';
 % method = 'Spam';
 % method = 'KNN';
+% method = 'BF';
+% method = 'LARS';
+method = 'LASSO';
+method = 'NLLS';
+% method = 'LR';
 
 if isequal(method, 'GP') || isequal(method, 'addGP')
   addpath ~/libs/gpml/, startup; % add gpml path.
@@ -83,6 +88,26 @@ switch method
 
   case 'KNN'
     predFunc = KnnRegressionCV(Xtr, Ytr);
+    Ypred = predFunc(Xte);
+
+  case 'BF'
+    predFunc = backFitting(Xtr, Ytr);
+    Ypred = predFunc(Xte);
+
+  case 'LARS'
+    predFunc = larsWrap(Xtr, Ytr);
+    Ypred = predFunc(Xte);    
+
+  case 'LR'
+    predFunc = ridgeReg(Xtr, Ytr);
+    Ypred = predFunc(Xte);
+
+  case 'LASSO'
+    predFunc = lassoWrap(Xtr, Ytr);
+    Ypred = predFunc(Xte);
+
+  case 'NLLS'
+    predFunc = nlls(Xtr,Ytr);
     Ypred = predFunc(Xte);
 
 end

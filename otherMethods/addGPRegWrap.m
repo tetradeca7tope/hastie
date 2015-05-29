@@ -11,7 +11,7 @@ function [preds] = addGPRegWrap(X, Y, Xte, order)
   hyp2.lik = log(0.1);
   hyp2.cov = [log(ones(1,2*D)), log(ones(1,order))];
 
-  hyp2 = minimize(hyp2, @gp, -15, @infExact, [], covFunc, likFunc, X, Y);
+  hyp2 = minimize(hyp2, @gp, -20, @infExact, [], covFunc, likFunc, X, Y);
 
   % Now do prediction
   preds = gp(hyp2, @infExact, [], covFunc, likFunc, X, Y, Xte); 

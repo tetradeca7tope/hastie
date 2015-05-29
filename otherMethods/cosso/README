@@ -1,0 +1,5 @@
+This is the cosso tuned with cross validation. Five fold cross validation is recommended and used in the examples. For details see the paper. 
+
+For prediction on new data points and model selection (which theta's are zeros), the main functions are predadd (model selection and estimation in additive models) and predfull (model selection and estimation in two-way interaction models). See the examples in the file examples.m. All the other functions are supporting functions. 
+
+The input vectors should be in the hypercube [0,1]^d, but not necessarily uniform. When using the algorithm on real datasets, remember to scale the input vector to [0,1]^d. 
