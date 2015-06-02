@@ -37,7 +37,7 @@ Yte = func(Xte);
 
 % Book Keeping 
 numNCandidates = numel(nCands);
-saveFileName = sprintf('results/v2-%s.mat', datestr(now, 'mmdd-HHMMSS'));
+saveFileName = sprintf('results/v2known-%s.mat', datestr(now, 'mmdd-HHMMSS'));
 % Store the results here
 numRegAlgos = numel(regressionAlgorithms);
 results = cell(numRegAlgos, 1);

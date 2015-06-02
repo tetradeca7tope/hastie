@@ -158,6 +158,59 @@ function [Xtr, Ytr, Xte, Yte] = getDataset(dataset)
       Xtr = [Xtr, randn(size(Xtr,1), numAddDims)];
       Xte = [Xte, randn(size(Xte,1), numAddDims)];
       
+    case 'Insulin'
+      load('datasets/epidata.mat');
+      L = [insulin_data snp_data];
+      L = shuffleData(L);
+      attrs = [2:51]; label =1;
+      trIdxs = (1:256)'; teIdxs = (257:506)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+
+    case 'Bleeding'
+      load('datasets/bleed.mat');
+      L = shuffleData(X1);
+      preLabel = 1; preAttrs = [2: 1526];
+      D = 100;
+      Y = L(:, preLabel);
+      X = L(:, preAttrs) * A(:,1:D);
+      L = [Y X];
+      attrs = [2:(D+1)]; label =1;
+      trIdxs = (1:200)'; teIdxs = (201:351)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+
+    case 'School'
+      load('datasets/school.mat');
+      L = [school_data_features school_data_output];
+      L = shuffleData(L);
+      label = 37; attrs = setdiff(1:36, label);
+%       attrs = [1:36]; label =37;
+      trIdxs = (1:90)'; teIdxs = (91:142)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+      
+    case 'Brain'
+      load('datasets/brain.mat');
+      L = zeros(0, 30);
+      for i = 1:9
+        L = [L; VoxelsShelter{i}];
+      end
+      L = shuffleData(L);
+      label = 30; attrs = setdiff(1:30, label);
+      trIdxs = (1:300)'; teIdxs = (301:540)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+
+
+    case 'fMRI'
+      load('datasets/fmri.mat');
+      L = shuffleData(data);
+      preLabel = 1; preAttrs = setdiff(1:37913, preLabel);
+      D = 100;
+      Y = L(:, preLabel);
+      X = L(:, preAttrs) * A(:,1:D);
+      L = [Y X];
+      attrs = [2:(D+1)]; label =1;
+      trIdxs = (1:700)'; teIdxs = (701:1351)';
+      [Xtr, Ytr, Xte, Yte] = partitionData(L, attrs, label, trIdxs, teIdxs);
+      
 
     otherwise
       error('Unknown Dataset');

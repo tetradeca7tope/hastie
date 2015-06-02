@@ -6,8 +6,8 @@ clc;
 addpath ../addKernelRegression/
 addpath ../utils/
 
-numDims = 12;
-orderCands = 1:10;
+numDims = 15;
+orderCands = [1 2 4 8 15];
 % orderCands = [1 2 4 6 10];
 numOrderCands = numel(orderCands);
 

@@ -18,7 +18,7 @@ warning off;
 
 % Determine dataset
 % dataset = 'debug';
-% dataset = 'parkinson21';              % **
+dataset = 'parkinson21';              % **
 % dataset = 'parkinson21-small';
 % dataset = 'housing';                  % **
 % dataset = 'music';                    % **
@@ -33,9 +33,14 @@ warning off;
 % dataset = 'Skillcraft';
 % dataset = 'Skillcraft-small';
 % dataset = 'Airfoil*';
-dataset = 'CCPP*';
+% dataset = 'CCPP*';
+% dataset = 'Insulin';
 % dataset = 'CCPP*small';
 % dataset = 'diabetes'; %TODO
+% dataset = 'Bleeding';
+% dataset = 'School';
+% dataset = 'Brain';
+% dataset = 'fMRI';
 
 % Load data
 [Xtr, Ytr, Xte, Yte] = getDataset(dataset);
@@ -47,40 +52,39 @@ saveFileName = sprintf('results/%s-%s.mat', dataset, ...
   datestr(now, 'mmdd-HHMMSS') );
 
 regAlgos = {}; cnt = 0;
-% % % Now add each method one by one
-% cnt=cnt+1; regAlgos{cnt}= {'addKRR',   @(X,Y,Xte) addKRR(X, Y)};
-% cnt=cnt+1; regAlgos{cnt}= {'KRR', @(X,Y,Xte) kernelRidgeReg(X, Y, struct())};
-% cnt=cnt+1; regAlgos{cnt}= {'KNN', @(X,Y,Xte) KnnRegressionCV(X, Y, [])};
-% cnt=cnt+1; regAlgos{cnt}= {'NW', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],0)};
-% cnt=cnt+1; regAlgos{cnt}= {'LL', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],1)};
-% cnt=cnt+1; regAlgos{cnt}= {'LQ', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],2)};
-% cnt=cnt+1; regAlgos{cnt}= {'LC', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],3)};
-% cnt=cnt+1; regAlgos{cnt}= {'SV-eps', @(X,Y,Xte) svmRegWrap(X, Y, 'eps')};
-% if numDims < 40
-%   cnt=cnt+1; regAlgos{cnt}= {'SV-nu', @(X,Y,Xte) svmRegWrap(X, Y, 'nu')};
-% end
-% cnt=cnt+1; regAlgos{cnt}= {'GP', @(X,Y,Xte) gpRegWrap(X,Y,Xte)};
-% cnt=cnt+1; regAlgos{cnt}= {'regTree', @(X,Y,Xte) regTree(X, Y, Xte)};
-% cnt=cnt+1; regAlgos{cnt}= {'RBFI',  @(X,Y,Xte) rbfInterpol(X,Y,Xte)};
-% cnt=cnt+1; regAlgos{cnt}= {'M5P',  @(X,Y,Xte) m5prime(X,Y,Xte)};
-% cnt=cnt+1; regAlgos{cnt}= {'Shepard', @(X,Y,Xte) shepard(X,Y,2,Xte)};
-% cnt=cnt+1; regAlgos{cnt}= {'BF', @(X,Y,Xte) backFitting(X,Y)};
-  cnt=cnt+1; regAlgos{cnt}= {'MARS', @(X,Y,Xte) mars(X,Y,Xte)};
+% % Now add each method one by one
+cnt=cnt+1; regAlgos{cnt}= {'addKRR',   @(X,Y,Xte) addKRR(X, Y)};
+cnt=cnt+1; regAlgos{cnt}= {'KRR', @(X,Y,Xte) kernelRidgeReg(X, Y, struct())};
+cnt=cnt+1; regAlgos{cnt}= {'KNN', @(X,Y,Xte) KnnRegressionCV(X, Y, [])};
+cnt=cnt+1; regAlgos{cnt}= {'NW', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],0)};
+cnt=cnt+1; regAlgos{cnt}= {'LL', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],1)};
+cnt=cnt+1; regAlgos{cnt}= {'LQ', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],2)};
+cnt=cnt+1; regAlgos{cnt}= {'LC', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],3)};
+cnt=cnt+1; regAlgos{cnt}= {'SV-eps', @(X,Y,Xte) svmRegWrap(X, Y, 'eps')};
+cnt=cnt+1; regAlgos{cnt}= {'SV-nu', @(X,Y,Xte) svmRegWrap(X, Y, 'nu')};
+cnt=cnt+1; regAlgos{cnt}= {'GP', @(X,Y,Xte) gpRegWrap(X,Y,Xte)};
+cnt=cnt+1; regAlgos{cnt}= {'regTree', @(X,Y,Xte) regTree(X, Y, Xte)};
+cnt=cnt+1; regAlgos{cnt}= {'RBFI',  @(X,Y,Xte) rbfInterpol(X,Y,Xte)};
+cnt=cnt+1; regAlgos{cnt}= {'M5P',  @(X,Y,Xte) m5prime(X,Y,Xte)};
+cnt=cnt+1; regAlgos{cnt}= {'Shepard', @(X,Y,Xte) shepard(X,Y,2,Xte)};
+cnt=cnt+1; regAlgos{cnt}= {'BF', @(X,Y,Xte) backFitting(X,Y)};
+cnt=cnt+1; regAlgos{cnt}= {'MARS', @(X,Y,Xte) mars(X,Y,Xte)};
 % if numDims <= 40
 %   cnt=cnt+1; regAlgos{cnt}= {'MARS', @(X,Y,Xte) mars(X,Y,Xte)};
 % end
-% cnt=cnt+1; regAlgos{cnt}= {'COSSO', @(X,Y,Xte) cossoWrap(X, Y, Xte)};
-% cnt=cnt+1; regAlgos{cnt}= {'spam', @(X,Y,Xte) SpamRegressionCV(X, Y)};
-% if numDims <= 15 & nTr < 300
-%   cnt=cnt+1; regAlgos{cnt}= {'addGP', @(X,Y,Xte) addGPRegWrap(X,Y,Xte)};
-% end
-% cnt=cnt+1; regAlgos{cnt}= {'LR',       @(X,Y,Xte) ridgeReg(X, Y)};
-% cnt=cnt+1; regAlgos{cnt}= {'LASSO',       @(X,Y,Xte) lassoWrap(X, Y)};
-% cnt=cnt+1; regAlgos{cnt}= {'LARS',       @(X,Y,Xte) larsWrap(X, Y)};
-% %   cnt=cnt+1; regAlgos{cnt}= {'addGP', @(X,Y,Xte) addGPRegWrap(X,Y,Xte)};
+cnt=cnt+1; regAlgos{cnt}= {'COSSO', @(X,Y,Xte) cossoWrap(X, Y, Xte)};
+cnt=cnt+1; regAlgos{cnt}= {'spam', @(X,Y,Xte) SpamRegressionCV(X, Y)};
+if numDims <= 15 & nTr < 300
+  cnt=cnt+1; regAlgos{cnt}= {'addGP', @(X,Y,Xte) addGPRegWrap(X,Y,Xte)};
+end
+cnt=cnt+1; regAlgos{cnt}= {'LR',       @(X,Y,Xte) ridgeReg(X, Y)};
+cnt=cnt+1; regAlgos{cnt}= {'LASSO',       @(X,Y,Xte) lassoWrap(X, Y)};
+cnt=cnt+1; regAlgos{cnt}= {'LARS',       @(X,Y,Xte) larsWrap(X, Y)};
+% % %   cnt=cnt+1; regAlgos{cnt}= {'addGP', @(X,Y,Xte) addGPRegWrap(X,Y,Xte)};
+% % %   cnt=cnt+1; regAlgos{cnt}= {'MARS', @(X,Y,Xte) mars(X,Y,Xte)};
 
 
-numRegAlgos = numel(regAlgos);
+numRegAlgos = numel(regAlgos),
 
 results = zeros(numRegAlgos, 1);
 times = zeros(numRegAlgos, 1);
