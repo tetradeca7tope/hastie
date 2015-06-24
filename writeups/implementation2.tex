@@ -1,0 +1,129 @@
+
+\section{Implementation}
+\label{sec:implementation}
+
+We now describe the implementation and the optimisation procedures used therein.
+Let the Cholesky decomposition of $\KKj$ be $\KKj = \LLj \LLj^\top$. 
+Denote $\betaj = \LLj^\top \alphaj$.
+Then, our objective can be written in terms of $\bbeta = [{\betaii{1}}^\top,
+\dots, {\betaii{M}}^\top]$ as,
+\begin{equation}
+\Fbeta(\bbeta) =  \frac{1}{2}\Big\|Y - \sum_{j=1}^m \LLj \alphaj\Big\|_2^2 + 
+  \lambda \sum_{j=1}^M \|\betaj\|_2
+\label{eqn:objBeta}
+\end{equation}
+The objective, in the above form is well studied in optimisation literature as the group
+LASSO. 
+We consider the following methods to optimise the objectives
+in~\eqref{eqn:optObjective} and~\eqref{eqn:objBeta}.
+
+\subsubsection*{Subgradient Method on $\bbeta$~\eqref{eqn:objBeta}}
+Because our objective function is non-smooth, the simplest method is to solve it via 
+the subgradient method. We implemented subgradient method with 
+decreasing step sizes for our experiments. 
+While subgradients can be computed cheaply in $O(n^2M)$, we observed poor 
+convergence on our problem. %, as we would expect.
+
+\subsubsection*{Subgradient Method on $\aalpha$~\eqref{eqn:optObjective}}
+Here, we directly performed subgradient method on the objective
+in~\eqref{eqn:optObjective}. The advantage to this method is that it doesn't
+require the potentially expensive Cholesky decompositions at the start of the
+algorithm. Despite this, we saw that convergence was slow.
+
+\subsubsection*{Proximal Gradient Method}
+
+Note that we can write the objective \eqref{eqn:optObjective} as $F(\bbeta) =
+G(\bbeta) + \Psi(\bbeta)$ where $G$ is smooth and $\Psi$ is not. $\Psi$ is the
+group lasso penalty. Via the Moreau decomposition, and using the fact
+that the argument in the prox operator is separable, the prox operator can
+be shown to be,
+\[
+[\prox_{\Psi, t} (\bbeta)]^{(j)} =
+\prox_{\Psi, t} (\betaj) = 
+  \begin{cases}
+    \alphaj - t \frac{\beta}{\|\betaj\|_2} & \text{if } 
+              \|\betaj\| < t \\
+    \zero & \text{otherwise}
+  \end{cases}
+\]
+Obtaining the prox operator takes $O(n^2M)$ time and has cost comparable to
+computing the gradient of $G(\bbeta)$. We use the above to implement proximal
+gradient method as described in the class notes. We use backtracking to
+determine the step size and experimented both with and without acceleration.
+
+\subsubsection*{Exact Block Coordinate Descent via Newton trust region}
+
+We can optimize the objective function over group $\betaj$ with all other groups
+$\betai, i \ne j$ fixed. The objective is then
+\[
+\arg\min_\betaj \frac{1}{2}\betaj^T A_j \betaj + b_j^T \betaj + \lambda \|\betaj\|_2
+\]
+where $A_j = \LLj^T \LLj$ 
+and $b_j = -\LLj^T (Y-\sum_{i\ne j}{\LLi \betai})$.
+This problem can be efficiently solved \citep{bcd-group-lasso:2013} 
+by converting it to a one-dimensional trust-region problem. 
+When $\|b_j\|_2 \le \lambda$, we have $\betaj = 0$. 
+Otherwise, there exists $t_j$ such that $\betaj$ is the solution of
+the following problem
+\[
+\arg\min_\betaj \frac{1}{2}\betaj^T A_j \betaj + b_j^T \betaj, 
+\text{ such that } \|\betaj\|_2 \le t_j.
+\]
+If $t_j$ is known we have $\betaj = t_j * \left(-(t_j A_j + \lambda I)^{-1} b_j\right)$
+Because in this case $\|\betaj\|_2 = t_j$, we have $\|(t_j A_j + \lambda I)^{-1} b_j\|_2 = 1$.
+As described in \citet{bcd-group-lasso:2013}, 
+we can use Newton's method to solve this equation efficiently 
+using the eigendecomposition of $A_j$, which is constant and needs to be computed only once.
+However, this method does not scale well with $n$, since we still need
+to solve an $n \times n$ linear system after $t_j$ is computed.
+Thus, updating all blocks costs $O(n^3 M)$.
+
+\subsubsection*{Block Coordinate Gradient Descent}
+
+Because $\Psi(\bbeta)$, our $\ell_{1,2}$ group lasso penalty, is non-smooth yet block-separable,
+we can apply the Coordinate Gradient Descent method \citep{cgd:2009}.
+For each block of $\betaj$, we solve
+\[
+\arg\min_{d_j} \frac{1}{2}d_j^T H_j d_j + \nabla_{j}G(\bbeta)^T d_j 
++ \lambda \|\betaj+d_j\|_2
+\]
+where $H_j \approx \nabla^2_{jj}G(\bbeta) = \LLj^T \LLj$ 
+and $\nabla_j G(\bbeta) = -\LLj^T (Y-\sum_{i\ne j}{\LLi \betai})$.
+As suggested \citet{cgd:2009}, we use a diagonal matrix to approximate the true block Hessian.
+We set $H_j = \max(\diag(\nabla^2_{jj}G(\aalpha))) I_n := h_j I_n$, so that a closed-form solution exists
+for $d_j$:
+\[
+d_j = \frac{1}{h_j}\left(\lambda \frac{\nabla_j G(\bbeta) - h_j \betaj}
+{\|\nabla_j G(\bbeta) - h_j \betaj\|_2}\right).
+\]
+We use backtracking to determine the step size, then update $\betaj \leftarrow \betaj + t d_j$.
+
+The Hessian is constant, so we only need compute its diagonal once. Furthermore, we store and maintain residuals $Y - \sum_{i}{\LLi \betai}$, so that updating each block takes $O(n^2)$. Thus, the cost of each iteration is $O(n^2M)$.
+%Alternatively, as suggested in \citet{note-group-lasso:2010}, rather than using the 
+%diagonal Hessian approximation, we could approximately solve each block subproblem via 
+%coordinate descent.
+
+\subsubsection*{Alternating direction method of multipliers (ADMM)}
+
+We implemented ADMM for our group lasso problem ~\eqref{eqn:objBeta}. Using an initial LU factorization, we are able to reduce the iteration cost to $O(n^2M^2)$. 
+
+When the number of parameters for each group are small in group LASSO problems, 
+block coordinate descent (BCD) is believed
+to be the state of the art solver. However, in our case the number of parameters
+is large -- growing linearly with $n$. In this regime BCD is slow since it
+requires a matrix inversion at each step. In particular, we found that Block
+Coordinate Gradient Descent (BCGD) and ADMM significantly outperformed BCD in our
+experiments. 
+In fact, we tried several other methods including subgradient method, proximal
+gradient method and ADMM and found that BCGD/ ADMM performed best.
+The results are shown in Figures~\ref{fig:optCompIter} and~\ref{fig:optCompTime}.
+
+\insertFigOpt
+
+The penalty coefficient $\lambda$ was chosen using $5$-fold cross validation. 
+Our implementation
+first solves for the largest $\lambda$. For successive $\lambda$
+values, we initialise BCGD at the solution of the previous $\lambda$. This
+warm starts procedure significantly speeds up the running time of the entire
+training procedure.
+

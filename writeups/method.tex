@@ -5,7 +5,8 @@
 \subsection{Problem Statement \& Notation}
 \label{sec:setup}
 
-Let $\func : \Xcal \rightarrow \RR$ be the function of interest. 
+Let $\func : \Xcal \rightarrow \RR$ be the regression function
+$\func(\cdot) = \EE[Y|X=\cdot]$.
 Here $\Xcal \ni x = [x_1, \dots, x_D] \in \RR^D$ and $\Xcal \subset \RR^D$.
 We have data $\XYn$ and wish to obtain an estimate
 $\funchat$ of $\func$.
@@ -49,16 +50,17 @@ groups to approximate the function - i.e. $\funchatj = \zero$ for several $j$.
 
 One of several ways to formulate a nonparametric regression problem is to 
 minimise an
-objective of the form $J(f) = \sum_{i=1}^n \ell(f(X_i), Y_i) + \lambda P(f)$ 
+objective of the form $J(f) = \sum_{i=1}^n \ell(f(X_i), Y_i) + \lambda \xi(f)$ 
 over a nonparametric class of functions $\Fcal$.
-Here $\ell$ is a loss function and $P$ is a term that penalises the complexity
-of the function $f$. Several nonparametric regression problems such as Gaussian
+Here $\ell$ is a loss function 
+and $\xi$ is a term that penalises the complexity
+of $f$. Several nonparametric regression problems such as Gaussian
 processes, smoothing splines and natural splines can be formulated this way.
 Or particular interest to us is Kernel Ridge Regression (\krr)
 which uses a positive semidefinite kernel 
 $\kernel: \Xcal \times \Xcal \rightarrow \RR$ \citep{scholkopf01kernels}
 and takes $\Fcal$ is taken to be the reproducing kernel Hilbert
-space (RKHS) $\Hcal_\kernel$ corresponding to $\kernel$. $P$ is taken to be 
+space (RKHS) $\Hcal_\kernel$ corresponding to $\kernel$. $\xi$ is taken to be 
 the squared RKHS norm of $f$ and $\ell$ the squared error loss. 
 Accordingly, \krrs is characterised via the optimisation objective,
 \[
@@ -71,6 +73,8 @@ $\kernelj$ and their associated RKHSs $\Hcalkj$. In
 equation~\eqref{eqn:addAssumption}, we will aim for $\funchatj \in \Hcalkj$.
 Accordingly we consider an optimisation problem of the following form where
 we jointly optimise over $\funchatii{1}, \dots, \funchatii{M}$,
+\begingroup
+\allowdisplaybreaks
 \begin{align*}
 & \{\funchatj\}_{j=1}^M =
 \argmin_{\funcj \in \Hcalkj, j = 1,\dots, M} 
@@ -78,11 +82,12 @@ we jointly optimise over $\funchatii{1}, \dots, \funchatii{M}$,
  \textrm{where, } 
   \numberthis \label{eqn:rkhsObjective}
 \\
-& F\left( \{\funcj\}_{j=1}^M \right)  \;=  
-\hspace{0.2in}  
+& F\left( \{\funcj\}_{j=1}^M \right)  \;=\; 
   \frac{1}{2}\sum_{i=1}^n \left(Y_i - \sum_{j=1}^M \funcj (\xj) \right)^2 
- + \lambda \sum_{j=1}^M \|\funcj\|^q_\Hcalkj 
+  \\ &\hspace{1.2in}
+ + \lambda \sum_{j=1}^M \|\funcj\|_\Hcalkj.
 \end{align*}
+\endgroup
 Our estimate for $\func$ is then $\funchat(\cdot) = \sum_j \funchatj(\cdot)$.
 
 Via a representer theorem like argument it is straightforward to show
@@ -97,7 +102,8 @@ After further simplification, the objective can be written as,
 $\aalpha = \argmin_{\aalpha \in \RR^{nM}} F(\aalpha)$ where,
 \begin{equation}
 \Falpha(\aalpha) = \frac{1}{2}\Big\|Y - \sum_{j=1}^m \KKj \alphaj\Big\|_2^2 + 
-  \lambda \sum_{j=1}^M \left({\alphaj}^\top \KKj \alphaj\right)^{q/2}.
+%   \lambda \sum_{j=1}^M \left({\alphaj}^\top \KKj \alphaj\right).
+  \lambda \sum_{j=1}^M \sqrt{{\alphaj}^\top \KKj \alphaj}.
 %   \lambda \sum_{j=1}^M \sqrt{{\alphaj}^\top \KKj \alphaj}^{q/2}.
 \label{eqn:optObjective}
 \end{equation}
@@ -106,13 +112,11 @@ Here $\alphaj \in \RR^n \; \forall j$, $\aalpha = [{\alphaii{1}}^\top, \dots,
 \RR^n$. Given the solution to the above, our
 estimate is obtained via $\funchat(\cdot) = \sum_{j=1}^M \sum_{i=1}^n \alphaj_i
 \kernelj(\cdot, \Xj_i)$.
-Equation~\eqref{eqn:optObjective} will the (convex) optimisation problem in our
+Equation~\eqref{eqn:optObjective} will be the (convex) optimisation problem in our
 algorithm.
 We call this algorithm Additive Kernel Regression (\addkrr).
-A natural choice for $q$ in the objective~\eqref{eqn:rkhsObjective} is $q=2$. 
-However in
-this work we use $q=1$ since it encourages a sparse subset of functions as the
-solution which provides interpretability of the learned models. 
+Note that we use the sum of RKHS norms (as opposed to a sum of squared norms) to
+encourage sparse solutions.
 
 
 \subsection{Applications}
@@ -127,6 +131,8 @@ we to be learned in large $D$. A kernel directly defined on $D$ dimensions
 is complex since it allows for interactions of all $D$ variables. We may reduce
 the complexity of the kernel by constraining how these variables interact.
 Here we consider kernels of the form, 
+\begingroup
+\allowdisplaybreaks
 \begin{align*}
 \kernelii{1}(x,x') &= \sum_{1\leq i \leq D} \kerni(x_i, x'_i) 
 \numberthis \label{eqn:espKernel} \\
@@ -135,6 +141,7 @@ Here we consider kernels of the form,
 \kernelii{M}(x,x') &= \sum_{1\leq i_1 < i_2 < \dots < i_M \leq D} 
   \prod_{d=1}^M \kernel_{i_d}(x_{i_d}, x'_{i_d}) 
 \end{align*}
+\endgroup
 Here $\kerni:\RR\times\RR \rightarrow \RR$ 
 is a base kernel acting on one dimension. 
 $\kernelj$ has ${D \choose j}$ terms and exhaustively computing all of them is
@@ -148,14 +155,15 @@ we have,
 \kernelii{j}(x,x') = \frac{1}{j} \sum_{d=1}^j (-1)^{d-1} 
   \;\kappa_j \; \kernelii{j-d}(x, x')
 \]
-Computing the $M$ kernels this way only requires $O(DM)$ computation.
+Computing the $M$ kernels this way only requires $O(DM^2)$ computation.
 We call these the \emph{ESP Kernels}.
-A similar kernel using a similar trick for computing it was used in
+A similar kernel using a similar trick for computing it  was used by 
 \citet{duvenaud11additivegps}.
 
 \textbf{Application 2 (Function Selection): }
 The second setting is when we are explicitly searching for a sparse subset of
-functions to explain the data. For instance, in neurological models, while the
+functions to explain the data. For instance, in neurological and genomics models, 
+while the
 function of interest has several variables the interactions are sparse and of
 lower order. For example, a function of $4$ variables may take the form
 \[
@@ -167,34 +175,41 @@ recover the groups and the individual functions acting on those groups.
 In this setting, $M$ and our RKHSs are determined by the problem
 -- $\Hcalkj$ contains functions on the variables
 belonging to the $j$\superscript{th} candidate group. 
+This idea was first explored by~\cite{bach08consistency} using a slightly different
+objective.
 
 
-% \subsection{Implementation}
-% 
-% We now describe the implementation and other detials of the above algorithm.
-% Let the Cholesky decomposition of $\KKj$ be $\KKj = \LLj \LLj^\top$. 
-% Denote $\betaj = \LLj^\top \alphaj$.
-% Then, our objective can be written in terms of $\bbeta = [{\betaii{1}}^\top,
-% \dots, {\betaii{M}}^\top]$ as,
-% \begin{equation}
-% \Fbeta(\bbeta) =  \frac{1}{2}\Big\|Y - \sum_{j=1}^m \LLj \alphaj\Big\|_2^2 + 
-%   \lambda \sum_{j=1}^M \|\betaj\|_2
-% \end{equation}
-% The objective, in the above form is well studied in optimisation literature as the group
-% LASSO. 
-% When the number of parameters for each group are small, which is
-% typically the case in group LASSO problems, block coordinate descent (BCD) is believed
-% to be the state of the art solver. However, in our case the number of parameters
-% is large -- growing linearly with $n$. In this regime BCD is slow since it
-% requires a matrix inversion at each step. In particular, we found that Block
-% Coordinate Gradient Descent (BCGD) significantly outperformed BCD in our
-% experiments. 
-% In fact, we tried several other methods including subgradient method, proximal
-% gradient method and ADMM and found that BCGD performed best.
-% 
-% The penalty term $\lambda$ was chosen using $5$-fold cross validation. Our implementation
-% first solves for the largest $\lambda$ value. For successive $\lambda$
-% values, we initialise BCGD at the solution of the previous $\lambda$ value. This
-% warm starts procedure significantly speeds up the running time of the entire
-% training procedure.
+\subsection{Implementation}
+
+We now describe the implementation details of the above algorithm.
+Let the Cholesky decomposition of $\KKj$ be $\KKj = \LLj \LLj^\top$. 
+Denote $\betaj = \LLj^\top \alphaj$.
+Then, our objective can be written in terms of $\bbeta = [{\betaii{1}}^\top,
+\dots, {\betaii{M}}^\top]$ as,
+\begin{equation}
+\Fbeta(\bbeta) =  \frac{1}{2}\Big\|Y - \sum_{j=1}^m \LLj \alphaj\Big\|_2^2 + 
+  \lambda \sum_{j=1}^M \|\betaj\|_2
+\end{equation}
+The objective, in the above form is well studied in optimisation literature as the group
+LASSO. 
+When the number of parameters for each group are small, which is
+typically the case in group LASSO problems, block coordinate descent (BCD) is believed
+to be the state of the art solver. However, in our case the number of parameters per
+group
+is large -- equal the number of samples $n$. In this regime BCD is slow since it
+requires a matrix inversion at each step. In particular, we found that Block
+Coordinate Gradient Descent (BCGD) and Alternating Direction Method of Multipliers
+(ADMM) significantly outperformed BCD in our experiments. 
+In fact, we experimented with several optimisation methods to minimise the objective
+which included Subgradient method, Proximal Gradient method (with and
+without acceleration), BCD, BCGD and ADMM. Figure~\ref{fig:opt} depicts the
+empirical convergence of these methods on a synthetic problem.
+In all our experiments, we use BCGD.
+
+
+The penalty term $\lambda$ was chosen using $5$-fold cross validation. Our implementation
+first solves for the largest $\lambda$ value. For successive $\lambda$
+values, we initialise BCGD at the solution of the previous $\lambda$ value. This
+warm starts procedure significantly speeds up the running time of the entire
+training procedure.
 

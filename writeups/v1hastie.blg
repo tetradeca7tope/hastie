@@ -3,44 +3,44 @@ The top-level auxiliary file: v1hastie.aux
 The style file: icml2015.bst
 Database file #1: kky.bib
 Database file #2: convexopt.bib
-You've used 17 entries,
+You've used 18 entries,
             2773 wiz_defined-function locations,
-            689 strings with 7685 characters,
-and the built_in function-call counts, 7869 in all, are:
-= -- 683
-> -- 474
-< -- 10
-+ -- 158
-- -- 141
-* -- 622
-:= -- 1201
-add.period$ -- 53
-call.type$ -- 17
+            692 strings with 7761 characters,
+and the built_in function-call counts, 7749 in all, are:
+= -- 665
+> -- 455
+< -- 11
++ -- 153
+- -- 135
+* -- 598
+:= -- 1203
+add.period$ -- 56
+call.type$ -- 18
 change.case$ -- 95
-chr.to.int$ -- 17
-cite$ -- 34
-duplicate$ -- 380
-empty$ -- 654
-format.name$ -- 174
-if$ -- 1659
+chr.to.int$ -- 18
+cite$ -- 36
+duplicate$ -- 384
+empty$ -- 659
+format.name$ -- 169
+if$ -- 1622
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 20
-newline$ -- 94
-num.names$ -- 68
-pop$ -- 203
+missing$ -- 22
+newline$ -- 99
+num.names$ -- 72
+pop$ -- 207
 preamble$ -- 1
 purify$ -- 81
 quote$ -- 0
-skip$ -- 292
+skip$ -- 285
 stack$ -- 0
-substring$ -- 231
-swap$ -- 42
-text.length$ -- 2
+substring$ -- 193
+swap$ -- 31
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 172
+type$ -- 178
 warning$ -- 0
 while$ -- 67
 width$ -- 0
-write$ -- 222
+write$ -- 233

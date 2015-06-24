@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  4 MAY 2015 19:08
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.20)  12 JUN 2015 11:24
 entering extended mode
  %&-line parsing enabled.
 **v1hastie.tex
@@ -613,26 +613,23 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 81.
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 106.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 106.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
  (./figureHash.tex)
 (./tableHash.tex) (./abstract.tex
+Overfull \hbox (5.1225pt too wide) in paragraph at lines 2--2
+ [] 
+ []
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
 LaTeX Font Info:    Try loading font information for OT1+lmss on input line 3.
- (/usr/share/texmf/tex/latex/lm/ot1lmss.fd
+(/usr/share/texmf/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
-))
-(./introduction.tex
-Underfull \vbox (badness 5490) has occurred while \output is active []
-
-
-Underfull \hbox (badness 3302) in paragraph at lines 50--59
-[]\OT1/ptm/m/n/10 Our work ex-tends Sparse Ad-di-tive Mod-els (SpAM)
- []
-
-
+)) (./introduction.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
@@ -640,110 +637,130 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]) (./method.tex
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 5.
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Overfull \hbox (16.73482pt too wide) detected at line 103
-[][]\OML/cmm/m/it/10 F[]\OT1/cmr/m/n/10 (\OML/cmm/b/it/10 \OT1/cmr/m/n/10 ) = 
-[][]\OML/cmm/m/it/10 Y \OMS/cmsy/m/n/10 ^^@ [] [][][][] \OT1/cmr/m/n/10 + \OML/
-cmm/m/it/10 ^^U [] [][] :
+Overfull \hbox (4.71729pt too wide) in paragraph at lines 89--89
+[] 
  []
 
 [2]
+Overfull \hbox (0.62405pt too wide) detected at line 109
+[][]\OML/cmm/m/it/10 F[]\OT1/cmr/m/n/10 (\OML/cmm/b/it/10 \OT1/cmr/m/n/10 ) = 
+[][]\OML/cmm/m/it/10 Y \OMS/cmsy/m/n/10 ^^@ [] [][][][] \OT1/cmr/m/n/10 + \OML/
+cmm/m/it/10 ^^U [] []:
+ []
+
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 139.
+(amsmath)                 on input line 147.
 
-) (./experiments2.tex
-Underfull \hbox (badness 5592) in paragraph at lines 20--32
+
+Underfull \hbox (badness 1242) in paragraph at lines 184--189
+\OT1/ptm/m/n/10 al-go-rithm. Let the Cholesky de-com-po-si-tion of $[]$
+ []
+
+[3]) (./experiments2.tex
+Underfull \hbox (badness 5592) in paragraph at lines 18--30
 []\OT1/ptm/m/n/10 We com-pare \OT1/lmss/m/n/10 Add-KR \OT1/ptm/m/n/10 against k
 er-nel kidge re-gres-
  []
 
-[3] <figs/compToy.pdf, id=128, 449.68pt x 338.26375pt>
+<figs/iteration1000v2.pdf, id=125, 794.97pt x 614.295pt>
+File: figs/iteration1000v2.pdf Graphic file (type pdf)
+
+<use figs/iteration1000v2.pdf>
+<figs/time1000v2.pdf, id=126, 794.97pt x 614.295pt>
+File: figs/time1000v2.pdf Graphic file (type pdf)
+ <use figs/time1000v2.pdf>
+<figs/compToy.pdf, id=133, 449.68pt x 338.26375pt>
 File: figs/compToy.pdf Graphic file (type pdf)
  <use figs/compToy.pdf>
-<figs/solnpath600.pdf, id=129, 565.16228pt x 408.85959pt>
+<figs/solnpath600.pdf, id=134, 565.16228pt x 408.85959pt>
 File: figs/solnpath600.pdf Graphic file (type pdf)
 
 <use figs/solnpath600.pdf>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [4 <./figs/compToy.pdf> <./figs/solnpath600.pdf>]) (./conclusion.tex) (./v1has
-tie.bbl
-Underfull \hbox (badness 2189) in paragraph at lines 9--14
+ [4 <./figs/iteration1000v2.pdf> <./figs/time1000v2.pdf> <./figs/compToy.pdf> <
+./figs/solnpath600.pdf>]
+Underfull \hbox (badness 1189) in paragraph at lines 56--61
+[]\OT1/ptm/m/n/10 First, we con-duct the fol-low-ing syn-thetic ex-per-i-ment.
+ []
+
+) (./conclusion.tex) (./v1hastie.bbl
+Underfull \hbox (badness 2189) in paragraph at lines 14--19
 \OT1/ptm/m/n/10 thresholding al-go-rithm for lin-ear in-verse prob-lems.
  []
 
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 19.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 24.
 (/usr/share/texmf-texlive/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 16--20
+Underfull \hbox (badness 10000) in paragraph at lines 21--25
 []\OT1/ptm/m/n/10 Chang, Chih-Chung and Lin, Chih-Jen.  LIB-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--20
+Underfull \hbox (badness 10000) in paragraph at lines 21--25
 \OT1/ptm/m/n/10 SVM: A li-brary for sup-port vec-tor ma-chines.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--20
+Underfull \hbox (badness 10000) in paragraph at lines 21--25
 \OT1/ptm/m/it/10 ACM Trans-ac-tions on In-tel-li-gent Sys-tems and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--20
+Underfull \hbox (badness 10000) in paragraph at lines 21--25
 \OT1/ptm/m/it/10 Tech-nol-ogy\OT1/ptm/m/n/10 , 2011.  Soft-ware avail-able at
  []
 
 
-Overfull \hbox (17.62251pt too wide) in paragraph at lines 16--20
+Overfull \hbox (17.62251pt too wide) in paragraph at lines 21--25
 [][]\OT1/pcr/m/n/10 http://www.csie.ntu.edu.tw/ cjlin/libsvm[][]\OT1/ptm/m/n/10
  . 
  []
 
-) [5] (./v1hastie.aux) ) 
+[5]) [6
+
+] (./v1hastie.aux) ) 
 Here is how much of TeX's memory you used:
- 9330 strings out of 493848
- 129733 string characters out of 1152822
- 259769 words of memory out of 3000000
- 12301 multiletter control sequences out of 15000+50000
- 37462 words of font info for 84 fonts, out of 3000000 for 9000
+ 9364 strings out of 493848
+ 130350 string characters out of 1152822
+ 251776 words of memory out of 3000000
+ 12325 multiletter control sequences out of 15000+50000
+ 39186 words of font info for 86 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,12n,55p,560b,340s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}{
-/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf-texlive/fonts/t
-ype1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi5.pfb
-></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share
-/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/typ
-e1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-texlive/fonts/type1/public/
-amsfonts/cmextra/cmmib7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.p
-fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/shar
-e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
-sy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></us
-r/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/texmf/fonts/type1/pu
-blic/lm/lmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols
-/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm7
-.pfb></usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/t
-exmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/t
-ype1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8
-a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on v1hastie.pdf (5 pages, 381246 bytes).
+ 38i,12n,55p,547b,412s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}{/usr
+/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf-texlive/fonts/type1
+/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
+fonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
+mi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi5.pfb></u
+sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/tex
+mf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmmib10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
+onts/cmextra/cmmib7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
+ts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.
+pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/sh
+are/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/texmf/fonts/type1/public
+/lm/lmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msb
+m10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm7.pfb
+></usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf
+-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1
+/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pf
+b></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on v1hastie.pdf (6 pages, 657140 bytes).
 PDF statistics:
- 279 PDF objects out of 1000 (max. 8388607)
- 42 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 362 PDF objects out of 1000 (max. 8388607)
+ 48 named destinations out of 1000 (max. 500000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

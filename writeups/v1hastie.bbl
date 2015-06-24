@@ -1,9 +1,14 @@
-\begin{thebibliography}{17}
+\begin{thebibliography}{18}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bach(2008)]{bach08consistency}
+Bach, Francis~R.
+\newblock {Consistency of the Group Lasso and Multiple Kernel Learning}.
+\newblock \emph{J. Mach. Learn. Res.}, 2008.
 
 \bibitem[Beck \& Teboulle(2009)Beck and Teboulle]{beck2009fast}
 Beck, Amir and Teboulle, Marc.
@@ -97,12 +102,10 @@ Tseng, Paul and Yun, Sangwoon.
 \newblock \emph{Mathematical Programming}, 117\penalty0 (1-2):\penalty0
   387--423, 2009.
 
-\bibitem[Wang et~al.(2013)Wang, Zhou, Wonka, and
-  Ye]{group-lasso-screening:2013}
-Wang, Jie, Zhou, Jiayu, Wonka, Peter, and Ye, Jieping.
-\newblock Lasso screening rules via dual polytope projection.
-\newblock In \emph{Advances in Neural Information Processing Systems}, pp.\
-  1070--1078, 2013.
+\bibitem[Tsybakov(2008)]{tsybakov08nonparametric}
+Tsybakov, Alexandre~B.
+\newblock \emph{Introduction to Nonparametric Estimation}.
+\newblock Springer Publishing Company, Incorporated, 2008.
 
 \bibitem[Wytock et~al.(2014)Wytock, Sra, and Kolter]{group-fused-lasso:2014}
 Wytock, Matt, Sra, Suvrit, and Kolter, J~Zico.

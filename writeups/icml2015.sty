@@ -107,10 +107,12 @@
 % final/accepted version of the ``appearing in'' note.  Modify it to
 % change that text.
 %%%%%%%%%%%%%%%%%%%%
-\newcommand{\ICML@appearing}{\textit{Proceedings of the
-$\mathit{31}^{st}$ International Conference on Machine Learning},
-Lille, France, 2015. JMLR: W\&CP volume 37. 
-Copyright 2015 by the author(s).}
+% \newcommand{\ICML@appearing}{ \textit{Proceedings of the
+% $\mathit{32}^{nd}$ International Conference on Machine Learning},
+% Lille, France, 2015. JMLR: W\&CP volume 37. 
+% Copyright 2015 by the author(s).}
+\newcommand{\ICML@appearing}{ Both authors contributed equally to this work. The
+names appear in alphabetical order.}
 
 %%%%%%%%%%%%%%%%%%%%
 % This string is printed at the bottom of the page for the draft/under
@@ -222,16 +224,17 @@ International Conference on Machine Learning (ICML).  Do not distribute.}
 \@float{copyrightbox}[b]
 \begin{center}
 \setlength{\unitlength}{1pc}
-\begin{picture}(20,1.5)
+\begin{picture}(20,0.5)
 % Create a line separating the main text from the note block.
 % 4.818pc==0.8in.
-\put(0,2.5){\line(1,0){4.818}}
+\put(0,2.0){\line(1,0){4.818}}
 % Insert the text string itself.  Note that the string has to be
 % enclosed in a parbox -- the \put call needs a box object to
 % position.  Without the parbox, the text gets splattered across the
 % bottom of the page semi-randomly.  The 19.75pc distance seems to be
 % the width of the column, though I can't find an appropriate distance
 % variable to substitute here.  -- TDRL.
+% \put(0,0){\parbox[b]{19.75pc}{\small \Notice@String}}
 \put(0,0){\parbox[b]{19.75pc}{\small \Notice@String}}
 \end{picture}
 \end{center}
@@ -388,14 +391,7 @@ International Conference on Machine Learning (ICML).  Do not distribute.}
 \renewenvironment{abstract}
    {%
 % Insert the ``appearing in'' copyright notice.
-
-% Uncomment this !!
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \@copyrightspace
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\@copyrightspace
 \centerline{\large\bf Abstract}
     \vspace{-0.12in}\begin{quote}}
    {\par\end{quote}\vskip 0.12in}
