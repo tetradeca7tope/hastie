@@ -129,6 +129,7 @@ function validErr = crossValidate(K, Y, lambda, numPartsKFoldCV, numTrialsKFoldC
     alpha = (Ktrtr + lambda*eye(nTr))\Ytr;
     preds = Ktetr * alpha;
     validErr = validErr + norm(preds - Yte).^2/nTe;
+%     max(max(Ktrtr)), pause,
   end
 end
 

@@ -24,7 +24,10 @@ function [K, allKs] = espKernels(X, Y, bws, order)
 %   for k = 1:order
 %     allKs(:,:,k) = allKs(:,:,k) / nchoosek(D, k);
 %   end
+
+  % Compute the final kernel
   K = allKs(:,:,end); % just pass this for now.
+%   K = sum(allKs, 3); % pass the sum.
 
 end
 

@@ -3,7 +3,7 @@
 
 close all;
 clear all;
-clc;
+% clc;
 addpath ../addKernelRegression/
 addpath ../utils/
 addpath ../otherMethods/
@@ -11,14 +11,16 @@ addpath ../otherMethods/cosso/
 addpath ../otherMethods/ARESLab/
 addpath ../otherMethods/RBF/
 addpath ../otherMethods/M5PrimeLab/
+addpath ../otherMethods/sqb-0.1/build/
+addpath ../otherMethods/BoostedRegressionTree/
 addpath ~/libs/libsvm/matlab/
-addpath ~/libs/gpml/, startup;
+% addpath ~/libs/gpml/, startup;
 rng('default');
 warning off;
 
 % Determine dataset
 % dataset = 'debug';
-dataset = 'parkinson21';              % **
+% dataset = 'parkinson21';              % **
 % dataset = 'parkinson21-small';
 % dataset = 'housing';                  % **
 % dataset = 'music';                    % **
@@ -59,11 +61,12 @@ cnt=cnt+1; regAlgos{cnt}= {'KNN', @(X,Y,Xte) KnnRegressionCV(X, Y, [])};
 cnt=cnt+1; regAlgos{cnt}= {'NW', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],0)};
 cnt=cnt+1; regAlgos{cnt}= {'LL', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],1)};
 cnt=cnt+1; regAlgos{cnt}= {'LQ', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],2)};
-cnt=cnt+1; regAlgos{cnt}= {'LC', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],3)};
+% cnt=cnt+1; regAlgos{cnt}= {'LC', @(X,Y,Xte) localPolyRegressionCV(X,Y,[],3)};
 cnt=cnt+1; regAlgos{cnt}= {'SV-eps', @(X,Y,Xte) svmRegWrap(X, Y, 'eps')};
 cnt=cnt+1; regAlgos{cnt}= {'SV-nu', @(X,Y,Xte) svmRegWrap(X, Y, 'nu')};
 cnt=cnt+1; regAlgos{cnt}= {'GP', @(X,Y,Xte) gpRegWrap(X,Y,Xte)};
 cnt=cnt+1; regAlgos{cnt}= {'regTree', @(X,Y,Xte) regTree(X, Y, Xte)};
+cnt=cnt+1; regAlgos{cnt}= {'GBRT', @(X,Y,Xte) bbrtWrap(X, Y, Xte)};
 cnt=cnt+1; regAlgos{cnt}= {'RBFI',  @(X,Y,Xte) rbfInterpol(X,Y,Xte)};
 cnt=cnt+1; regAlgos{cnt}= {'M5P',  @(X,Y,Xte) m5prime(X,Y,Xte)};
 cnt=cnt+1; regAlgos{cnt}= {'Shepard', @(X,Y,Xte) shepard(X,Y,2,Xte)};
@@ -71,7 +74,7 @@ cnt=cnt+1; regAlgos{cnt}= {'BF', @(X,Y,Xte) backFitting(X,Y)};
 cnt=cnt+1; regAlgos{cnt}= {'MARS', @(X,Y,Xte) mars(X,Y,Xte)};
 % if numDims <= 40
 %   cnt=cnt+1; regAlgos{cnt}= {'MARS', @(X,Y,Xte) mars(X,Y,Xte)};
-% end
+% end 
 cnt=cnt+1; regAlgos{cnt}= {'COSSO', @(X,Y,Xte) cossoWrap(X, Y, Xte)};
 cnt=cnt+1; regAlgos{cnt}= {'spam', @(X,Y,Xte) SpamRegressionCV(X, Y)};
 if numDims <= 15 & nTr < 300
@@ -111,7 +114,7 @@ for i = 1:numRegAlgos
   times(i) = cputime - startTime;
   predError = norm(YPred-Yte).^2/nTe;
   results(i) = predError;
-  fprintf('Method: %s, err: %.4f\n\n', regAlgos{i}{1}, predError);
+  fprintf('Method: %s, err: %.5f\n\n', regAlgos{i}{1}, predError);
 end
 
 % Save results

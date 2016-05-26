@@ -11,6 +11,7 @@ addpath ../otherMethods/cosso/
 addpath ../otherMethods/ARESLab/
 addpath ../otherMethods/RBF/
 addpath ../otherMethods/M5PrimeLab/
+addpath ../otherMethods/sqb-0.1/build/
 addpath ~/libs/libsvm/matlab/
 addpath ~/libs/gpml/, startup;
 rng('default');
@@ -21,10 +22,10 @@ rng('default');
 %   {'addKRR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'SVR', 'kNN', 'SpAM'};
 % regressionAlgorithms = ...
 %   {'Add-KRR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'SVR', 'kNN'};
-regressionAlgorithms = ...
-  {'Add-KRR', 'KRR', 'NW', 'LL', 'GP', 'kNN', 'RT'};
 % regressionAlgorithms = ...
-%   {'addKRR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'kNN'};
+%   {'Add-KRR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'RT'};
+regressionAlgorithms = ...
+  {'Add-KRR', 'KRR', 'NW', 'LL', 'LQ', 'GP', 'kNN'};
 
 % Problem Set up
 numExperiments = 10;
@@ -43,6 +44,7 @@ numExperiments = 10;
 nTotal = 2000; nCands = (120:120:nTotal)'; 
 % numDims = 20; numGroupDims = 9;
 % numDims = 30; numGroupDims = 5;
+numDims = 30; numGroupDims = 9;
 % numDims = 50; numGroupDims = 50;
 % numDims = 40; numGroupDims = 20;
 % numDims = 24; numGroupDims = 7;
@@ -92,7 +94,7 @@ for expIter = 1:numExperiments
     n = nCands(candIter);
     X = Xtr(1:n, :);
     Y = Ytr(1:n, :);
-    fprintf('n = %d\n------------------------\n', n);
+    fprintf('D = %d, n = %d\n------------------------\n', numDims, n);
 
     for algoIter = 1:numRegAlgos
 
@@ -138,6 +140,9 @@ for expIter = 1:numExperiments
 
         case 'RT'
           YPred = regTree(Xtr, Ytr, Xte);
+
+        case 'BT'
+          YPred = boostTreeWrap(Xtr, Ytr, Xte);
 
         case 'BF'
           predFunc = backFitting(Xtr, Ytr);
